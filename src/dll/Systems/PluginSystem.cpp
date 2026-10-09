@@ -271,17 +271,41 @@ void PluginSystem::Load(const std::filesystem::path& aPath, bool aUseAlteredSear
         }
         if (const auto addresses = Addresses::Instance())
         {
-            const auto missing = addresses->UnresolvedAmong(*constants);
+            auto missing = addresses->UnresolvedAmong(*constants);
             if (!missing.empty())
             {
-                std::string list;
+                // LOCAL TRIAL PATCH (cp2077-mac R30): hashes the plugin declares as self-trapped in a sidecar that matches its sha256
+                // are accepted, and only those (see PluginRequirements::SelfTrapped). Nothing is resolved through the database for them.
+                const auto trapped = PluginRequirements::LoadSelfTrapped(aPath);
+                if (trapped.present && !trapped.valid)
+                {
+                    Log::warn(L"Plugin '{}': its trapped-hashes sidecar is ignored ({})", stem, Utils::Widen(trapped.reason));
+                }
+                std::vector<std::uint32_t> accepted;
+                std::vector<std::uint32_t> refused;
                 for (const auto hash : missing)
+                {
+                    (trapped.valid && trapped.hashes.contains(hash) ? accepted : refused).push_back(hash);
+                }
+                if (!refused.empty())
+                {
+                    std::string list;
+                    for (const auto hash : refused)
+                    {
+                        list += fmt::format("{}{}", list.empty() ? "" : ", ", hash);
+                    }
+                    Log::warn(L"Not loading plugin '{}': {} of the game addresses it uses are not verified ({})", stem,
+                              refused.size(), Utils::Widen(list));
+                    return;
+                }
+                std::string list;
+                for (const auto hash : accepted)
                 {
                     list += fmt::format("{}{}", list.empty() ? "" : ", ", hash);
                 }
-                Log::warn(L"Not loading plugin '{}': {} of the game addresses it uses are not verified ({})", stem,
-                          missing.size(), Utils::Widen(list));
-                return;
+                Log::info(L"Plugin '{}': {} unverified addresses accepted as self-trapped by its sidecar (the plugin resolves them "
+                          L"itself, never through the address database): {}",
+                          stem, accepted.size(), Utils::Widen(list));
             }
         }
 

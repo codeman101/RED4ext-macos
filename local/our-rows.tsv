@@ -4,13 +4,18 @@
 489494088	EntityBuilder_ExtractComponentsJob	1:0xCA41E0	OK	1:0xD4DC20	ArchiveXL,Codeware	0x1CD4A8	offsets:16/35~46%, calls w49 m159, size w1800 m4632
 566894273	CEnum_FromString	1:0x21A3D4C	OK	1:0x21B13AC	ArchiveXL,Codeware	0x75DF94	offsets:1/6~17%, calls w2 m1, size w79 m528
 633871992	MorphTargetManager_ApplyMorphTarget	1:0xC6C0C4	OK	1:0x1C5226C	ArchiveXL,Codeware	0x1607FC	offsets:1/11~9%, calls w4 m11, size w201 m972
+787099588	CharacterCustomizationSystem_EnsureState	1:0x2456C9C	OK	1:0x2F2D360	ArchiveXL	0xEED694	offsets:1/15~7%, calls w7 m82, size w173 m1696
 898639042	ScriptValidator_Validate	1:0x21FBF90	OK	1:0x3D96BF4	Codeware	0x3CCBA0	offsets:1/6~17%, calls w10 m19, size w302 m532
+956641309	GarmentAssemblerState_ChangeCustomItem	1:0x36F89A4	STRONG	1:0x36FE44C	ArchiveXL	0xB56A1C	offsets:2/4~50%, calls w4 m4, size w164 m144
 1087575974	CEnum_Unserialize	1:0x21A39B0	OK	1:0x2213FD4	ArchiveXL,Codeware	0x1487A4	offsets:1/7~14%, calls w5 m2, size w186 m528
+1303056161	ResourceLoader_OnUpdate	1:0x21B5548	OK	1:0x2D9766C	ArchiveXL	0x270ACC	offsets:3/21~14%, calls w11 m37, size w365 m1164
 1411585028	CBitfield_ToString	1:0x2196930	OK	1:0x21E9C58	ArchiveXL,Codeware	0x2076F18	offsets:1/2~50%, calls w6 m5, size w192 m252
+1693194103	InkWorldLayer_UpdateComponents	1:0x491DDB0	OK	1:0x3DA0574	ArchiveXL	0x29EEBC	offsets:2/5~40%, calls w7 m14, size w205 m500
 1828854026	IPlacedComponent_SetTransform	1:0xC417F0	OK	1:0x1443324	ArchiveXL,Codeware	0x574FC8	offsets:4/13~31%, calls w2 m0, size w198 m204
 2182550867	Entity_Assemble	1:0xC97E28	STRONG	1:0xCCEDEC	ArchiveXL,Codeware	0x8AB708	offsets:5/9~56%, calls w6 m7, size w162 m176
 2263681375	Entity_Detach	1:0xC996C0	OK	1:0x15EDE88	ArchiveXL,Codeware	0x1B3A1C	offsets:3/20~15%, calls w5 m11, size w192 m320
 2296260874	Entity_RequestComponents	1:0xC95E24	OK	1:0xD4DC20	ArchiveXL,Codeware	0x8B116C	offsets:1/4~25%, calls w2 m2, size w85 m88
+2347184335	CharacterCustomizationGenitalsController_CheckState	1:0x2440814	OK	1:0x2DEAC58	ArchiveXL	0x8586B4	offsets:4/30~13%, calls w33 m39, size w1132 m1676
 2349406410	ResourceToken_Fetch	1:0x21C4D4C	REVIEWED	1:0x12F06B0	ArchiveXL,Codeware	0x261F24	ResourceToken_Fetch: the IsFinished test and the add x0,x19,#0x28 return match Windows 0x261f24; Mac 312 bytes against 85 because the waiting path is inlined; the SDK calls it as a direct function [heuristic: WEAK offsets:0/7~0%, calls w3 m9, size w85 m312]
 2515274237	Entity_Dispose	1:0xC999E0	OK	1:0xCF5E98	ArchiveXL,Codeware	0x8B5540	offsets:3/7~43%, calls w4 m7, size w96 m208
 2694518184	CBitfield_FromString	1:0x2196A2C	OK	1:0x21FC47C	ArchiveXL,Codeware	0x2076E00	offsets:1/6~17%, calls w9 m11, size w278 m508
@@ -18,5 +23,6 @@
 3121353053	Handle_ctor	1:0x2104788	OK	1:0x243C88	ArchiveXL,Codeware,TweakXL	0x1456C0	offsets:1/4~25%, calls w1 m8, size w262 m312
 3490519617	Entity_Initialize	1:0xC985EC	OK	1:0x3641A50	ArchiveXL,Codeware	0x8B0190	offsets:21/75~28%, calls w34 m111, size w994 m3028
 3596356635	Entity_Uninitialize	1:0xC992C4	OK	1:0xCC45EC	ArchiveXL,Codeware	0x402F74	offsets:2/10~20%, calls w7 m6, size w225 m160
+3740082313	GarmentAssemblerState_ChangeItem	1:0x36F887C	STRONG	1:0x36FE44C	ArchiveXL	0xB57FD8	offsets:2/3~67%, calls w4 m4, size w163 m144
 4248638169	Entity_Attach	1:0xC99368	OK	1:0x180C9D8	ArchiveXL,Codeware	0x1CDBB0	offsets:7/20~35%, calls w8 m16, size w336 m508
 4254156293	UpdateRegistrar_RegisterGroupUpdate	1:0x3D95800	OK	1:0x1FFFF8C	ArchiveXL,Codeware	0x624D54	offsets:3/8~38%, calls w8 m7, size w332 m292

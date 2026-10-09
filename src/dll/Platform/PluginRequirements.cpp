@@ -3,6 +3,10 @@
 
 #ifdef RED4EXT_PLATFORM_MACOS
 #include <mach-o/loader.h>
+#include <CommonCrypto/CommonDigest.h>
+
+#include <cstdio>
+#include <string>
 
 #include <cstring>
 #include <fstream>
@@ -140,5 +144,72 @@ std::optional<std::unordered_set<std::uint32_t>> PluginRequirements::CollectCons
     }
 
     return constants;
+}
+
+// LOCAL TRIAL PATCH (cp2077-mac R30): see PluginRequirements.hpp, SelfTrapped.
+PluginRequirements::SelfTrapped PluginRequirements::LoadSelfTrapped(const std::filesystem::path& aPluginPath)
+{
+    SelfTrapped result;
+    auto sidecar = aPluginPath;
+    sidecar.replace_extension(".trapped-hashes.txt");
+    std::ifstream in(sidecar);
+    if (!in)
+    {
+        return result;
+    }
+    result.present = true;
+
+    std::string expectedSha;
+    std::unordered_set<std::uint32_t> hashes;
+    std::string line;
+    while (std::getline(in, line))
+    {
+        if (line.empty() || line[0] == '#')
+        {
+            continue;
+        }
+        if (line.rfind("sha256 ", 0) == 0)
+        {
+            expectedSha = line.substr(7);
+            continue;
+        }
+        if (line.rfind("plugin ", 0) == 0)
+        {
+            continue;
+        }
+        const auto tab = line.find('\t');
+        try
+        {
+            hashes.insert(static_cast<std::uint32_t>(std::stoul(line.substr(0, tab))));
+        }
+        catch (...)
+        {
+            result.reason = "malformed line: " + line;
+            return result;
+        }
+    }
+    if (expectedSha.size() != 64)
+    {
+        result.reason = "no sha256 line";
+        return result;
+    }
+
+    std::ifstream plugin(aPluginPath, std::ios::binary);
+    std::vector<unsigned char> data((std::istreambuf_iterator<char>(plugin)), std::istreambuf_iterator<char>());
+    unsigned char digest[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(data.data(), static_cast<CC_LONG>(data.size()), digest);
+    char hex[2 * CC_SHA256_DIGEST_LENGTH + 1];
+    for (int i = 0; i < CC_SHA256_DIGEST_LENGTH; ++i)
+    {
+        std::snprintf(hex + 2 * i, 3, "%02x", digest[i]);
+    }
+    if (expectedSha != hex)
+    {
+        result.reason = "its sha256 " + expectedSha + " is not the plugin's " + std::string(hex);
+        return result;
+    }
+    result.valid = true;
+    result.hashes = std::move(hashes);
+    return result;
 }
 #endif

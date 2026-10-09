@@ -1,0 +1,3414 @@
+{
+ "rows": [
+  {
+   "hash": 3235774480,
+   "mac_rva": 10379156,
+   "name": "MacJobSetLocalThreadParam",
+   "note": "MacJobSetLocalThreadParam. void(uint8_t). Mac-only id: the SDK writes TLS::Get()->jobParam, and TLS::Get() is null on Mac. 2468 callers, all around job bodies.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": null,
+   "win_sym": "",
+   "verdict": "NO-TWIN",
+   "detail": "Mac-only id"
+  },
+  {
+   "hash": 3235774467,
+   "mac_rva": 32786792,
+   "name": "MacScriptGameInstanceCtor",
+   "note": "MacScriptGameInstanceCtor. void(ScriptGameInstance* out, GameInstance*). Mac-only id.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": null,
+   "win_sym": "",
+   "verdict": "NO-TWIN",
+   "detail": "Mac-only id"
+  },
+  {
+   "hash": 3235774481,
+   "mac_rva": 47132988,
+   "name": "QuestContext_ctor (Mac-only id)",
+   "note": "QuestContext_ctor (Mac-only id). QuestsSystem_CreateContext is inlined in the 18 Mac callers; this is the constructor it forwards to: ctx = ctor(ctx, a3, a4, a5, a6, *(qs+0xE8), qs+0xA8, qs+0xB8, qs+0x78, qs+0x1D0, *(qs+0x2C8), *(qs+0x40)). Windows 0x258F70.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": null,
+   "win_sym": "",
+   "verdict": "NO-TWIN",
+   "detail": "Mac-only id"
+  },
+  {
+   "hash": 3235774465,
+   "mac_rva": 36009288,
+   "name": "ResourceSerializer_MacLoadJob",
+   "note": "ResourceSerializer_MacLoadJob. Entry runs after deserialization.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": null,
+   "win_sym": "",
+   "verdict": "NO-TWIN",
+   "detail": "Mac-only id"
+  },
+  {
+   "hash": 3235774466,
+   "mac_rva": 36010032,
+   "name": "ResourceSerializer_MacPostLoadJob",
+   "note": "ResourceSerializer_MacPostLoadJob. Entry runs after post-load.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": null,
+   "win_sym": "",
+   "verdict": "NO-TWIN",
+   "detail": "Mac-only id"
+  },
+  {
+   "hash": 882511585,
+   "mac_rva": 117419680,
+   "name": "CStack_vtbl",
+   "note": "CStack_vtbl (data: vptr value, slot 0)",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 45316904,
+   "win_sym": "",
+   "verdict": "DATA",
+   "detail": "section 0002"
+  },
+  {
+   "hash": 2635337807,
+   "mac_rva": 148232240,
+   "name": "InkSystem_Instance",
+   "note": "InkSystem_Instance. Data: the global that holds the InkSystem pointer. Windows .data 0x3495C70.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 55139440,
+   "win_sym": "",
+   "verdict": "DATA",
+   "detail": "section 0003"
+  },
+  {
+   "hash": 1508445968,
+   "mac_rva": 148668400,
+   "name": "JobDispatcher",
+   "note": "JobDispatcher. Data: the cell that holds the dispatcher pointer. Windows .data 0x3438980.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 54757760,
+   "win_sym": "",
+   "verdict": "DATA",
+   "detail": "section 0003"
+  },
+  {
+   "hash": 1704595399,
+   "mac_rva": 131515704,
+   "name": "ResourceDepot",
+   "note": "",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 76474600,
+   "win_sym": "",
+   "verdict": "DATA",
+   "detail": "section 0003"
+  },
+  {
+   "hash": 2017202228,
+   "mac_rva": 151041408,
+   "name": "ResourceLoader",
+   "note": "ResourceLoader. Data: the cell holding the ResourceLoader pointer. Windows .data 0x3426E58.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 54685272,
+   "win_sym": "",
+   "verdict": "DATA",
+   "detail": "section 0003"
+  },
+  {
+   "hash": 961751128,
+   "mac_rva": 151566232,
+   "name": "ScriptOpCodes_Handlers",
+   "note": "ScriptOpCodes_Handlers. Data: 8-byte handler table, zero in the file, filled at run time.",
+   "origins": [
+    "codeware",
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 54160976,
+   "win_sym": "",
+   "verdict": "DATA",
+   "detail": "section 0003"
+  },
+  {
+   "hash": 1444748215,
+   "mac_rva": 61425452,
+   "name": "",
+   "note": "",
+   "origins": [
+    "tweakxl"
+   ],
+   "win_rva": 2652948,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "StatsDataSystem_GetStatRange: read both bodies by hand: bounds check on the stat index (Windows jae 0x6ad, Mac b.hi 0x6ac), lock byte at +0xFC, table pointer at +0xE8, stride 12, two floats returned (Windows through the hidden pointer, Mac in s0 and s1) [heuristic: WEAK offsets:0/2~0%, calls w1 m1, size w112 m92]"
+  },
+  {
+   "hash": 2954893634,
+   "mac_rva": 61423220,
+   "name": "",
+   "note": "",
+   "origins": [
+    "tweakxl"
+   ],
+   "win_rva": 6640176,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "StatsDataSystem_CheckStatFlag: read both bodies by hand: the Windows wrapper calls GetStatFlags and does test and setne; the Mac body has GetStatFlags inlined (same bounds check, lock at +0xFC, table at +0xE8, stride 12, flags at +8) followed by tst and cset ne [heuristic: WEAK offsets:0/2~0%, calls w1 m1, size w25 m124]"
+  },
+  {
+   "hash": 3169139695,
+   "mac_rva": 13442896,
+   "name": "AppearanceChanger_RegisterPart",
+   "note": "AppearanceChanger_RegisterPart. Windows 0xa9fcbc. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11140284,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "AppearanceChanger_RegisterPart: exact twin; both take a lock byte at this+0x88 (Windows 0x2f0968 sets 0xFF and releases with xchg 0, Mac 0x20c0 sets 0x80 and releases with ldclralb), copy the three Handle arguments (rdx r8 r9 / x1 x2 x3, refcount incremented on each) into a 0x30 byte element and append it to the DynArray at this+0x40 (count at +0xC, capacity at +8, element size 0x30; Windows 0xa9fdd8, Mac 0xcd1fec), destroy the element and unlock; void, no x8 involved; function start with an ordinary prologue [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/5~0%, calls w3 m3, size w183 m156]"
+  },
+  {
+   "hash": 1186798404,
+   "mac_rva": 63795764,
+   "name": "AppearanceNameVisualTagsPreset_GetVisualTags",
+   "note": "AppearanceNameVisualTagsPreset_GetVisualTags. Windows 0x3f1334. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 4133684,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "AppearanceNameVisualTagsPreset_GetVisualTags: Windows 0x3f1334 is a thin wrapper (HashMap find at this+0x30 through 0x2d8acc, then one call), the Mac body 0x3cd7234 has the find inlined; both hash the 8 byte entity path key with 32 bit FNV-1a (seed 0x811c9dc5) and look it up in the map at this+0x30 (bucket count at map+0xC, node stride map+0x1C, node hash at +4, key at +8, value at node+0x10), then on a hit call the value method with (value, appearance name, out TagList). That value method is an exact twin on both sides (Windows 0x3f1380, Mac 0x3cd2f60 reached by tail branch): entry array at +0x40 with count at +0x4C and stride 0x48, name compared at entry+0x30, tag arrays at +0x38/+0x44 and +0x30/+0x3C, ResizeBuffer then append. Arguments this, path, name, outTags in rcx rdx r8 r9 / x0 x1 x2 x3; function start; Mac callers (0x36bc8e0 and others) call it with the same four arguments and then scan the returned tags for a constant CName hash [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/7~0%, calls w2 m0, size w75 m220]"
+  },
+  {
+   "hash": 3235778566,
+   "mac_rva": 63795480,
+   "name": "AppearanceNameVisualTagsPreset_GetVisualTagsByRecord",
+   "note": "AppearanceNameVisualTagsPreset_GetVisualTagsByRecord (Mac-only id). R22: twin of the Windows wrapper 0x3F12F0 (record based entry), the map find is inlined and it does not call 0x3CD7234. R26: the TweakDBID field it reads at +0xE4 holds the game's cached flat offset (see GarmentExtension ResolveRecordFlatPath); the Windows wrapper reads +0xE8.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 4133616,
+   "win_sym": "mac-only twin",
+   "verdict": "REVIEWED",
+   "detail": "AppearanceNameVisualTagsPreset_GetVisualTagsByRecord: Windows 0x3F12F0 is a 68 byte wrapper that computes the entity path from the TweakDBID flat of its record argument and tail jumps into GetVisualTags 0x3F1334; Mac 0x3CD7118 (284 bytes) is the same wrapper with the hash map find inlined (it does not call 0x3CD7234) and tail branches into the shared value method 0x3CD2F60 (the exact twin of Windows 0x3F1380); read by the group c2 matcher. R26 (crash on the first save load): both wrappers resolve the flat of the record field first, Windows 0x3F12F0 with `lea rcx,[rdx+0xE8]; call 0x3F1CAC`, Mac 0x3CD7118 with `add x0,x1,#0xE4; bl 0x9C8520` (0x3F1CAC and 0x9C8520 are twins: bytes 5 to 7 of the id are the flat offset, big endian, added to the buffer at TweakDB+0; the front half 0x3F1CF0 / 0x9C8520 revalidates it against the version byte at TweakDB+0x160). The offset points at the value of the flat, so the field must never be handed to the SDK GetFlatValue as it is. [heuristic: WEAK offsets:0/7~0%, calls w1 m1, size w68 m284]"
+  },
+  {
+   "hash": 4231927464,
+   "mac_rva": 55641316,
+   "name": "AttachmentSlots_IsSlotEmpty",
+   "note": "AttachmentSlots_IsSlotEmpty. Windows 0x6afce0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 7011552,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "AttachmentSlots_IsSlotEmpty: exact twin (Windows 0x6afce0, Mac 0x35104e4); lock at this+0x100 released by lock xadd byte -1 / ldaddalb -1, slot table at this+0xB0 with stride 0x90 searched by (u32 id, u8 at +4), node+8 must be 0, then a call on node+0x18 (Windows 0x332f54, Mac 0x1fab1b4) whose result is inverted (sete dl / eor w0,w0,#1), 0 when not found; callers pair (Windows 0x6afc94, Mac 0x3896458: entity lookup then call); bool(this, TweakDBID in rdx / x1) [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/5~0%, calls w3 m2, size w99 m196]"
+  },
+  {
+   "hash": 1283201918,
+   "mac_rva": 55641668,
+   "name": "AttachmentSlots_IsSlotSpawning",
+   "note": "AttachmentSlots_IsSlotSpawning. Windows 0xffc6ac. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 16762540,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "AttachmentSlots_IsSlotSpawning: exact twin and the non-inverted sibling of IsSlotEmpty (Windows 0xffc6ac, Mac 0x3510644); same lock at this+0x100 (Windows 0x2167f4, Mac 0x2098, released by lock xadd -1 / ldaddalb -1), same table at this+0xB0 with stride 0x90 searched by (u32 id, u8 at +4), node+8 must be 0, then the result of the call on node+0x18 (the same callee that IsSlotEmpty uses on each side: Windows 0x332f54, Mac 0x1fab1b4) returned as is, 0 when not found (the Mac body is byte for byte the IsSlotEmpty body without the eor); callers pair (Windows 0xffc660, Mac 0x38966a8: entity lookup 0x2856f8 / 0x3887f7c then call); bool(this, TweakDBID in rdx / x1); function start with an ordinary prologue, safe for a full Hook [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/5~0%, calls w3 m2, size w96 m192]"
+  },
+  {
+   "hash": 3729789488,
+   "mac_rva": 64614344,
+   "name": "CBaseEngine_LoadGatheredResources",
+   "note": "CBaseEngine_LoadGatheredResources. bool(CBaseEngine&). Windows 0x303460: virtual slot 0xD0 (Mac 0xD8), helper call, bool.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 3159136,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "CBaseEngine_LoadGatheredResources: Windows 0x303460 is a 40 byte function (virtual slot 0xD0, a helper call, a bool); Mac 0x3D9EFC8 is 100 bytes with the same shape and the virtual slot at 0xD8 (+8 after the destructor); ArchiveXL hooks this exact address in every boot and loads its archives through it [heuristic: WEAK offsets:0/3~0%, calls w2 m4, size w40 m100]"
+  },
+  {
+   "hash": 2794985748,
+   "mac_rva": 35219360,
+   "name": "CBitfield_Unserialize",
+   "note": "CBitfield_Unserialize. Windows 0x33B6C0.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 3389120,
+   "win_sym": "rtti::BitFieldType::Serialize",
+   "verdict": "REVIEWED",
+   "detail": "CBitfield_Unserialize: Windows 144 bytes, Mac 400 bytes (stream reads inlined); the reflect matcher found it in the CBitfield vtable (Mac 0x6FFBEC8, slot 0x68 = Windows 0x60 + 8) next to CBitfield_ToString and FromString, and it is the exact twin of the CEnum_Unserialize shape; not run live (no bitfield is deserialized in a boot) [heuristic: WEAK offsets:0/3~0%, calls w2 m4, size w144 m400]"
+  },
+  {
+   "hash": 773462733,
+   "mac_rva": 14784984,
+   "name": "CMesh_GetAppearance",
+   "note": "CMesh_GetAppearance. Windows 0x3CA128. (0xE19A1C is the shim that calls FindAppearance with the default name.)",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 3973416,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "CMesh_GetAppearance: 46 byte wrapper over FindAppearance on Windows, 68 bytes on Mac; both call FindAppearance, test the returned handle for null and fall back to the default CName global, and both are called from VisualController::LoadDependencies at the matching spot (Win 0x36B9DC, Mac 0xC8B858); read-only entity agent, HIGH [heuristic: WEAK calls w1 m1, size w46 m68]"
+  },
+  {
+   "hash": 10488987,
+   "mac_rva": 54865372,
+   "name": "CNamePool_AddCstr",
+   "note": "CNamePool_AddCstr",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 2664028,
+   "win_sym": "NameBuilder::Build",
+   "verdict": "REVIEWED",
+   "detail": "CNamePool_AddCstr: Windows body is a 48 byte wrapper, the Mac body is 300 bytes; every CName made from text goes through it in every boot [heuristic: WEAK calls w2 m4, size w48 m300]"
+  },
+  {
+   "hash": 3649309656,
+   "mac_rva": 54865312,
+   "name": "CNamePool_AddPair",
+   "note": "CNamePool_AddPair",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 10642260,
+   "win_sym": "NameBuilder::Register",
+   "verdict": "REVIEWED",
+   "detail": "CNamePool_AddPair: bodies of similar size (54 and 48 bytes); used by the SDK CName helpers [heuristic: WEAK calls w2 m0, size w54 m48]"
+  },
+  {
+   "hash": 1247874916,
+   "mac_rva": 35163788,
+   "name": "CRTTISystem_Get",
+   "note": "CRTTISystem_Get",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 3084416,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "CRTTISystem_Get: Windows 61 bytes, Mac 148 bytes; every RTTI lookup in every boot (the R16a and R17 self-tests resolve classes through it) [heuristic: WEAK offsets:0/1~0%, calls w0 m5, size w61 m148]"
+  },
+  {
+   "hash": 3357477547,
+   "mac_rva": 183736,
+   "name": "CString_ctor_str",
+   "note": "CString_ctor_str",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 2382760,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "CString_ctor_str: Windows 31 bytes, Mac 192 bytes; Red::CString built from text works in the self-tests (UTF8StrLower, GameFileExists) [heuristic: WEAK offsets:0/2~0%, calls w0 m4, size w31 m192]"
+  },
+  {
+   "hash": 1782982010,
+   "mac_rva": 38011928,
+   "name": "CharacterCustomizationGenitalsController_OnAttach",
+   "note": "CharacterCustomizationGenitalsController_OnAttach. Windows 0x18b2c14. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 25898004,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "CharacterCustomizationGenitalsController_OnAttach: Windows 0x18b2c14 (no unwind entry) and Mac 0x2440418 are the same flag thunk: Windows test byte [0x3584f78],1 then jmp 0x385f8c, flagged path 0x203b7d2 does or word [this+0x88],2 and returns; Mac loads the flag with the getter 0x20fc438 and tail branches to 0x243e768, or to 0xca627c which does the same or [this+0x88],2. The shared body twins (Windows 0x385f8c, Mac 0x243e768: virtual call at vtable 0x2A0 / 0x2A8, this+0x50 then +0xC0 component lookup, vcalls +0x490 / +0x498 and +0x108 / +0x110) sit in 8 vtables on each side while the thunk sits in exactly one on each side (Windows slot 0x2c10bd0, Mac slot 49 of the table at 0x7029100). That class is the Genitals one on both sides: its state refresh virtual (Windows 0x3861dc, Mac 0x2440754) calls the Genitals CheckState (Windows 0x8586b4, Mac 0x2440814) and stores the two states at +0xD4 / +0xD8 on Windows and +0xCC / +0xD0 on Mac (derived members sit 8 lower on Mac), with the same two virtual calls (0x2A8 / 0x2B0) on +0xE0 / +0x130 versus +0xD8 / +0x128. Function start, void(this) in rcx / x0, safe prologue [R22 read-only matcher, both bodies read] [heuristic: WEAK calls w0 m1, size w19 m76]"
+  },
+  {
+   "hash": 4275058446,
+   "mac_rva": 38115088,
+   "name": "CharacterCustomizationSystem_GetResource",
+   "note": "CharacterCustomizationSystem_GetResource. Windows 0xeed744. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 15652676,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "CharacterCustomizationSystem_GetResource: same selector and same handle copy; Windows 0xeed744 picks the token pointer at this+0x48 (isMale true) or this+0x58 (false) via ((isMale^1)*2)*8, Mac 0x2459710 does csel 0x48 / 0x58 on w1; both take the resource Handle of the token (token+0x28, Windows inline, Mac through helper 0x21c4d44), compare its class with the class cell of gameuiCharacterCustomizationInfoResource (Windows cell 0x3437bc0 referenced by 0x15fbcc4, Mac cell 0x90cd3a0 referenced by 0x2565124, both functions hold that string), then copy the {ptr, refcount} pair to the result with an increment, or write zeros when null or of another class. ABI differs: Windows (system, out* in rdx, bool in r8b), Mac (system in x0, bool in w1) with the Handle returned through x8, so the SDK signature (system, out&, isMale) needs the x8 treatment; function start [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/3~0%, calls w2 m4, size w162 m148]"
+  },
+  {
+   "hash": 402202441,
+   "mac_rva": 38117240,
+   "name": "CharacterCustomizationSystem_Uninitialize",
+   "note": "CharacterCustomizationSystem_Uninitialize. Windows 0x27f81bc. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 41910716,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "CharacterCustomizationSystem_Uninitialize: Windows 0x27f81bc and Mac 0x2459f78 have the same three steps under the same lock byte at this+0x98 (Windows scoped lock 0x2045428, Mac 0x20c0, released by xchg 0 / ldclralb): a weak handle resolve plus array walk (Windows 0x27fa474, Mac 0x2459fbc: weak handle at this+0x108 / +0x110 locked with a refcount CAS loop, array of stride 0x10 with count at +0xC walked with an IsA test), then the reset helper called with (this, 1) (Windows 0x16042c, Mac 0x2455940: both clear the container at +0xA0 and the stride 0x28 arrays at +0x150, +0x160, +0x170); void(this) in rcx / x0; function start [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/1~0%, calls w3 m3, size w59 m68]"
+  },
+  {
+   "hash": 2057311186,
+   "mac_rva": 165608,
+   "name": "DynArray_Realloc",
+   "note": "DynArray_Realloc",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 1358288,
+   "win_sym": "red::DynamicBuffer::ResizeBuffer",
+   "verdict": "REVIEWED",
+   "detail": "DynArray_Realloc: bodies of similar size (Windows 458 bytes, Mac 508) and call count (6 and 9), no shared offset or string; the SDK grows arrays through it and every Gate 5 and C1 boot does so [heuristic: MISMATCH offsets:0/3~0%, calls w6 m9, size w458 m508]"
+  },
+  {
+   "hash": 2091718968,
+   "mac_rva": 13504176,
+   "name": "EntitySpawnerToken_GetWaitHandle",
+   "note": "EntitySpawnerToken_GetWaitHandle. JobHandle*(token). Not called by Codeware. Windows 0x8B2F6C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 9121644,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "EntitySpawnerToken_GetWaitHandle: Windows 0x8B2F6C and Mac 0xCE0EB0 both return the JobHandle at (the state pointer stored at token+0) + 0x78, or a function-local static JobHandle built under a thread-safe static guard (JobInternalHandle_Acquire on Windows, the JobHandle constructor on Mac); the callers pair one to one (Win 0x660558 / Mac 0x15C8C34 call it right after SpawnEntity and join the result); the bodies differ in size (125 / 160 bytes: guard code); Codeware does not call it; read-only spawn agent, HIGH [heuristic: WEAK calls w4 m4, size w125 m160]"
+  },
+  {
+   "hash": 3040549301,
+   "mac_rva": 13372396,
+   "name": "FactoryIndex_ResolveResource",
+   "note": "FactoryIndex_ResolveResource. Windows 0x2046bf4. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 33844212,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "FactoryIndex_ResolveResource: Windows 0x2046bf4 is a 34 byte wrapper over the finder 0x6604f0 (writes the 8 byte ResourcePath to *out and returns out), the Mac body 0xcc0bec is the same finder with that wrapper folded in; both search the HashMap at this+0x68 keyed by the 8 byte CName with hash (high 32 bits xor low 32 bits) (Windows 0x1cf710: count at map+8, bucket count at map+0xC, nodes at map+0x10, stride map+0x1C, node hash at +4, key at +8; Mac: +0x70, +0x74, +0x78, +0x84), take node+0x10, then [value+0x18], then the 8 byte path stored there, 0 when missing; callers pair (8 on Windows, 12 on Mac, for example Windows 0x383fd8 and Mac 0x36e7bb8). ABI differs: Mac is uint64_t(index in x0, CName in x1) returning the ResourcePath in x0, while the SDK shape (index, ResourcePath& out, CName) used by TransmogExtension::OnLoadTemplate passes the out pointer in rdx, so the call site must be reshaped on Mac (it is only called, not hooked); function start [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/8~0%, calls w1 m0, size w34 m128]"
+  },
+  {
+   "hash": 709304039,
+   "mac_rva": 57802348,
+   "name": "GarmentAssembler_OnGameDetach",
+   "note": "GarmentAssembler_OnGameDetach. Windows 0x70437c. R22 code twin: void(this, a2), called only from the entity appearance system's detach virtual (Windows 0x557D98 / Mac 0x3712FF8). The fork DB value 0x36F6F4C is the callee that clears the per-entity states.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 7357308,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "GarmentAssembler_OnGameDetach: Windows 0x70437C (369 bytes) and Mac 0x371FE6C (676 bytes) are the same big reset routine on the entity appearance system (three arrays destroyed, three global counter blocks reset, helper calls on this+0x830 and the third sub-object, then the per-entity state array cleared); the single caller on each side is the system's detach virtual (Windows 0x557D98 / Mac 0x3712FF8); the struct sizes differ because the class layouts do [heuristic: WEAK offsets:0/9~0%, calls w12 m23, size w369 m676]"
+  },
+  {
+   "hash": 29053464,
+   "mac_rva": 11419652,
+   "name": "GarmentAssembler_ProcessGarment",
+   "note": "GarmentAssembler_ProcessGarment. Windows 0xb57c60. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11893856,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "GarmentAssembler_ProcessGarment: Windows 0xb57c60 and Mac 0xae4004 are the same wrapper: build a job handle local (Windows 0x218b54, Mac 0x9d420c: same fields, vtable, two sub objects at +0x10 and +0x18, bytes +0x28 / +0x29 with the 0xFF default), call the body with (out SharedPtr, &local, a2, a3, params) (Windows 0x2765c8, Mac 0xae4070), destroy the local, return the out pointer; the bodies agree (array at obj+0x50 with count at +0x5C and stride 8, context object created with reserves, byte params+9 stored at context+0x138, members at +0x58 and +0x70). ABI differs: Windows passes the hidden out pointer in rcx and a2, a3, params in rdx r8 r9, Mac takes the SharedPtr result in x8 and a2, a3, params in x0 x1 x2, so the SDK 4 argument signature used by the ArchiveXL Hook (which replaces and calls the original) must be reshaped and x8 preserved; callers: 4 on Windows (0x8de8b0, 0xb56fb0, 0xb57944, 0x25dca00) and 5 on Mac; function start [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/3~0%, calls w3 m3, size w108 m104]"
+  },
+  {
+   "hash": 1863723270,
+   "mac_rva": 57640772,
+   "name": "GarmentAssembler_RemoveItem",
+   "note": "GarmentAssembler_RemoveItem. Windows 0xb575bc. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11892156,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "GarmentAssembler_RemoveItem: exact twin; both first call a finder with (a1, WeakHandle a2) that returns three pointers through the struct return (Windows 0x5eb300 via rdx, Mac 0x36f8030 via x8; table at +8, count at +0x14, element 0x60), then run two removals keyed by the request (id at [req], index at [req+8]): the stride 0x28 array (Windows 0xb58104, Mac 0x36f920c, compare at +0x18) and the stride 0x20 array (Windows 0xb5807c, Mac 0x36f9810, compare at +0x18), and return the AND of both results; bool(a1, handle*, request*) in rcx rdx r8 / x0 x1 x2 (a1 is unused by the Mac body); callers pair (Windows 0xb56fb0 and 0x25dc744, Mac 0x3700904 and 0x3704bf4); function start [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/1~0%, calls w3 m3, size w87 m84]"
+  },
+  {
+   "hash": 859509764,
+   "mac_rva": 34621636,
+   "name": "Handle_DecWeakRef",
+   "note": "",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 1328368,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "Handle_DecWeakRef: void(SharedPtrBase*); the TweakXL notes record an identical copy at 0x914668; bodies of similar size (85 and 76 bytes) with one call each [heuristic: WEAK offsets:0/1~0%, calls w1 m1, size w85 m76]"
+  },
+  {
+   "hash": 2601784524,
+   "mac_rva": 34883396,
+   "name": "ISerializable_Clone",
+   "note": "ISerializable_Clone. Handle<ISerializable>(const Handle*), result through x8. Windows 0x74ED60.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 7662944,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ISerializable_Clone: wrapper of 56 bytes on Windows and 204 on Mac (Handle result built through x8); both wrappers store a flag byte at params+0x16 and call a post-process function (Windows 0x74ed98, Mac 0x219e390); the typed-clone caller pattern matches; the R19 self-test clones a scripted object and compares class and field [heuristic: WEAK offsets:0/1~0%, calls w3 m7, size w56 m204]"
+  },
+  {
+   "hash": 2715367827,
+   "mac_rva": 35152588,
+   "name": "ISerializable_sub_78",
+   "note": "ISerializable_sub_78. Mac: Handle(this, a1, a2 byte, a3, a4) with the Handle through x8 (the SDK signature models a hidden first argument). Windows 0x711A14.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 7412244,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ISerializable_sub_78: exact twin by the serial matcher (same call structure, x8 is the out pointer); Mac inlines the helper that makes a 0x68 byte object, so the body is 556 bytes against 269; called by the game only; Codeware calls it nowhere and the SDK signature was reshaped for x8 [heuristic: WEAK offsets:0/4~0%, calls w9 m20, size w269 m556]"
+  },
+  {
+   "hash": 2149588021,
+   "mac_rva": 35152392,
+   "name": "ISerializable_sub_C0",
+   "note": "ISerializable_sub_C0. The base default: the owning CResource's +0x30, returned in x0. The address table's Windows 0x81DA2C is unrelated; the twin is 0x4B0D9C.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 8509996,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ISerializable_sub_C0: the address table Windows RVA 0x81da2c is an unrelated function; the true twin is the base default Windows 0x4b0d9c (45 bytes, inlined getter of the owning resource field +0x30) and Mac 0x2186208 (32 bytes, tail call to the one instruction getter 0x21b3708); checked against 3874 to 6951 Mac vtables; the R19 self-test calls it on a native object without an owner and expects null [heuristic: WEAK offsets:0/1~0%, calls w2 m1, size w45 m32]"
+  },
+  {
+   "hash": 2050958960,
+   "mac_rva": 76396104,
+   "name": "InkLayer_AttachWidgetTree",
+   "note": "InkLayer_AttachWidgetTree. void(inkLayer*, const Handle<inkWidget>*, const Handle<inkLayerProxy>*): walker and visitor inlined. Not the clone 0x48D6834. Windows 0x581248.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 5771848,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkLayer_AttachWidgetTree: Windows 198 bytes plus the tree walker 0x4fcac8 and the visitor lambda 0x4fcc28, which clang inlined (Mac 1716 bytes); same structure (two DynArray reserves of 0x400 elements, the visitor struct {layer, array, handle copy}, widget vtable calls at +0x110/+0xd8/+0xe0 on Windows and +0x118/+0xe0/+0xe8 on Mac, SetLayer 0x49b18f0, controller weak widget at +0x40, listener wrapper 0x49b1794, controller layer proxy at +0x50, OnInitialize virtual at 0x108 and 0x110); one caller whose four callers pair up (Windows 0x580864, Mac 0x48daf04); the inkLayer clone uses layer+0x90 on both sides, the other clone 0x48d6834 uses +0x70 [heuristic: WEAK offsets:0/10~0%, calls w5 m50, size w198 m1716]"
+  },
+  {
+   "hash": 4792499,
+   "mac_rva": 76399428,
+   "name": "InkLayer_RegisterListener",
+   "note": "InkLayer_RegisterListener. void(inkLayer*, const Handle<IScriptable>*). Not the sibling 0x48DC420. Windows 0x881848.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 8919112,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkLayer_RegisterListener: Windows 144 bytes, Mac 220; same lock byte at layer+0x130, same casal/cmpxchg lock of the listener handle, same listener array at layer+0xd0 with the same insert helper pair (Windows 0x1b4298, Mac 0x2101128); the wrapper chain matches (Windows 0x8817b4 / 0x88177c, Mac 0x48e5104 / 0x49b1794, five callers each); the near-identical sibling 0x48dc420 has a different insert helper and caller chain and is not used [heuristic: WEAK offsets:0/2~0%, calls w3 m7, size w144 m220]"
+  },
+  {
+   "hash": 1159862457,
+   "mac_rva": 75298592,
+   "name": "InkLogicController_OnUninitialize",
+   "note": "InkLogicController_OnUninitialize. void(controller): base implementation (slot 0x118). Windows 0x4A2B40.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 4860736,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkLogicController_OnUninitialize: base-class virtual of inkWidgetLogicController (Windows slot 0x110, Mac 0x118) shared by 184 and 181 vtables; both bodies raise the script event with the same CName hash 0xd3e7ce8f5e9069a9 and then run the cleanup that unregisters the layer proxy listener at this+0x50/0x58; Mac inlines more (152 bytes against 43); called by inkComponent, not hooked [heuristic: WEAK offsets:0/1~0%, calls w2 m3, size w43 m152]"
+  },
+  {
+   "hash": 4284882427,
+   "mac_rva": 76051748,
+   "name": "InkSystem_ProcessCharacterEvent",
+   "note": "InkSystem_ProcessCharacterEvent. bool(InkSystem*, EInputKey, EInputAction). Windows 0xC225C0.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 12723648,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkSystem_ProcessCharacterEvent: Windows 78 bytes (the key-to-character mapping is a table in the callee), Mac 716 bytes with the mapping inlined; only caller on both sides is ProcessInputEvents; both lock the input widget WeakHandle at InkSystem+0x2E8, test the shift bits of the keyboard state at +0x2F8, build the 0x98 byte character event and call the widget virtual (0x188 Windows, 0x190 Mac); true for the same keys (Backspace, arrows, Delete, Space, digits, letters, numpad, OEM keys) [heuristic: WEAK offsets:0/2~0%, calls w2 m15, size w78 m716]"
+  },
+  {
+   "hash": 1396063719,
+   "mac_rva": 76962616,
+   "name": "InkWidgetLibrary_AsyncSpawnFromExternal",
+   "note": "InkWidgetLibrary_AsyncSpawnFromExternal. bool(lib&, InkSpawningInfo&, ResourcePath, CName, bool flag). Windows 0x9FB2A8.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 10465960,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkWidgetLibrary_AsyncSpawnFromExternal: Windows 79 bytes, Mac 344 (local lookup inlined); resolves the external library from lib+0x58 (Windows) / lib+0x50 (Mac) with stride 0x18, then runs the item async spawn (string anchor UI/WidgetLibraryItem/AsyncSpawnFromDefPack: Windows 0x8a9980, Mac 0x4922c90); callers pair up (Windows 0x9fb200, Mac 0x48d65b8 and 0x48db514); Mac takes the flag as a fifth argument (0 from both callers) [heuristic: WEAK offsets:0/3~0%, calls w3 m6, size w79 m344]"
+  },
+  {
+   "hash": 118698863,
+   "mac_rva": 76962176,
+   "name": "InkWidgetLibrary_AsyncSpawnFromLocal",
+   "note": "InkWidgetLibrary_AsyncSpawnFromLocal. bool(lib&, InkSpawningInfo&, CName, bool flag). Windows 0x57F26C.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 5763692,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkWidgetLibrary_AsyncSpawnFromLocal: Windows 43 bytes, Mac 252 (item lookup inlined); the same item lookup loop (stride 0x38, name at item+0), then the item async spawn 0x8a9980 / 0x4922c90; callers pair up (Windows 0x8a86a4, Mac 0x48d6584 and 0x48db32c) with the same flag derivation (byte at +0x171 or the virtual result equal to 1); Mac w3 is the flag [heuristic: WEAK offsets:0/3~0%, calls w2 m2, size w43 m252]"
+  },
+  {
+   "hash": 506278179,
+   "mac_rva": 76963520,
+   "name": "InkWidgetLibrary_SpawnFromExternal",
+   "note": "InkWidgetLibrary_SpawnFromExternal. Handle(lib&, ResourcePath, CName), the Handle through x8. Windows 0x9FB618.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 10466840,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkWidgetLibrary_SpawnFromExternal: Windows 92 bytes, Mac 324 (the local lookup is inlined); resolver for the external library (Windows 0x9fb790, Mac 0x4965c90), item lookup, item spawn helper (Windows 0x57fc60, Mac 0x4923164); callers pair up (Windows 0x9fb4d0 and 0x2209bf0, Mac 0x48d63a0 and 0x48db148); the Handle result comes back through x8 [heuristic: WEAK offsets:0/3~0%, calls w4 m6, size w92 m324]"
+  },
+  {
+   "hash": 1158555307,
+   "mac_rva": 76963296,
+   "name": "InkWidgetLibrary_SpawnFromLocal",
+   "note": "InkWidgetLibrary_SpawnFromLocal. Handle<WidgetLibraryItemInstance>(lib&, CName), the Handle through x8. Windows 0x57F9C0.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 5765568,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkWidgetLibrary_SpawnFromLocal: Windows 53 bytes, Mac 224 (lookup inlined); same item lookup and the same item spawn helper; callers pair up (Windows 0x5817a8, Mac 0x48d5f80 and 0x48dacfc, which hand instance+0x38 to the same std::function); the Handle result comes back through x8; the R20 boot sees 104 calls whose results are real inkWidget roots [heuristic: WEAK offsets:0/3~0%, calls w2 m1, size w53 m224]"
+  },
+  {
+   "hash": 3357288308,
+   "mac_rva": 77326376,
+   "name": "InkWidget_TriggerEvent",
+   "note": "InkWidget_TriggerEvent. bool(manager = widget+0x50, CName, Handle<Event> passed indirectly); the caller owns the copy. Windows 0x89A86C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 9021548,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "InkWidget_TriggerEvent: Windows 125 bytes, Mac 236; both look up the CName in the manager (Windows 0x32c610, Mac 0x4866ec8), copy the Handle twice and dispatch to the listener list (Windows 0x89aa40, Mac 0x49be914); thirteen callers on each side, the input-event dispatchers OnPress to OnRelative, with identical CName hashes (OnDoubleClick 0xe38fc2cdc00e4ba7, OnLeave 0x11c99f14acbe050f); the manager is widget+0x50 on both sides [heuristic: WEAK calls w4 m9, size w125 m236]"
+  },
+  {
+   "hash": 2621709954,
+   "mac_rva": 10323600,
+   "name": "JobDispatcher_DispatchJob",
+   "note": "JobDispatcher_DispatchJob. uint32_t(dispatcher, const JobInstance&, uint8_t, JobInternalHandle*, JobInternalHandle*). Not its tail target 0x9D8720. Windows 0x14299C.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1321372,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "JobDispatcher_DispatchJob: Windows 387 bytes (queue push inlined), Mac 144 bytes; read by the agent: the same pending-count bump on the fifth argument, the 0x38 byte node, the one byte spin lock of the fourth argument, the same five argument order; call-site pair Windows 0x30AD3C and Mac 0x9D46F0 (939 callers); the R18 job self-test dispatches a job through it [heuristic: WEAK offsets:0/10~0%, calls w5 m2, size w387 m144]"
+  },
+  {
+   "hash": 2627471740,
+   "mac_rva": 10308156,
+   "name": "JobHandle_Join",
+   "note": "JobHandle_Join. void(JobHandle*, const JobHandle&). Windows 0x142838.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1321016,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "JobHandle_Join: Windows 33 byte wrapper (dummy job at priority 3 built in 0x14285C), Mac 128 bytes with that code inline; same dummy job, same priority 3, same h1 and h2; call-site pair Windows 0x8ACE3C and Mac 0x2150A60 with identical offsets 0xB8 0xBB 0xBC 0x118; the R18 job self-test joins two handles [heuristic: WEAK offsets:0/1~0%, calls w1 m3, size w33 m128]"
+  },
+  {
+   "hash": 1576079097,
+   "mac_rva": 10307484,
+   "name": "JobHandle_Wait",
+   "note": "JobHandle_Wait. bool(JobHandle*), plain blocking wait. Windows 0x2AC294.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 2802324,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "JobHandle_Wait: Windows 0x2AC294 is a 5 instruction stub into a blocking wait (0x14AB30), Mac 0x9D479C is the same stub shape into 0x9D885C; both loads the handle internal, the dispatcher global and the constants 1 and -1; both waits poll internal+0x18 until zero and return true; the only direct Mac caller 0x3F84D90 has the Windows idiom (queue, Capture, Wait, release). Called on a job thread in r18e it hit the assert \"::SIsMainThread() && !g_tls_IsDispatcherThread\" in 0x9D885C (so the function is the wait that is main thread only, like Windows); Codeware never calls it, so nothing else depends on it [heuristic: WEAK calls w0 m1, size w23 m72]"
+  },
+  {
+   "hash": 2655521326,
+   "mac_rva": 10308096,
+   "name": "JobHandle_dtor",
+   "note": "JobHandle_dtor (ReleaseInternalHandle). Mac returns this. The caller-less twins are 0x9D498C and 0x9D49C4. Windows 0x1419A4.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1317284,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "JobHandle_dtor: Windows 74 bytes, Mac 60 bytes, one call each; both drop the refcount at internal+0x1C and free on the last reference, then zero internal; the Capture, Wait, release, release idiom matches at Windows 0x1C6789B and Mac 0x48CE1B8; every JobQueue self-test and every boot that builds a JobHandle runs it [heuristic: WEAK offsets:0/1~0%, calls w1 m1, size w74 m60]"
+  },
+  {
+   "hash": 1945256833,
+   "mac_rva": 31939108,
+   "name": "JournalRootFolderEntry_Initialize",
+   "note": "JournalRootFolderEntry_Initialize. Windows 0x950620. The virtual (this, a2, a3, JobQueue) that calls the loader half 0x1E7528C and tail-branches to 0x1E75660, as the Windows virtual 0x950620 calls 0x9507fc then jumps to 0x950660. R22: the fork DB row 0x1E7528C is only the first half.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9766432,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "JournalRootFolderEntry_Initialize: Windows 0x950620 (61 bytes, a virtual with no direct callers, vtable slot 0x2b9e908) calls helper A 0x9507fc with (this, a2, JobQueue) and tail jumps to helper B 0x950660 with the same arguments; Mac 0x1E75A24 (64 bytes, a function start with an ordinary prologue, vtable slot 0x6f9e988) calls 0x1E7528C (the descriptor.journaldesc half) with the JobQueue moved from x3 to x2 and tail-branches to 0x1E75660, which the matcher found to be the twin of 0x950660. The fork DB row 0x1E7528C is only the first half. [R22 read-only matcher, re-read by me] [heuristic: WEAK calls w1 m1, size w61 m64]"
+  },
+  {
+   "hash": 3550098299,
+   "mac_rva": 49708468,
+   "name": "Localization_LoadOnScreens",
+   "note": "Localization_LoadOnScreens. Handle<PersistenceOnScreenEntries>(path), result through x8. Not the sibling 0x2F67BE0 (subtitle map). Windows 0x261018.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 2494488,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "Localization_LoadOnScreens: Windows 0x261018 and Mac 0x2f67db4 share the caller pairs (Windows 0x58dd18, Mac 0x2f6eF5c: map at +0x38, entries at +0x30, count at +0x3c, 0x68 stride) and the class cell pairing (cell written by the function that references the string localizationPersistenceOnScreenEntries on both sides); the sibling 0x2f67be0 loads the subtitle map and is not hooked; the R19 boot check reads the entries the hook sees [heuristic: WEAK offsets:0/5~0%, calls w9 m18, size w275 m436]"
+  },
+  {
+   "hash": 772484645,
+   "mac_rva": 49708000,
+   "name": "Localization_LoadSubtitles",
+   "note": "Localization_LoadSubtitles. Windows 0x262090. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2498704,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "Localization_LoadSubtitles: Windows 0x262090 and Mac 0x2f67be0 are the same function (the MISMATCH is the heuristic seeing only a shared shape); both test the ResourcePath argument for 0 first (rdx / x0), request it through the loader global (Windows 0x2253c8 IssueLoadingRequestByPath, Mac 0x21b7130), wait, check finished, then copy the Handle at resource+0x40 to the result only when its class matches a class cell (result Handle via rcx / x8, zeroed first). The Mac body is byte for byte the shape of LoadOnScreens 0x2f67db4, so the class cell is the discriminator: the cell used here (Windows 0x34389c0, Mac 0x90d1500) is the one written by the function that holds the string localizationPersistenceSubtitleMap (Windows 0xb69380, Mac 0x2f65b94 and 0x2f68490), while LoadOnScreens uses Windows 0x34389c8 and Mac 0x90d1520 (string localizationPersistenceOnScreenEntries); the single caller pairs (Windows 0x263344, Mac 0x2f6fda8: loop over a DynArray of 8 byte ResourcePaths, count at +0xC, then walk result+0x30 entries, count at +0x3c, stride 0x10); function start, but x8 is consumed by the first instruction (stp xzr,xzr,[x8]) so a hook must preserve x8 [R22 read-only matcher, both bodies read] [heuristic: MISMATCH offsets:0/7~0%, calls w10 m18, size w256 m436]"
+  },
+  {
+   "hash": 240386859,
+   "mac_rva": 204312,
+   "name": "Main",
+   "note": "Main. Windows 0x18d4dc0. Codeware/SDK row.",
+   "origins": [
+    "archivexl",
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 26037696,
+   "win_sym": "wWinMain",
+   "verdict": "REVIEWED",
+   "detail": "Main: the Windows address is the ASI entry point; nothing on Mac calls this row [heuristic: WEAK offsets:0/1~0%, calls w3 m8, size w25 m128]"
+  },
+  {
+   "hash": 3491172781,
+   "mac_rva": 53742840,
+   "name": "NodeRef_Create",
+   "note": "NodeRef_Create. Mac ABI uint64_t(const char*, uint32_t, bool).",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 1964832,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "NodeRef_Create: Mac ABI uint64_t(const char*, uint32_t, bool), bodies of similar size (520 and 436 bytes); the R13 self-test compares the result with FNV1a64 and passes [heuristic: WEAK offsets:0/3~0%, calls w6 m7, size w520 m436]"
+  },
+  {
+   "hash": 125247621,
+   "mac_rva": 18706008,
+   "name": "ObjectSerializer_ReadFromStrean",
+   "note": "ObjectSerializer_ReadFromStrean. Handle<ISerializable>(BaseStream*, CClass*), result through x8. Windows 0x4946F4.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 4802292,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ObjectSerializer_ReadFromStrean: sizes 0x14d (Windows) and 0x14c (Mac) with the same call sequence; reuses CClass_CreateInstance and Handle_ctor; the two Mac callers reference StatsSystem and StatPoolsSystem like the Windows callers; the R19 persistence self-test reads a saved state back through it [heuristic: WEAK offsets:0/4~0%, calls w10 m19, size w333 m332]"
+  },
+  {
+   "hash": 2646156567,
+   "mac_rva": 18706340,
+   "name": "ObjectSerializer_WriteToBuffer",
+   "note": "ObjectSerializer_WriteToBuffer. DataBuffer(const Handle*, uint32 flags, uint32 sizeLimit), result through x8. Windows 0x2A672B8.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 44462776,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ObjectSerializer_WriteToBuffer: sizes 231 and 248 bytes; the same two callers on both sides pass the same size limits (0x40000 and 0x10000) and store the result at the same offsets (+0x3d8 and +0x160); the R19 persistence self-test writes a state through it [heuristic: WEAK offsets:0/6~0%, calls w8 m10, size w231 m248]"
+  },
+  {
+   "hash": 779107884,
+   "mac_rva": 47141492,
+   "name": "QuestPhaseInstance_ExecuteGraph",
+   "note": "QuestPhaseInstance_ExecuteGraph. uint8(phase, QuestContext&, const WeakHandle<node>&, const Socket&, bool, DynArray<Socket>&). Windows 0x9481D8.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 9732568,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "QuestPhaseInstance_ExecuteGraph: Windows 0x9481D8 wrapper (refcount check, push phase on the context stack, call body 0x58E31C, pop) against Mac 0x2CF5274 (same four steps, body 0x2CFB178, push 0x2CF3150, pop 0x2CF31FC); the single Windows caller 0x58E444 pairs with Mac 0x2CFCE70; read-only quest agent, HIGH [heuristic: WEAK offsets:0/9~0%, calls w1 m3, size w222 m160]"
+  },
+  {
+   "hash": 43194193,
+   "mac_rva": 65904284,
+   "name": "ResourceDepot_CheckResource",
+   "note": "ResourceDepot_CheckResource. Windows 0x26475c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2508636,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ResourceDepot_CheckResource: Windows 0x26475c (wrapper: local at rsp+0x20 as 3rd argument, calls 0x264770) and Mac 0x3ed9e9c (local object built by 0x3e2cb34, calls 0x3ed9eec, destroys it) are the same wrapper over twin bodies (Windows 0x264770, Mac 0x3ed9eec): dirty bit 0 of depot+0x20 tested first, group array at depot+0x10 with count at +0x1C and stride 0x38, inner archive array per group (count at +0xC, stride 0x50, first qword the archive), and per archive a FindFile call (Windows 0x1cfc4c, Mac thunk 0x3e2f030 into 0x3e2de90: sorted array, the same bit 0 of archive+0x20, count at +0xC, entries at +0x10 with stride 0x20) that returns true on the first hit, else 0. bool(depot, ResourcePath by value in rdx / x1) matches the SDK type and how ArchiveXL calls it; function start with an ordinary prologue [R22 read-only matcher, both bodies read] [heuristic: WEAK calls w1 m3, size w19 m80]"
+  },
+  {
+   "hash": 1250309504,
+   "mac_rva": 35352880,
+   "name": "ResourceLoader_IssueLoadingRequestByPath",
+   "note": "ResourceLoader_IssueLoadingRequestByPath. SharedPtr<Token>(loader, path), result through x8. Windows 0x2253C8.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 2249672,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ResourceLoader_IssueLoadingRequestByPath: the ResourceRequest is built on the stack identically on both sides; Mac inlines Windows IssueLoadingRequest 0x1de50c and the bank find 0x1de588 (156 bytes against 64); path in x1, SharedPtr out through x8 [heuristic: WEAK offsets:0/1~0%, calls w1 m3, size w64 m156]"
+  },
+  {
+   "hash": 3998356057,
+   "mac_rva": 35426468,
+   "name": "ResourcePath_Create",
+   "note": "ResourcePath_Create. uint64_t(const char* text, uint32 size): the hash comes back in x0. The same entry the NCC ArchiveXL hooked with the Windows shape and crashed. Windows 0x1DF644.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1963588,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ResourcePath_Create: Windows 93 byte wrapper, Mac 380 bytes with the sanitiser and the FNV-1a-64 loop inlined (the Windows bodies are 0x1dfdc4 and 0x1dfa20, same steps: skip leading quote and slash, collapse separators to backslash, lowercase, stop at a quote); static initialiser call sites hash the same literals with the same lengths (av_zetatech_surveyor_basic_01_ep1.ent: Windows 0x7bfb0, Mac 0x15BCD60 with w1 = 0x48); 244 call sites plus 6 tail branches; the R19 boot checks that the hook sees at least 1000 calls and resolves a known path [heuristic: WEAK offsets:0/1~0%, calls w2 m2, size w93 m380]"
+  },
+  {
+   "hash": 4142009574,
+   "mac_rva": 68745984,
+   "name": "ResourceToken_CancelUnk38",
+   "note": "ResourceToken_CancelUnk38. void(Unk38*) (IO::IOContext::RequestCancel). Windows 0xBC7E34.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 12353076,
+   "win_sym": "IO::IOContext::RequestCancel",
+   "verdict": "REVIEWED",
+   "detail": "ResourceToken_CancelUnk38: IO::IOContext::RequestCancel; Windows 17 bytes (stub), Mac 96 bytes; its field offsets are the Windows ones minus 0x20 (0x68 to 0x48, 0x76 to 0x56, 0x38 to 0x18); two callers on each side, both in the token destructor path [heuristic: WEAK offsets:0/5~0%, calls w0 m1, size w17 m96]"
+  },
+  {
+   "hash": 2349406410,
+   "mac_rva": 35409228,
+   "name": "ResourceToken_Fetch",
+   "note": "ResourceToken_Fetch. Handle<T>&(token): returns token+0x28. Windows 0x261F24.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 2498340,
+   "win_sym": "res::ResourceToken::WaitUntilLoaded",
+   "verdict": "REVIEWED",
+   "detail": "ResourceToken_Fetch: the IsFinished test and the add x0,x19,#0x28 return match Windows 0x261f24; Mac 312 bytes against 85 because the waiting path is inlined; the SDK calls it as a direct function [heuristic: WEAK offsets:0/7~0%, calls w3 m9, size w85 m312]"
+  },
+  {
+   "hash": 2070546748,
+   "mac_rva": 35991284,
+   "name": "ScriptOpCodes_Register",
+   "note": "ScriptOpCodes_Register. Fills the table (one call to 0x21FD4B8 per opcode). Not hooked.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 8084976,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "ScriptOpCodes_Register: fills the opcode handler table; Windows has no calls (the 104 registrations are inline), Mac makes 104 calls; the R15 table dump and the New and Cast patch work on the table it fills [heuristic: WEAK offsets:0/4~0%, calls w0 m104, size w1022 m1680]"
+  },
+  {
+   "hash": 410718963,
+   "mac_rva": 54701376,
+   "name": "StreamingWorld_Serialize",
+   "note": "StreamingWorld_Serialize. Windows 0x113a890. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 18065552,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "StreamingWorld_Serialize: Windows 0x113a890 and Mac 0x342ad40 (the latter calls the map serializer 0x342ad84) both run ISerializable::OnSerialize first (Windows 0x148940, Mac 0x2185f34, same stream bit 2 test and same virtual chain), then serialize one HashMap<8 byte key, 0x20 byte value> that is a member of the derived class (Windows this+0x1D8, Mac this+0x1C8: the derived member sits 0x10 lower on Mac): the stream mode bit 2 of [stream+8] selects read or write, count as u32 through the stream virtual (0x10 / 0x18), Reserve (Windows 0x113a91c, Mac 0x342c4c8), then per node 8 bytes at node+8 and 0x20 bytes at node+0x10 (reader inserts via Windows 0x2255310 / Mac 0x342c6e0, writer walks the buckets); the Mac zeroes a 0x20 byte local exactly as the Windows two xorps; void(worldStreamingWorld*, BaseStream*) in rcx rdx / x0 x1; reached through the vtable, function start with an ordinary prologue [R22 read-only matcher, both bodies read] [heuristic: WEAK offsets:0/3~0%, calls w3 m2, size w140 m68]"
+  },
+  {
+   "hash": 838931066,
+   "mac_rva": 40603064,
+   "name": "TweakDB_CreateRecord",
+   "note": "TweakDB_CreateRecord",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 2405704,
+   "win_sym": "game::data::AddRecord",
+   "verdict": "REVIEWED",
+   "detail": "TweakDB_CreateRecord: call counts 36 and 38, sizes 898 and 696 bytes; TweakXL creates records in every boot and the Equipment-EX and Lizzie's tweaks apply [heuristic: WEAK offsets:0/1~0%, calls w36 m38, size w898 m696]"
+  },
+  {
+   "hash": 914361828,
+   "mac_rva": 45563004,
+   "name": "TweakDB_Get",
+   "note": "TweakDB_Get",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 3407716,
+   "win_sym": "game::data::GetTweakDB",
+   "verdict": "REVIEWED",
+   "detail": "TweakDB_Get: small getter with one call on each side; TweakXL reads records in every boot [heuristic: WEAK calls w1 m1, size w35 m64]"
+  },
+  {
+   "hash": 1159928678,
+   "mac_rva": 19201564,
+   "name": "VehicleGarageComponent_LoadSummonSetup",
+   "note": "VehicleGarageComponent_LoadSummonSetup. void(garage). The Windows table address (0x126DF78) is an RTTI type getter; the real function is Windows 0x126BF78 (it reads the 27 Vehicle.summon_setup flats).",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 19324792,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "VehicleGarageComponent_LoadSummonSetup: the Windows address table row (0x126DF78) is an RTTI type getter, not this function; the real Windows function is 0x126BF78 (reads the Vehicle.summon_setup flats) and pairs with Mac 0x124FE1C by its TweakDB flat names and call structure; read-only misc agent, HIGH for the real function [heuristic: WEAK offsets:0/9~0%, calls w8 m124, size w146 m1816]"
+  },
+  {
+   "hash": 3027836941,
+   "mac_rva": 20355676,
+   "name": "VehicleSystem_ToggleGarageVehicle",
+   "note": "VehicleSystem_ToggleGarageVehicle. bool(system, const GarageVehicleID*, bool): virtual (Windows slot 0x298, Mac 0x2A0), called directly. Windows 0x14FCFC8.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 22007752,
+   "win_sym": "",
+   "verdict": "REVIEWED",
+   "detail": "VehicleSystem_ToggleGarageVehicle: virtual (Windows slot 0x298, Mac 0x2A0) called directly; the Windows loop over Vehicle.vehicle_list.initially_unlocked_list at 0x14FCF10 pairs with Mac 0x125358C (same arguments, same follow-up call); two other Mac loops have it inlined, so offsets and call counts differ; read-only misc agent, HIGH [heuristic: WEAK offsets:0/4~0%, calls w3 m3, size w122 m140]"
+  },
+  {
+   "hash": 3123320294,
+   "mac_rva": 61423344,
+   "name": "",
+   "note": "",
+   "origins": [
+    "tweakxl"
+   ],
+   "win_rva": 6640204,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w1 m1, size w85 m92"
+  },
+  {
+   "hash": 3652194890,
+   "mac_rva": 61420200,
+   "name": "",
+   "note": "",
+   "origins": [
+    "tweakxl"
+   ],
+   "win_rva": 1640640,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/13~31%, calls w9 m24, size w293 m1232"
+  },
+  {
+   "hash": 2515346652,
+   "mac_rva": 64296400,
+   "name": "AIWorkspotManager_RegisterSpots",
+   "note": "AIWorkspotManager_RegisterSpots. Windows 0x83bf4c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 8634188,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/12~25%, calls w1 m5, size w145 m364"
+  },
+  {
+   "hash": 2855474741,
+   "mac_rva": 12154148,
+   "name": "AnimatedComponent_InitializeAnimations",
+   "note": "AnimatedComponent_InitializeAnimations. Windows 0x46b7b4. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 4634548,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/11~27%, calls w11 m15, size w282 m320"
+  },
+  {
+   "hash": 735526026,
+   "mac_rva": 13906456,
+   "name": "AppearanceChangeSystem_ChangeAppearance1",
+   "note": "AppearanceChangeSystem_ChangeAppearance1. Windows 0x85084c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 8718412,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/29~10%, calls w17 m55, size w351 m1756"
+  },
+  {
+   "hash": 386815609,
+   "mac_rva": 13918160,
+   "name": "AppearanceChangeSystem_ChangeAppearance2",
+   "note": "AppearanceChangeSystem_ChangeAppearance2. Windows 0x8a5b34. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9067316,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/10~20%, calls w19 m39, size w660 m1384"
+  },
+  {
+   "hash": 3243419919,
+   "mac_rva": 57738592,
+   "name": "AppearanceChanger_ComputePlayerGarment",
+   "note": "AppearanceChanger_ComputePlayerGarment. Windows 0xb58674. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11896436,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:5/20~25%, calls w11 m23, size w360 m760"
+  },
+  {
+   "hash": 39206067,
+   "mac_rva": 11323952,
+   "name": "AppearanceDefinition_ExtractPartComponents",
+   "note": "AppearanceDefinition_ExtractPartComponents. Windows 0x5067f4. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 5269492,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/20~10%, calls w12 m38, size w483 m1036"
+  },
+  {
+   "hash": 549398675,
+   "mac_rva": 11366472,
+   "name": "AppearanceResource_FindAppearanceDefinition",
+   "note": "AppearanceResource_FindAppearanceDefinition. Windows 0x8aa5e8. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9086440,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/11~36%, calls w2 m2, size w203 m432"
+  },
+  {
+   "hash": 3141736993,
+   "mac_rva": 11372712,
+   "name": "AppearanceResource_OnLoad",
+   "note": "AppearanceResource_OnLoad. Windows 0x105d42c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 17159212,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/5~20%, calls w0 m9, size w28 m380"
+  },
+  {
+   "hash": 3778157291,
+   "mac_rva": 35074780,
+   "name": "CBaseFunction_ExecuteNative",
+   "note": "CBaseFunction_ExecuteNative. bool(CBaseFunction*, CStack*): builds its own frame. Windows 0x20668A0.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 33974432,
+   "win_sym": "rtti::Function::CallNative",
+   "verdict": "OK",
+   "detail": "offsets:1/6~17%, calls w3 m6, size w162 m180"
+  },
+  {
+   "hash": 404169501,
+   "mac_rva": 35074336,
+   "name": "CBaseFunction_InternalExecute",
+   "note": "CBaseFunction_InternalExecute",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 3324712,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/12~33%, calls w7 m11, size w384 m416"
+  },
+  {
+   "hash": 2694518184,
+   "mac_rva": 35220012,
+   "name": "CBitfield_FromString",
+   "note": "CBitfield_FromString. Same StringView shape as the enum one. Windows 0x2076E00.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 34041344,
+   "win_sym": "rtti::BitFieldType::FromString",
+   "verdict": "OK",
+   "detail": "offsets:1/6~17%, calls w9 m11, size w278 m508"
+  },
+  {
+   "hash": 1411585028,
+   "mac_rva": 35219760,
+   "name": "CBitfield_ToString",
+   "note": "CBitfield_ToString. Windows 0x2076F18.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 34041624,
+   "win_sym": "rtti::BitFieldType::ToString",
+   "verdict": "OK",
+   "detail": "offsets:1/2~50%, calls w6 m5, size w192 m252"
+  },
+  {
+   "hash": 1613572595,
+   "mac_rva": 35075936,
+   "name": "CClassFunction_ctor",
+   "note": "CClassFunction_ctor (Mac pointer-to-member ABI)",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 3989268,
+   "win_sym": "rtti::NativeMemberFunction::NativeMemberFunction",
+   "verdict": "OK",
+   "detail": "offsets:2/12~17%, calls w1 m10, size w106 m256"
+  },
+  {
+   "hash": 2920426135,
+   "mac_rva": 35076196,
+   "name": "CClassStaticFunction_ctor",
+   "note": "CClassStaticFunction_ctor",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 13145904,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/12~17%, calls w1 m10, size w106 m248"
+  },
+  {
+   "hash": 1518341917,
+   "mac_rva": 35224236,
+   "name": "CClass_CreateInstance",
+   "note": "CClass_CreateInstance (rtti::ClassType::CreateObject)",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 1339884,
+   "win_sym": "rtti::ClassType::CreateObject",
+   "verdict": "OK",
+   "detail": "offsets:5/11~45%, calls w9 m10, size w376 m288"
+  },
+  {
+   "hash": 566894273,
+   "mac_rva": 35274060,
+   "name": "CEnum_FromString",
+   "note": "CEnum_FromString. bool(CEnum*, instance, const char* text and a size): the string comes as a StringView in x2/x3. Windows 0x59B204 (the address table says 0x75DF94, which is wrong).",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 7724948,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/6~17%, calls w2 m1, size w79 m528"
+  },
+  {
+   "hash": 68817558,
+   "mac_rva": 35273664,
+   "name": "CEnum_ToString",
+   "note": "CEnum_ToString. bool(CEnum*, instance, CString&). Windows 0x599BFC.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 5872636,
+   "win_sym": "rtti::EnumType::ToString",
+   "verdict": "OK",
+   "detail": "offsets:1/6~17%, calls w6 m7, size w137 m396"
+  },
+  {
+   "hash": 1087575974,
+   "mac_rva": 35273136,
+   "name": "CEnum_Unserialize",
+   "note": "CEnum_Unserialize. bool(CEnum*, BaseStream*, instance, int64). Windows 0x1487A4.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1345444,
+   "win_sym": "rtti::EnumType::Serialize",
+   "verdict": "OK",
+   "detail": "offsets:1/7~14%, calls w5 m2, size w186 m528"
+  },
+  {
+   "hash": 4007601841,
+   "mac_rva": 66115840,
+   "name": "CGameFramework_InitializeGameInstance",
+   "note": "CGameFramework_InitializeGameInstance. Job body void(closure, group); the first word of the closure is the CGameFramework, and the job frees the closure. Windows 0x16145C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 1447004,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/5~40%, calls w2 m7, size w134 m132"
+  },
+  {
+   "hash": 4201325776,
+   "mac_rva": 35076584,
+   "name": "CGlobalFunction_ctor",
+   "note": "CGlobalFunction_ctor",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 13145828,
+   "win_sym": "rtti::NativeGlobalFunction::NativeGlobalFunction",
+   "verdict": "OK",
+   "detail": "offsets:1/12~8%, calls w1 m10, size w73 m236"
+  },
+  {
+   "hash": 555290091,
+   "mac_rva": 14773864,
+   "name": "CMesh_AddStubAppearance",
+   "note": "CMesh_AddStubAppearance. Windows 0x223b3a8. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 35894184,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/2~50%, calls w6 m11, size w158 m284"
+  },
+  {
+   "hash": 701648326,
+   "mac_rva": 14781480,
+   "name": "CMesh_LoadMaterialsAsync",
+   "note": "CMesh_LoadMaterialsAsync. Windows 0x253c5c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2440284,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:5/30~17%, calls w35 m85, size w808 m2216"
+  },
+  {
+   "hash": 3235778563,
+   "mac_rva": 14775556,
+   "name": "CMesh_PreloadAppearances",
+   "note": "CMesh_PreloadAppearances (Mac-only id). R22: the action CMesh::PostLoad takes after its inlined ShouldPreloadAppearances test; (CMesh*, w1 = 0, request*), void, single caller at 0xE16D00. Windows twin 0xAF3CC4 (caller 0x224907).",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11484356,
+   "win_sym": "mac-only twin",
+   "verdict": "OK",
+   "detail": "offsets:4/25~16%, calls w22 m88, size w519 m2152"
+  },
+  {
+   "hash": 503977943,
+   "mac_rva": 14775292,
+   "name": "CMesh_ShouldPreloadAppearances",
+   "note": "CMesh_ShouldPreloadAppearances. Windows 0x22583c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2250812,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/6~33%, calls w1 m4, size w43 m264"
+  },
+  {
+   "hash": 1759447004,
+   "mac_rva": 54865276,
+   "name": "CNamePool_Get",
+   "note": "CNamePool_Get",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 2135424,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "calls w1 m0, size w25 m8, tiny body"
+  },
+  {
+   "hash": 3904113489,
+   "mac_rva": 174796,
+   "name": "CString_copy",
+   "note": "CString_copy. R25: the copy ASSIGN (Windows twin 0x2503FC), was the copy constructor 0x2B110",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 2425852,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/2~100%, calls w0 m2, size w35 m268"
+  },
+  {
+   "hash": 2065762423,
+   "mac_rva": 168972,
+   "name": "CString_ctor_span",
+   "note": "CString_ctor_span",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 8522104,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/2~100%, calls w1 m2, size w34 m172"
+  },
+  {
+   "hash": 1409615660,
+   "mac_rva": 168488,
+   "name": "CString_dtor",
+   "note": "CString_dtor",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 1964616,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/1~100%, calls w2 m1, size w80 m60"
+  },
+  {
+   "hash": 3015323410,
+   "mac_rva": 38024912,
+   "name": "CharacterCustomizationFeetController_CheckState",
+   "note": "CharacterCustomizationFeetController_CheckState. Windows 0x388134. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 3703092,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/10~30%, calls w5 m9, size w237 m340"
+  },
+  {
+   "hash": 2347184335,
+   "mac_rva": 38012948,
+   "name": "CharacterCustomizationGenitalsController_CheckState",
+   "note": "CharacterCustomizationGenitalsController_CheckState. Windows 0x8586b4. R22: body twin read from both sides (virtual 0x2A0 / Mac 0x2A8 first, then the owner's component at +0x50 -> +0xC0, the vtable +0x430 / Mac +0x438 query, the 0x90 byte element loop, the controller flag at +0xD0 / Mac +0xC8) and the Mac state refresh virtual 0x2440754 calls it as the Windows 0x3861dc calls 0x8586b4. The fork DB entry 0x2deac58 was unverified.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 8750772,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/30~13%, calls w33 m39, size w1132 m1676"
+  },
+  {
+   "hash": 2652844338,
+   "mac_rva": 38022540,
+   "name": "CharacterCustomizationHairstyleController_CheckState",
+   "note": "CharacterCustomizationHairstyleController_CheckState. Windows 0x8579d4. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 8747476,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/18~17%, calls w19 m41, size w740 m1128"
+  },
+  {
+   "hash": 2249860539,
+   "mac_rva": 38016448,
+   "name": "CharacterCustomizationHairstyleController_OnDetach",
+   "note": "CharacterCustomizationHairstyleController_OnDetach. Windows 0x388690. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 3704464,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/12~8%, calls w7 m21, size w284 m612"
+  },
+  {
+   "hash": 110771572,
+   "mac_rva": 38084396,
+   "name": "CharacterCustomizationState_GetArmsAppearances1",
+   "note": "CharacterCustomizationState_GetArmsAppearances1. Windows 0x1192f2c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 18427692,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/11~27%, calls w5 m4, size w230 m536"
+  },
+  {
+   "hash": 4059182261,
+   "mac_rva": 38084932,
+   "name": "CharacterCustomizationState_GetArmsAppearances2",
+   "note": "CharacterCustomizationState_GetArmsAppearances2. Windows 0x1192f2c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 18427692,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/11~27%, calls w5 m4, size w230 m536"
+  },
+  {
+   "hash": 4014159024,
+   "mac_rva": 38083324,
+   "name": "CharacterCustomizationState_GetBodyAppearances1",
+   "note": "CharacterCustomizationState_GetBodyAppearances1. Windows 0xeede78. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 15654520,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/10~30%, calls w5 m4, size w243 m536"
+  },
+  {
+   "hash": 56573295,
+   "mac_rva": 38083860,
+   "name": "CharacterCustomizationState_GetBodyAppearances2",
+   "note": "CharacterCustomizationState_GetBodyAppearances2. Windows 0xb85240. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 12079680,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/11~27%, calls w5 m4, size w232 m536"
+  },
+  {
+   "hash": 4051123539,
+   "mac_rva": 38082080,
+   "name": "CharacterCustomizationState_GetHeadAppearances1",
+   "note": "CharacterCustomizationState_GetHeadAppearances1. Windows 0x38503c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 3690556,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/11~27%, calls w5 m4, size w227 m536"
+  },
+  {
+   "hash": 3766105236,
+   "mac_rva": 38082788,
+   "name": "CharacterCustomizationState_GetHeadAppearances2",
+   "note": "CharacterCustomizationState_GetHeadAppearances2. Windows 0x38503c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 3690556,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/11~27%, calls w5 m4, size w227 m536"
+  },
+  {
+   "hash": 787099588,
+   "mac_rva": 38104220,
+   "name": "CharacterCustomizationSystem_EnsureState",
+   "note": "CharacterCustomizationSystem_EnsureState. Windows 0xeed694 (cold half 0x1fc6c0a). R22 code twin: (System*, Handle<State>*), one of the three sites that inline GetResource on the Mac (the GetResource row 0x2459710 has no callers).",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 15652500,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/15~7%, calls w7 m82, size w173 m1696"
+  },
+  {
+   "hash": 2341291776,
+   "mac_rva": 38114268,
+   "name": "CharacterCustomizationSystem_Initialize",
+   "note": "CharacterCustomizationSystem_Initialize. Windows 0x27f8a0c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 41912844,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/12~25%, calls w19 m35, size w410 m820"
+  },
+  {
+   "hash": 1092645213,
+   "mac_rva": 38162132,
+   "name": "CharacterCustomizationSystem_InitializeAppOption",
+   "note": "CharacterCustomizationSystem_InitializeAppOption. Windows 0x27f5010. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 41898000,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:12/28~43%, calls w27 m11, size w708 m1028"
+  },
+  {
+   "hash": 3776734053,
+   "mac_rva": 38163160,
+   "name": "CharacterCustomizationSystem_InitializeMorphOption",
+   "note": "CharacterCustomizationSystem_InitializeMorphOption. Windows 0x27f5400. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 41899008,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:6/18~33%, calls w14 m25, size w511 m1060"
+  },
+  {
+   "hash": 2229107513,
+   "mac_rva": 38166944,
+   "name": "CharacterCustomizationSystem_InitializeSwitcherOption",
+   "note": "CharacterCustomizationSystem_InitializeSwitcherOption. Windows 0x27f5cb0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 41901232,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:11/25~44%, calls w20 m25, size w673 m1024"
+  },
+  {
+   "hash": 1559565515,
+   "mac_rva": 21681012,
+   "name": "CommunitySystem_Update",
+   "note": "CommunitySystem_Update. void(CommunitySystem*, bool). Windows 0x3F226C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 4137580,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:7/16~44%, calls w19 m27, size w629 m808"
+  },
+  {
+   "hash": 4125893577,
+   "mac_rva": 36054412,
+   "name": "DeferredDataBuffer_LoadAsync",
+   "note": "DeferredDataBuffer_LoadAsync. LoadResult(DeferredDataBuffer*, int64 a3): a 16 byte result through x8 whose JobHandle is at result+8 (the game never writes result+0); Windows: JobHandle* out in rdx. R22 body twin of Windows 0xB0762C: lock byte at this+0x55 (xchg / swpalb), counter at this+0x50, a JobQueue, the load job; callers include the ArchiveXL resource patch (compiledData.LoadAsync).",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 11564588,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/17~12%, calls w7 m16, size w207 m480"
+  },
+  {
+   "hash": 489494088,
+   "mac_rva": 13255136,
+   "name": "EntityBuilder_ExtractComponentsJob",
+   "note": "EntityBuilder_ExtractComponentsJob. void(EntityBuilderJobParams*, void*). Windows 0x1CD4A8.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1889448,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:16/35~46%, calls w49 m159, size w1800 m4632"
+  },
+  {
+   "hash": 552341017,
+   "mac_rva": 13503784,
+   "name": "EntitySpawnerToken_dtor",
+   "note": "EntitySpawnerToken_dtor. void(token): releases the entity Handle (+0x10) and the SharedPtr (+0), frees nothing; 0xCE0DD0 is a one instruction thunk to it, not to be hooked. Windows 0xCD921C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 13472284,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/4~50%, calls w2 m7, size w68 m168"
+  },
+  {
+   "hash": 3068279668,
+   "mac_rva": 13488432,
+   "name": "EntitySpawner_SpawnEntity",
+   "note": "EntitySpawner_SpawnEntity. SharedPtr<EntitySpawnerToken>(spawner, const EntitySpawnerRequest&): the SharedPtr through x8, no result argument. Called, not hooked. Windows 0x8B24B0.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 9118896,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/14~29%, calls w7 m15, size w242 m476"
+  },
+  {
+   "hash": 2509382878,
+   "mac_rva": 21005488,
+   "name": "EntitySpawner_SpawnFromTemplate",
+   "note": "EntitySpawner_SpawnFromTemplate. Windows 0x661538. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 6690104,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/22~5%, calls w16 m28, size w332 m944"
+  },
+  {
+   "hash": 2741376473,
+   "mac_rva": 13314668,
+   "name": "EntityTemplate_OnLoad",
+   "note": "EntityTemplate_OnLoad. Windows 0x26f3e8. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2552808,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:5/25~20%, calls w11 m32, size w350 m952"
+  },
+  {
+   "hash": 4248638169,
+   "mac_rva": 13210472,
+   "name": "Entity_Attach",
+   "note": "Entity_Attach. void(Entity*, void* ctx). Not 0xC99378 (inside the prologue).",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1891248,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:7/20~35%, calls w8 m16, size w336 m508"
+  },
+  {
+   "hash": 2263681375,
+   "mac_rva": 13211328,
+   "name": "Entity_Detach",
+   "note": "Entity_Detach. void(Entity*). Not 0xC996BC (base no-op). Windows 0x1B3A1C.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1784348,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/20~15%, calls w5 m11, size w192 m320"
+  },
+  {
+   "hash": 2515274237,
+   "mac_rva": 13212128,
+   "name": "Entity_Dispose",
+   "note": "Entity_Dispose. void(Entity*). Windows 0x8B5540.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 9131328,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/7~43%, calls w4 m7, size w96 m208"
+  },
+  {
+   "hash": 3490519617,
+   "mac_rva": 13207020,
+   "name": "Entity_Initialize",
+   "note": "Entity_Initialize. void(Entity*, JobQueue&, EntityInitializeRequest*). RequestComponents and four job schedulers are inlined. Windows 0x8B0190.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 9109904,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:21/75~28%, calls w34 m111, size w994 m3028"
+  },
+  {
+   "hash": 1560690857,
+   "mac_rva": 13195076,
+   "name": "Entity_Reassemble",
+   "note": "Entity_Reassemble. void(Entity*, a2, CName, u64, DynArray&, Handle&), all six in registers. Windows 0xC27FD8.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 12746712,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:10/35~29%, calls w23 m65, size w526 m1760"
+  },
+  {
+   "hash": 2296260874,
+   "mac_rva": 13196836,
+   "name": "Entity_RequestComponents",
+   "note": "Entity_RequestComponents. Identity matches Windows 0x8B116C, but Mac has no caller (inlined into Initialize and Reassemble): never hooked.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 9113964,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/4~25%, calls w2 m2, size w85 m88"
+  },
+  {
+   "hash": 525805301,
+   "mac_rva": 58238952,
+   "name": "Entity_ResolveRecordID",
+   "note": "Entity_ResolveRecordID. Mac uint64_t TweakDBID(Entity* unused, PopulationSpawnParameter*): no out pointer. Windows 0x7280AC.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 7504044,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/3~67%, calls w1 m3, size w96 m148"
+  },
+  {
+   "hash": 3596356635,
+   "mac_rva": 13210308,
+   "name": "Entity_Uninitialize",
+   "note": "Entity_Uninitialize. void(Entity*). Not 0xC992C0 (base no-op). Dispose inlines it. Windows 0x402F74.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 4206452,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/10~20%, calls w7 m6, size w225 m160"
+  },
+  {
+   "hash": 2923109755,
+   "mac_rva": 24134036,
+   "name": "GameApplication_InitResourceDepot",
+   "note": "GameApplication_InitResourceDepot. Windows 0x9f45c8. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 10438088,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/9~33%, calls w13 m25, size w384 m388"
+  },
+  {
+   "hash": 809178766,
+   "mac_rva": 11429472,
+   "name": "GarmentAssembler_ExtractComponentsJob",
+   "note": "GarmentAssembler_ExtractComponentsJob. Windows 0x27399c. R22 code twin: the Windows body is the second stage 0xAE6660 (the fork DB value 0xAE6348 is stage 1). Both Mac stages free their closure at the end, so the HookAfter handler cannot run; the row stays held back (NOT_YET.md).",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2570652,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:8/52~15%, calls w25 m93, size w823 m2960"
+  },
+  {
+   "hash": 2594581880,
+   "mac_rva": 57638960,
+   "name": "GarmentAssembler_FindState",
+   "note": "GarmentAssembler_FindState. Windows 0x5eb300. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 6206208,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/7~29%, calls w3 m11, size w179 m472"
+  },
+  {
+   "hash": 1567972572,
+   "mac_rva": 11418816,
+   "name": "GarmentAssembler_ProcessMorphedMesh",
+   "note": "GarmentAssembler_ProcessMorphedMesh. Windows 0x79696c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 7956844,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/13~23%, calls w16 m34, size w407 m836"
+  },
+  {
+   "hash": 1663588463,
+   "mac_rva": 11417664,
+   "name": "GarmentAssembler_ProcessSkinnedMesh",
+   "note": "GarmentAssembler_ProcessSkinnedMesh. Windows 0x7974b0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 7959728,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/12~25%, calls w13 m26, size w302 m672"
+  },
+  {
+   "hash": 1559305924,
+   "mac_rva": 32778564,
+   "name": "GetScriptGameInstance",
+   "note": "GetScriptGameInstance. The GetGameInstance script native (void(ctx, frame, out, type)).",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 12939184,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/3~67%, calls w0 m2, size w82 m132"
+  },
+  {
+   "hash": 3121353053,
+   "mac_rva": 34621320,
+   "name": "Handle_ctor",
+   "note": "Handle_ctor (Gate 5 path)",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 1332928,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/4~25%, calls w1 m8, size w262 m312"
+  },
+  {
+   "hash": 3370191745,
+   "mac_rva": 13263676,
+   "name": "IComponent_Toggle",
+   "note": "IComponent_Toggle. void(IComponent*, bool). Ten instructions, tail call through a virtual slot. Windows 0x45A944.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 4565316,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/3~67%, calls w0 m0, size w24 m40"
+  },
+  {
+   "hash": 1828854026,
+   "mac_rva": 12851184,
+   "name": "IPlacedComponent_SetTransform",
+   "note": "IPlacedComponent_SetTransform. void(component, const WorldTransform*): a frameless leaf that tail-branches to 0xC91DD0. Windows 0x574FC8.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 5722056,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/13~31%, calls w2 m0, size w198 m204"
+  },
+  {
+   "hash": 55710513,
+   "mac_rva": 35882172,
+   "name": "IScriptable_DestructValueHolder",
+   "note": "IScriptable_DestructValueHolder. void(IScriptable*). Replaces the TweakXL stand-in. Windows 0x14934C.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1348428,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/14~21%, calls w4 m8, size w220 m236"
+  },
+  {
+   "hash": 4175699423,
+   "mac_rva": 35883288,
+   "name": "IScriptable_sub_D8",
+   "note": "IScriptable_sub_D8. void(this, unused, visitor). Windows 0x205FE10.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 33947152,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:0/1~0%, calls w1 m1, size w31 m44, tiny body"
+  },
+  {
+   "hash": 114701897,
+   "mac_rva": 35151992,
+   "name": "ISerializable_sub_30",
+   "note": "ISerializable_sub_30. bool(this): true when there is no owning CResource. Shared by about 6700 vtables, never hook. Windows 0x2052B84.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 33893252,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:0/2~0%, calls w1 m1, size w38 m44, tiny body"
+  },
+  {
+   "hash": 2293436409,
+   "mac_rva": 35151668,
+   "name": "ISerializable_sub_40",
+   "note": "ISerializable_sub_40. bool(this, BaseStream*). Windows 0x148940.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1345856,
+   "win_sym": "ISerializable::OnSerialize",
+   "verdict": "OK",
+   "detail": "offsets:1/5~20%, calls w7 m4, size w180 m172"
+  },
+  {
+   "hash": 3978435378,
+   "mac_rva": 35152432,
+   "name": "ISerializable_sub_A0",
+   "note": "ISerializable_sub_A0. The base default (GetType()->GetDefaultObject). The address table's Windows 0xB9A864 is a CResource override; the twin is 0x1247898.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 12167268,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:0/1~0%, calls w1 m1, size w32 m28, tiny body"
+  },
+  {
+   "hash": 2698985195,
+   "mac_rva": 77044152,
+   "name": "InkSpawner_FinishAsyncSpawn",
+   "note": "InkSpawner_FinishAsyncSpawn. void(InkSpawningContext*, Handle<WidgetLibraryItemInstance>&): the call operator of the std::function behind InkSpawningInfo. Windows 0xFA63F0.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 16409584,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/5~20%, calls w3 m11, size w98 m420"
+  },
+  {
+   "hash": 673454961,
+   "mac_rva": 76038880,
+   "name": "InkSystem_ProcessInputEvents",
+   "note": "InkSystem_ProcessInputEvents. void(InkSystem*, a2, RawInputBuffer&). Windows 0x39B8E8.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 3783448,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:17/49~35%, calls w93 m89, size w2391 m3220"
+  },
+  {
+   "hash": 1667176558,
+   "mac_rva": 77258280,
+   "name": "InkWidget_GetLayer",
+   "note": "InkWidget_GetLayer. Handle<inkLayerProxy>(inkWidget*): the Handle through x8, no out argument. Windows 0x2EE72C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 3073836,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w8 m23, size w197 m724"
+  },
+  {
+   "hash": 2516523266,
+   "mac_rva": 77273328,
+   "name": "InkWidget_SetLayer",
+   "note": "InkWidget_SetLayer. void(inkWidget*, const Handle<inkLayerProxy>*). Windows 0x4FCD4C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 5229900,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w5 m9, size w119 m240"
+  },
+  {
+   "hash": 1693194103,
+   "mac_rva": 76668336,
+   "name": "InkWorldLayer_UpdateComponents",
+   "note": "InkWorldLayer_UpdateComponents. Windows 0x29eebc. R22 code twin: no standalone function on the Mac; the lambda is inlined into the parallel-for job body 0x491DDB0 (Windows job body 0xC51EEC). The limit is `cmp x22,#9; b.hi` at +0x12C/+0x130. The row is read as code (WorldWidgetLimitPatch), never called. The fork DB entry 0x3da0574 was unverified.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2748092,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/5~40%, calls w7 m14, size w205 m500"
+  },
+  {
+   "hash": 1291460507,
+   "mac_rva": 57657992,
+   "name": "ItemFactoryAppearanceChangeRequest_LoadTemplate",
+   "note": "ItemFactoryAppearanceChangeRequest_LoadTemplate. Windows 0x1387648. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 20477512,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:8/17~47%, calls w8 m24, size w311 m704"
+  },
+  {
+   "hash": 1862212562,
+   "mac_rva": 10322824,
+   "name": "JobInternalHandle_Acquire",
+   "note": "JobInternalHandle_Acquire. Mac JobInternalHandle*(ignored, const char* name, uintptr_t unk): one more argument than the SDK. Windows 0x142B20.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1321760,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/12~17%, calls w3 m1, size w380 m72"
+  },
+  {
+   "hash": 3651996672,
+   "mac_rva": 10306844,
+   "name": "JobQueue_SyncWait",
+   "note": "JobQueue_SyncWait. void(JobQueue*). Windows 0x141B10.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1317648,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/10~10%, calls w2 m6, size w346 m108"
+  },
+  {
+   "hash": 242552139,
+   "mac_rva": 10306420,
+   "name": "JobQueue_ctor_FromGroup",
+   "note": "JobQueue_ctor_FromGroup (job::Builder::Builder). JobQueue*(JobQueue*, const JobGroup&). Windows 0x142634.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1320500,
+   "win_sym": "job::Builder::Builder",
+   "verdict": "OK",
+   "detail": "offsets:5/11~45%, calls w2 m7, size w342 m204"
+  },
+  {
+   "hash": 1525942140,
+   "mac_rva": 10307168,
+   "name": "JobQueue_dtor",
+   "note": "JobQueue_dtor. Body. The game calls it through the thunk 0x9D46EC. Windows 0x142F88.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1322888,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/5~40%, calls w4 m7, size w202 m140"
+  },
+  {
+   "hash": 1964512489,
+   "mac_rva": 32172064,
+   "name": "JournalManager_LoadJournal",
+   "note": "JournalManager_LoadJournal. Windows 0x9522c0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9773760,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/13~8%, calls w16 m28, size w304 m572"
+  },
+  {
+   "hash": 3274382593,
+   "mac_rva": 32184256,
+   "name": "JournalManager_TrackQuest",
+   "note": "JournalManager_TrackQuest. Windows 0x5944fc. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 5850364,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:7/27~26%, calls w63 m110, size w1106 m2760"
+  },
+  {
+   "hash": 1488657506,
+   "mac_rva": 28286156,
+   "name": "Localization_LoadLipsyncs",
+   "note": "Localization_LoadLipsyncs. Windows 0x112cb18. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 18008856,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/2~100%, calls w5 m11, size w133 m248"
+  },
+  {
+   "hash": 4223669659,
+   "mac_rva": 20992820,
+   "name": "Localization_LoadVoiceOvers",
+   "note": "Localization_LoadVoiceOvers. Windows 0x263124. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2502948,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:8/20~40%, calls w20 m57, size w541 m1996"
+  },
+  {
+   "hash": 3299551353,
+   "mac_rva": 69877352,
+   "name": "MappinSystem_GetMappinData",
+   "note": "MappinSystem_GetMappinData. Windows 0x9067a0 (reads this+0x68). R22: the fork DB row 0x42A3E38 is the crossed twin; the Mac wrapper that reads this+0x68 is 0x42A3E68. Not hooked (16 byte wrapper), see FindPoiData.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9463712,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w0 m0, size w45 m16"
+  },
+  {
+   "hash": 620961393,
+   "mac_rva": 69877304,
+   "name": "MappinSystem_GetPoiData",
+   "note": "MappinSystem_GetPoiData. Windows 0x69ba6c (reads this+0x58). R22: crossed in the fork DB; the Mac wrapper that reads this+0x58 is 0x42A3E38. Not hooked (16 byte wrapper), see FindMappinData.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 6929004,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w0 m0, size w45 m16"
+  },
+  {
+   "hash": 140387944,
+   "mac_rva": 69890468,
+   "name": "MappinSystem_OnStreamingWorldLoaded",
+   "note": "MappinSystem_OnStreamingWorldLoaded. Windows 0x1636a4. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 1455780,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/10~40%, calls w17 m44, size w555 m1232"
+  },
+  {
+   "hash": 1419388740,
+   "mac_rva": 14809012,
+   "name": "MeshAppearance_LoadMaterialSetupAsync",
+   "note": "MeshAppearance_LoadMaterialSetupAsync. Handle<MeshAppearance>(appearance, w1 = a3): the Handle through x8, no out argument. Windows 0x21A670.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 2205296,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:7/24~29%, calls w27 m66, size w628 m1448"
+  },
+  {
+   "hash": 633871992,
+   "mac_rva": 13025476,
+   "name": "MorphTargetManager_ApplyMorphTarget",
+   "note": "MorphTargetManager_ApplyMorphTarget. void(manager, CName target, CName region, float s0, bool w3): w3 is a live flag on Mac (the Windows function ignores its fifth argument; all nine game callers pass 0). Windows 0x1607FC.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1443836,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/11~9%, calls w4 m11, size w201 m972"
+  },
+  {
+   "hash": 1523127443,
+   "mac_rva": 14968764,
+   "name": "MorphTargetMesh_PostLoad",
+   "note": "MorphTargetMesh_PostLoad. Windows 0xc27adc. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 12745436,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:6/25~24%, calls w7 m49, size w252 m1512"
+  },
+  {
+   "hash": 546121377,
+   "mac_rva": 67025968,
+   "name": "PersistencySystem_SetPersistentStateData",
+   "note": "PersistencySystem_SetPersistentStateData. Windows 0x2494e0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2397408,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/10~20%, calls w36 m57, size w739 m1168"
+  },
+  {
+   "hash": 3442350580,
+   "mac_rva": 33087484,
+   "name": "PersistentObject_InitializeState",
+   "note": "PersistentObject_InitializeState. void(object, params): hooked HookBefore at the entry, called for the entity's own PersistentObject and once per component. Windows 0x84BA8C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 8698508,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/8~38%, calls w11 m27, size w306 m792"
+  },
+  {
+   "hash": 2394822845,
+   "mac_rva": 67708976,
+   "name": "PhysicsTraceResult_GetHitObject",
+   "note": "PhysicsTraceResult_GetHitObject. Handle<ISerializable>(w0 = resultID, w1 = index): the strong Handle through x8. Not the weak variant 0x409274C. Windows 0x23F29C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 2355868,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w3 m4, size w161 m260"
+  },
+  {
+   "hash": 2050111212,
+   "mac_rva": 66932080,
+   "name": "PlayerSystem_OnPlayerSpawned",
+   "note": "PlayerSystem_OnPlayerSpawned. x0..x3 map to the Windows rcx..r9. Windows 0xA1452C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 10569004,
+   "win_sym": "cp::PlayerSystem::OnPlayerMainObjectSpawned",
+   "verdict": "OK",
+   "detail": "offsets:10/24~42%, calls w18 m47, size w411 m1248"
+  },
+  {
+   "hash": 803085170,
+   "mac_rva": 70168340,
+   "name": "PointOfInterestMappin_SetPhase",
+   "note": "PointOfInterestMappin_SetPhase. bool(mappin, phase): vtable slot 0x1D0 of PointOfInterestMappin on Mac (0x1C8 on Windows). Windows 0x27A6F20.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 41578272,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/13~15%, calls w9 m19, size w718 m464"
+  },
+  {
+   "hash": 790570700,
+   "mac_rva": 49111184,
+   "name": "QuestLoader_ProcessPhaseResource",
+   "note": "QuestLoader_ProcessPhaseResource. Windows 0x9461ac. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9724332,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/8~38%, calls w5 m8, size w213 m388"
+  },
+  {
+   "hash": 3227858325,
+   "mac_rva": 47175236,
+   "name": "QuestPhaseInstance_ExecuteNode",
+   "note": "QuestPhaseInstance_ExecuteNode. uint8(phase, node*, QuestContext&, const Socket&, DynArray<Socket>&). Windows 0x58E5A8.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 5825960,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/10~40%, calls w9 m18, size w483 m524"
+  },
+  {
+   "hash": 3423879019,
+   "mac_rva": 47168100,
+   "name": "QuestPhaseInstance_Initialize",
+   "note": "QuestPhaseInstance_Initialize. (phase, QuestContext&, const Handle<resource>&, Handle<graph>&, const NodePath&, w5 = node id): the args that were on the Windows stack are in registers. Reached by a tail branch from the phase factory. Windows 0x257724.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 2455332,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:11/31~35%, calls w23 m34, size w737 m1544"
+  },
+  {
+   "hash": 797843833,
+   "mac_rva": 47188080,
+   "name": "QuestRootInstance_Start",
+   "note": "QuestRootInstance_Start. Windows 0x270026c (the virtual with the post-create helper). R22: the fork DB row 0x2D01878 is the twin of the other Windows function 0x11FC720 (not virtual, no helper); the virtual is 0x2D00870 (questRootInstance vtable slot 0xE8), with the post-create helper 0x2CFACF4.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 40895084,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/10~20%, calls w11 m22, size w251 m608"
+  },
+  {
+   "hash": 2996308699,
+   "mac_rva": 23738580,
+   "name": "RenderData_Release",
+   "note": "RenderData_Release. void(object): the generic intrusive release (refcount at +8, slot 8 on zero), a 9 instruction leaf: called, never hooked. Windows 0x1E6EB0.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 1994416,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:0/1~0%, calls w0 m0, size w14 m36, tiny body"
+  },
+  {
+   "hash": 1790971865,
+   "mac_rva": 23754980,
+   "name": "RenderProxy_SetVisibility",
+   "note": "RenderProxy_SetVisibility. void(proxy, bool): a 13 instruction leaf that tail-branches to UpdateVisibility, called not hooked. Windows 0x27FEBC.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 2621116,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/1~100%, calls w0 m0, size w45 m64"
+  },
+  {
+   "hash": 2288918343,
+   "mac_rva": 35343032,
+   "name": "ResourceBank_ForgetResource",
+   "note": "ResourceBank_ForgetResource. Handle<CResource>(bank value, path), result through x8. Windows 0x261A4C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 2497100,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/12~33%, calls w5 m9, size w323 m588"
+  },
+  {
+   "hash": 2885423437,
+   "mac_rva": 65902256,
+   "name": "ResourceDepot_InitializeArchives",
+   "note": "ResourceDepot_InitializeArchives. Windows 0xe60e24. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 15076900,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/11~27%, calls w15 m33, size w365 m844"
+  },
+  {
+   "hash": 2517385486,
+   "mac_rva": 65905800,
+   "name": "ResourceDepot_LoadArchives",
+   "note": "ResourceDepot_LoadArchives. Windows 0x7bba48. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 8108616,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w29 m26, size w703 m508"
+  },
+  {
+   "hash": 3362732471,
+   "mac_rva": 35356916,
+   "name": "ResourceLoader_FindTokenFast",
+   "note": "ResourceLoader_FindTokenFast. SharedPtr<Token>(loader, path), result through x8, no lock inside. Windows 0x1DD5D8.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1955288,
+   "win_sym": "res::ResourceLoader::TryAcquireResourceToken_NoLock",
+   "verdict": "OK",
+   "detail": "offsets:1/5~20%, calls w3 m5, size w77 m340"
+  },
+  {
+   "hash": 2365013187,
+   "mac_rva": 35353036,
+   "name": "ResourceLoader_IssueLoadingRequest",
+   "note": "ResourceLoader_IssueLoadingRequest. SharedPtr<Token>(loader, const ResourceRequest&), result through x8. Windows 0x1DE50C.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1959180,
+   "win_sym": "res::ResourceLoader::IssueLoadingRequest",
+   "verdict": "OK",
+   "detail": "offsets:1/1~100%, calls w3 m2, size w124 m132"
+  },
+  {
+   "hash": 1303056161,
+   "mac_rva": 35345736,
+   "name": "ResourceLoader_OnUpdate",
+   "note": "ResourceLoader_OnUpdate. Windows 0x270acc. R22 code twin: void(ResourceLoader*), the loader's per-frame token cache maintenance, one caller (the tail call wrapper 0x21B99A8, called once per frame from 0x3D99938 like Windows 0x29329C from 0x291DF0). The fork DB entry 0x2d9766c was unverified.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2558668,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/21~14%, calls w11 m37, size w365 m1164"
+  },
+  {
+   "hash": 2901686778,
+   "mac_rva": 36016668,
+   "name": "ResourceSerializer_Deserialize",
+   "note": "ResourceSerializer_Deserialize. Windows 0x148b70. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 1346416,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:13/57~23%, calls w11 m15, size w660 m1644"
+  },
+  {
+   "hash": 2577814646,
+   "mac_rva": 36002636,
+   "name": "ResourceSerializer_Load",
+   "note": "ResourceSerializer_Load. Windows 0x2357e8. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2316264,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:10/29~34%, calls w24 m86, size w673 m2336"
+  },
+  {
+   "hash": 1185093671,
+   "mac_rva": 36009408,
+   "name": "ResourceSerializer_OnDependenciesReady",
+   "note": "ResourceSerializer_OnDependenciesReady. Windows 0x24486c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2377836,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/18~22%, calls w10 m26, size w231 m624"
+  },
+  {
+   "hash": 3947570603,
+   "mac_rva": 35409540,
+   "name": "ResourceToken_OnLoaded",
+   "note": "ResourceToken_OnLoaded. JobHandle(token, LoadedCallback*), result through x8. Windows 0x9B44DC.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 10175708,
+   "win_sym": "res::ResourceToken::OnLoaded",
+   "verdict": "OK",
+   "detail": "offsets:3/20~15%, calls w11 m26, size w236 m812"
+  },
+  {
+   "hash": 2840271332,
+   "mac_rva": 13712476,
+   "name": "RuntimeEntityRegistry_RegisterEntity",
+   "note": "RuntimeEntityRegistry_RegisterEntity. bool(registry, Entity*): true when newly inserted. Windows 0x8B57F4.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 9132020,
+   "win_sym": "world::RuntimeEntityRegistry::RegisterEntity",
+   "verdict": "OK",
+   "detail": "offsets:1/5~20%, calls w6 m12, size w177 m296"
+  },
+  {
+   "hash": 3878623943,
+   "mac_rva": 13713540,
+   "name": "RuntimeEntityRegistry_UnregisterEntity",
+   "note": "RuntimeEntityRegistry_UnregisterEntity. bool(registry, Entity*). Windows 0x8B5310.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 9130768,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/7~14%, calls w3 m4, size w112 m248"
+  },
+  {
+   "hash": 1576214475,
+   "mac_rva": 13786704,
+   "name": "RuntimeSystemEntity_AttachEntity",
+   "note": "RuntimeSystemEntity_AttachEntity. void(system, const AttachRequest*): a two instruction thunk (ldr x0,[x0,#0x48]; b 0xCF6EBC), called not hooked. Windows 0x8B6928.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 9136424,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/1~100%, calls w1 m0, size w31 m8"
+  },
+  {
+   "hash": 1737563910,
+   "mac_rva": 13786712,
+   "name": "RuntimeSystemEntity_DetachEntity",
+   "note": "RuntimeSystemEntity_DetachEntity. void(system, const Handle<Entity>*): a two instruction thunk. Windows 0xB839B8.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 12073400,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/1~100%, calls w0 m0, size w10 m8"
+  },
+  {
+   "hash": 1471948702,
+   "mac_rva": 14003936,
+   "name": "RuntimeSystemWeather_GetEnvironmentDefinition",
+   "note": "RuntimeSystemWeather_GetEnvironmentDefinition. Handle<worldEnvironmentDefinition>(system): the Handle through x8. Windows 0x1DB070.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 1945712,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w0 m1, size w42 m76"
+  },
+  {
+   "hash": 2679119876,
+   "mac_rva": 14002784,
+   "name": "RuntimeSystemWeather_GetWeatherState",
+   "note": "RuntimeSystemWeather_GetWeatherState. Handle<worldWeatherState>(system): the Handle through x8. Windows 0xA06808.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 10512392,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/3~33%, calls w1 m0, size w48 m28"
+  },
+  {
+   "hash": 2334794340,
+   "mac_rva": 14009220,
+   "name": "RuntimeSystemWeather_SetWeatherByName",
+   "note": "RuntimeSystemWeather_SetWeatherByName. bool(system, CName weather, CName source, uint32 a5, uint32 priority, float blend in s0). Windows 0x13CC1AC.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 20758956,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/10~20%, calls w12 m17, size w318 m580"
+  },
+  {
+   "hash": 3993832650,
+   "mac_rva": 35573720,
+   "name": "ScriptBundle_dtor",
+   "note": "ScriptBundle_dtor. void(ScriptBundle*). Windows 0x7B7C18: same member destruction order (+0x138 ... +0x90).",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 8092696,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/34~6%, calls w11 m24, size w159 m740"
+  },
+  {
+   "hash": 4224523662,
+   "mac_rva": 35639620,
+   "name": "ScriptValidator_CompareType",
+   "note": "ScriptValidator_CompareType. bool(CBaseRTTIType* native, ScriptType* script). Plain call.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 14037316,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/8~25%, calls w4 m7, size w153 m380"
+  },
+  {
+   "hash": 898639042,
+   "mac_rva": 35635088,
+   "name": "ScriptValidator_Validate",
+   "note": "ScriptValidator_Validate. bool(validator, ScriptBundle*, report).",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 3984288,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/6~17%, calls w10 m19, size w302 m532"
+  },
+  {
+   "hash": 560604283,
+   "mac_rva": 35639224,
+   "name": "ScriptValidator_ValidateProperty",
+   "note": "ScriptValidator_ValidateProperty. bool(unused, ScriptProperty*, CProperty*).",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 3994712,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/10~30%, calls w11 m12, size w248 m396"
+  },
+  {
+   "hash": 3972601611,
+   "mac_rva": 54682116,
+   "name": "StreamingSector_PostLoad",
+   "note": "StreamingSector_PostLoad. Windows 0x26eeb4. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2551476,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/11~36%, calls w9 m19, size w208 m700"
+  },
+  {
+   "hash": 4010810747,
+   "mac_rva": 56254836,
+   "name": "TPPRepresentationComponent_OnItemEquipped",
+   "note": "TPPRepresentationComponent_OnItemEquipped. Windows 0x9fe5f4. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 10479092,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:7/17~41%, calls w26 m28, size w540 m952"
+  },
+  {
+   "hash": 3037343626,
+   "mac_rva": 56233488,
+   "name": "TPPRepresentationComponent_RegisterAffectedItem",
+   "note": "TPPRepresentationComponent_RegisterAffectedItem. Windows 0x9fdce8. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 10476776,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/4~25%, calls w4 m9, size w126 m376"
+  },
+  {
+   "hash": 1482886888,
+   "mac_rva": 35225572,
+   "name": "TTypedClass_IsEqual",
+   "note": "TTypedClass_IsEqual. bool(CClass*, lhs, rhs, uint32). Behind 8241 one-instruction vtable thunks (0x93FCAC): hook the body. Windows 0x33A208.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 3383816,
+   "win_sym": "rtti::ClassType::DeepCompare",
+   "verdict": "OK",
+   "detail": "offsets:1/9~11%, calls w4 m4, size w154 m244"
+  },
+  {
+   "hash": 1239092911,
+   "mac_rva": 34397820,
+   "name": "TagSystem_AssignTag",
+   "note": "TagSystem_AssignTag. void(red::TagSystem* = GameTagSystem + 0x48, EntityID, CName). Windows 0x42559C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 4347292,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/12~17%, calls w8 m8, size w288 m756"
+  },
+  {
+   "hash": 1875775378,
+   "mac_rva": 34399064,
+   "name": "TagSystem_UnassignTag",
+   "note": "TagSystem_UnassignTag. void(red::TagSystem*, EntityID, CName). Windows 0xFF1AD8.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 16718552,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:5/13~38%, calls w8 m6, size w346 m636"
+  },
+  {
+   "hash": 3062572522,
+   "mac_rva": 56564652,
+   "name": "TweakDB_Init",
+   "note": "TweakDB_Init",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 8079996,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:2/7~29%, calls w6 m15, size w153 m168"
+  },
+  {
+   "hash": 3512345737,
+   "mac_rva": 45599900,
+   "name": "TweakDB_TryLoad",
+   "note": "TweakDB_TryLoad",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 5300172,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:4/10~40%, calls w12 m39, size w409 m720"
+  },
+  {
+   "hash": 422530722,
+   "mac_rva": 64575780,
+   "name": "UpdateRegistrar_RegisterBucketUpdate",
+   "note": "UpdateRegistrar_RegisterBucketUpdate. void(registrar, mask, stage, CClass*, name, callback&&, w6 = 0xD): live on Mac (all 64 game call sites pass 0xD). Windows 0x62575C.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 6444892,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:3/8~38%, calls w7 m7, size w333 m304"
+  },
+  {
+   "hash": 4254156293,
+   "mac_rva": 64575488,
+   "name": "UpdateRegistrar_RegisterGroupUpdate",
+   "note": "UpdateRegistrar_RegisterGroupUpdate. void(registrar, group, CClass*, name, callback&&, w5 = 0xA): the last argument is live on Mac (all 128 game call sites pass 0xA). Windows 0x624D54.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 6442324,
+   "win_sym": "UpdatableSystemRegistrar::RegisterInternal",
+   "verdict": "OK",
+   "detail": "offsets:3/8~38%, calls w8 m7, size w332 m292"
+  },
+  {
+   "hash": 1883248814,
+   "mac_rva": 19820356,
+   "name": "VehicleController_ToggleAuxLights",
+   "note": "VehicleController_ToggleAuxLights. void(controller, bool enable, uint lightType). Not the thunk 0x12E6F40. Windows 0x274564.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 2573668,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:1/4~25%, calls w6 m18, size w147 m356"
+  },
+  {
+   "hash": 2912168594,
+   "mac_rva": 13153840,
+   "name": "VisualController_LoadDependencies",
+   "note": "VisualController_LoadDependencies. JobHandle(VisualController*, w1 = a3): the JobHandle through x8. Windows 0x36B8E8.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 3586280,
+   "win_sym": "",
+   "verdict": "OK",
+   "detail": "offsets:6/20~30%, calls w26 m48, size w620 m1328"
+  },
+  {
+   "hash": 1299190886,
+   "mac_rva": 61421984,
+   "name": "",
+   "note": "",
+   "origins": [
+    "tweakxl"
+   ],
+   "win_rva": 6339204,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:2/5~40%, calls w10 m10, size w211 m416"
+  },
+  {
+   "hash": 63057648,
+   "mac_rva": 57727268,
+   "name": "AppearanceChanger_GetSuffixes",
+   "note": "AppearanceChanger_GetSuffixes. Windows 0x858b20. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 8751904,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:3, offsets:1/22~5%, calls w27 m125, size w832 m2964"
+  },
+  {
+   "hash": 2770550105,
+   "mac_rva": 57879656,
+   "name": "AppearanceChanger_SelectAppearanceName",
+   "note": "AppearanceChanger_SelectAppearanceName. Windows 0x8de198. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9298328,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:2/7~29%, calls w10 m24, size w477 m684"
+  },
+  {
+   "hash": 3224838039,
+   "mac_rva": 55610872,
+   "name": "AttachmentSlots_InitializeSlots",
+   "note": "AttachmentSlots_InitializeSlots. Windows 0x3f0874. R22 code twin: Windows 0x3F0874 is the unlocked body (its only caller 0x81F788 takes the lock at this+0x100); Mac 0x3508DF8 is its exact twin and 0x3508DB0 is the locking wrapper (single caller 0x3894A6C). Hooked at the body so the handler runs under the slot lock as on Windows.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 4130932,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/6~50%, calls w8 m24, size w267 m568"
+  },
+  {
+   "hash": 1299073554,
+   "mac_rva": 36062144,
+   "name": "BufferReader_MakeType0",
+   "note": "BufferReader_MakeType0. Windows 0x23697c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2320764,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/5~60%, calls w1 m2, size w100 m108"
+  },
+  {
+   "hash": 3578095989,
+   "mac_rva": 36062252,
+   "name": "BufferReader_MakeType1",
+   "note": "BufferReader_MakeType1. Windows 0x2094c08. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 34163720,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:4/7~57%, calls w4 m7, size w151 m156"
+  },
+  {
+   "hash": 3273923080,
+   "mac_rva": 64611476,
+   "name": "CBaseEngine_InitEngine",
+   "note": "CBaseEngine_InitEngine. bool(CBaseEngine&, CGameOptions&). Windows 0x7CB080: same init-stage strings and options+0xB1.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 8171648,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:9, offsets:4/28~14%, calls w42 m73, size w702 m1640"
+  },
+  {
+   "hash": 3791200470,
+   "mac_rva": 35073012,
+   "name": "CBaseFunction_ExecuteScripted",
+   "note": "CBaseFunction_ExecuteScripted (Gate 5 path)",
+   "origins": [
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 1818884,
+   "win_sym": "rtti::Function::InternalCall",
+   "verdict": "STRONG",
+   "detail": "offsets:4/8~50%, calls w11 m13, size w288 m352"
+  },
+  {
+   "hash": 2547979664,
+   "mac_rva": 35224896,
+   "name": "CClass_AssignDefaultValuesToProperties",
+   "note": "CClass_AssignDefaultValuesToProperties. void(CClass*, ScriptInstance). Windows InitializeScriptDefaultValues 0x147384.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1340292,
+   "win_sym": "rtti::ClassType::InitializeScriptDefaultValues",
+   "verdict": "STRONG",
+   "detail": "offsets:5/10~50%, calls w4 m4, size w207 m348"
+  },
+  {
+   "hash": 1652956141,
+   "mac_rva": 35223848,
+   "name": "CClass_GetProperties",
+   "note": "CClass_GetProperties. void(CClass*, DynArray<CProperty*>&): returns nothing. Windows 0x2519E4.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 2431460,
+   "win_sym": "rtti::ClassType::GetProperties",
+   "verdict": "STRONG",
+   "detail": "offsets:5/10~50%, calls w2 m4, size w187 m364"
+  },
+  {
+   "hash": 2399343890,
+   "mac_rva": 35228480,
+   "name": "CClass_GetProperty",
+   "note": "CClass_GetProperty. CProperty*(CClass*, CName). Windows rtti::ClassType::FindProperty 0x148388. NCC value 0x219929C is mid-function, wrong.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1344392,
+   "win_sym": "rtti::ClassType::FindProperty",
+   "verdict": "STRONG",
+   "detail": "offsets:10/12~83%, calls w2 m3, size w262 m416"
+  },
+  {
+   "hash": 2257327441,
+   "mac_rva": 35224548,
+   "name": "CClass_InitializeProperties",
+   "note": "CClass_InitializeProperties. void(CClass*, ScriptInstance). Windows InitializeScriptedProperties 0x147CB8.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 1342648,
+   "win_sym": "rtti::ClassType::InitializeScriptedProperties",
+   "verdict": "STRONG",
+   "detail": "offsets:8/15~53%, calls w8 m15, size w520 m348"
+  },
+  {
+   "hash": 3007126651,
+   "mac_rva": 14780916,
+   "name": "CMesh_FindAppearance",
+   "note": "CMesh_FindAppearance. Handle<MeshAppearance>*(CMesh*, CName): the pointer comes back in x0, not x8. Windows 0x3CA158.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 3973464,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/4~75%, calls w4 m5, size w180 m320"
+  },
+  {
+   "hash": 2272530537,
+   "mac_rva": 14773032,
+   "name": "CMesh_PostLoad",
+   "note": "CMesh_PostLoad. Windows 0x224844. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2246724,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:7/14~50%, calls w4 m14, size w202 m704"
+  },
+  {
+   "hash": 437791594,
+   "mac_rva": 13240480,
+   "name": "EntityBuilder_ScheduleExtractComponentsJob",
+   "note": "EntityBuilder_ScheduleExtractComponentsJob. Mac void(EntityBuilder*, job::Builder&): the Windows signature differs. Declared only. Windows 0x8AC678.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 9094776,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:2/16~12%, calls w5 m14, size w166 m552"
+  },
+  {
+   "hash": 36838056,
+   "mac_rva": 13308604,
+   "name": "EntityTemplate_FindAppearance",
+   "note": "EntityTemplate_FindAppearance. Windows 0x8ac190. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9093520,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/3~100%, calls w2 m2, size w125 m248"
+  },
+  {
+   "hash": 2182550867,
+   "mac_rva": 13205032,
+   "name": "Entity_Assemble",
+   "note": "Entity_Assemble. void(Entity*, Request*). Not 0xC97E24, which is the base class no-op. Windows 0x8AB708.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 9090824,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:5/9~56%, calls w6 m7, size w162 m176"
+  },
+  {
+   "hash": 1886854234,
+   "mac_rva": 13371152,
+   "name": "FactoryIndex_LoadFactoryAsync",
+   "note": "FactoryIndex_LoadFactoryAsync. Windows 0x94d51c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9753884,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:1/15~7%, calls w8 m16, size w266 m508"
+  },
+  {
+   "hash": 3128897273,
+   "mac_rva": 57639668,
+   "name": "GarmentAssemblerState_AddCustomItem",
+   "note": "GarmentAssemblerState_AddCustomItem. Windows 0xb56ac0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11889344,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/5~60%, calls w3 m5, size w148 m180"
+  },
+  {
+   "hash": 2294423397,
+   "mac_rva": 57639432,
+   "name": "GarmentAssemblerState_AddItem",
+   "note": "GarmentAssemblerState_AddItem. Windows 0x5e9e00. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 6200832,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/3~100%, calls w3 m5, size w149 m180"
+  },
+  {
+   "hash": 956641309,
+   "mac_rva": 57641380,
+   "name": "GarmentAssemblerState_ChangeCustomItem",
+   "note": "GarmentAssemblerState_ChangeCustomItem. Windows 0xb56a1c. R22: exact twin by the read-only call structure (four helper calls ANDed: remove by hash, the 0x9810/0xb5807c pair, the 0x8d24/0x5e9ffc one with a zero third argument, and the overrides variant with request+0x10; request hash at +0x20, index at +0x28 on both sides). The fork DB entry 0x36fe44c is a log message function.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11889180,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:2/4~50%, calls w4 m4, size w164 m144"
+  },
+  {
+   "hash": 3740082313,
+   "mac_rva": 57641084,
+   "name": "GarmentAssemblerState_ChangeItem",
+   "note": "GarmentAssemblerState_ChangeItem. Windows 0xb57fd8. R22: exact twin (same four calls ANDed, request hash at +0x10, index at +0x18). The fork DB entry 0x36fe44c is a log message function.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11894744,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:2/3~67%, calls w4 m4, size w163 m144"
+  },
+  {
+   "hash": 3235778565,
+   "mac_rva": 57641228,
+   "name": "GarmentAssembler_ChangeCustomItem",
+   "note": "GarmentAssembler_ChangeCustomItem (Mac-only id). R22: the same for the custom request, called once from 0x36FDDD4.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11889180,
+   "win_sym": "mac-only twin",
+   "verdict": "STRONG",
+   "detail": "offsets:2/4~50%, calls w4 m5, size w164 m152"
+  },
+  {
+   "hash": 3235778564,
+   "mac_rva": 57640932,
+   "name": "GarmentAssembler_ChangeItem",
+   "note": "GarmentAssembler_ChangeItem (Mac-only id). R22: aggregator level wrapper bool(aggregator, WeakHandle<Entity>&, GarmentItemChangeRequest&), called once from 0x36FDDD4 (twin of the Windows request Apply 0xB57D10). The state level body 0x36F887C has no callers.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11894744,
+   "win_sym": "mac-only twin",
+   "verdict": "STRONG",
+   "detail": "offsets:2/3~67%, calls w4 m5, size w163 m152"
+  },
+  {
+   "hash": 3589084925,
+   "mac_rva": 75298888,
+   "name": "InkLogicController_OnArrangeChildrenComplete",
+   "note": "InkLogicController_OnArrangeChildrenComplete. void(controller): base implementation (slot 0x120). Windows 0x32B78C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 3323788,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:0/2~0%, calls w2 m4, size w94 m176"
+  },
+  {
+   "hash": 2671382832,
+   "mac_rva": 75298180,
+   "name": "InkLogicController_OnInitialize",
+   "note": "InkLogicController_OnInitialize. void(controller): the base implementation shared by 82 vtables (slot 0x110). Windows 0x581514.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 5772564,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/4~75%, calls w4 m6, size w123 m268"
+  },
+  {
+   "hash": 3558023194,
+   "mac_rva": 77213828,
+   "name": "InkWidget_ScriptAddChild",
+   "note": "InkWidget_ScriptAddChild (inkCompoundWidget.AddChild). Native script function body, hooked HookAfter. Windows 0x2218FE4.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 35753956,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:4/7~57%, calls w8 m15, size w223 m336"
+  },
+  {
+   "hash": 492509908,
+   "mac_rva": 77301900,
+   "name": "InkWidget_ScriptReparent",
+   "note": "InkWidget_ScriptReparent. Native script function body void(this, CStackFrame*, ret, retType), hooked HookAfter. Windows 0xF0F724.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 15791908,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/4~75%, calls w5 m7, size w252 m336"
+  },
+  {
+   "hash": 3392610574,
+   "mac_rva": 57658900,
+   "name": "ItemFactoryAppearanceChangeRequest_LoadAppearance",
+   "note": "ItemFactoryAppearanceChangeRequest_LoadAppearance. Windows 0x12e1a38. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 19798584,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:8/14~57%, calls w8 m21, size w309 m588"
+  },
+  {
+   "hash": 3659799256,
+   "mac_rva": 57685156,
+   "name": "ItemFactoryRequest_LoadAppearance",
+   "note": "ItemFactoryRequest_LoadAppearance. Windows 0x5ebbf0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 6208496,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:7/11~64%, calls w18 m46, size w481 m956"
+  },
+  {
+   "hash": 69014212,
+   "mac_rva": 10306960,
+   "name": "JobQueue_Capture",
+   "note": "JobQueue_Capture. Mac JobHandle(JobQueue*): the handle comes back through x8, no out pointer. Windows 0x218C38.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 2198584,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/5~60%, calls w5 m11, size w115 m208"
+  },
+  {
+   "hash": 2193429752,
+   "mac_rva": 10305736,
+   "name": "JobQueue_ctor_FromParams",
+   "note": "JobQueue_ctor_FromParams. JobQueue*(JobQueue*, uint8_t, uint8_t, uint64_t). Windows 0x218B54.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 2198356,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:5/8~62%, calls w2 m5, size w164 m168"
+  },
+  {
+   "hash": 837162664,
+   "mac_rva": 32125968,
+   "name": "JournalTree_ProcessJournalIndex",
+   "note": "JournalTree_ProcessJournalIndex. Windows 0x94ffcc. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9764812,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:4/11~36%, calls w19 m53, size w622 m1988"
+  },
+  {
+   "hash": 3235778561,
+   "mac_rva": 69856976,
+   "name": "MappinSystem_FindMappinData",
+   "note": "MappinSystem_FindMappinData (Mac-only id). R22: the finder (resource +0x40 array, count +0x4C, stride 0x20, u32 key) behind the 0x42A3E38 wrapper; 72 byte leaf, also called directly by the inlined position lookup 0x42B2748.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 6929004,
+   "win_sym": "mac-only twin",
+   "verdict": "STRONG",
+   "detail": "offsets:2/3~67%, calls w0 m0, size w45 m72"
+  },
+  {
+   "hash": 3235778562,
+   "mac_rva": 69985652,
+   "name": "MappinSystem_FindPoiData",
+   "note": "MappinSystem_FindPoiData (Mac-only id). R22: the same finder shape for the POI resource, behind the 0x42A3E68 wrapper.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 9463712,
+   "win_sym": "mac-only twin",
+   "verdict": "STRONG",
+   "detail": "offsets:2/3~67%, calls w0 m0, size w45 m72"
+  },
+  {
+   "hash": 1679234269,
+   "mac_rva": 14806536,
+   "name": "MeshAppearance_ReleaseReference",
+   "note": "MeshAppearance_ReleaseReference. void(appearance): the same lock, release and map clear as MeshAppearanceEx::ResetMaterialCache. Windows 0x21AA4C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 2206284,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:7/9~78%, calls w3 m5, size w134 m240"
+  },
+  {
+   "hash": 1609519068,
+   "mac_rva": 14842444,
+   "name": "MeshMaterialBuffer_LoadMaterialAsync",
+   "note": "MeshMaterialBuffer_LoadMaterialAsync. Windows 0x2781a0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 2589088,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:0/10~0%, calls w22 m40, size w605 m1068"
+  },
+  {
+   "hash": 2318998714,
+   "mac_rva": 34932296,
+   "name": "ObjectPackageExtractor_Initialize",
+   "note": "ObjectPackageExtractor_Initialize. void(this, params). Windows 0x46A1E8.",
+   "origins": [
+    "archivexl",
+    "codeware"
+   ],
+   "win_rva": 4628968,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:19/32~59%, calls w19 m33, size w556 m808"
+  },
+  {
+   "hash": 1944983789,
+   "mac_rva": 35001400,
+   "name": "ObjectSerializer_Prepare",
+   "note": "ObjectSerializer_Prepare. void(ObjectSerializer*, Params*). Hooked at the entry for the magic size limit. Windows 0xD0B690.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 13678224,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:11/17~65%, calls w13 m27, size w423 m536"
+  },
+  {
+   "hash": 2048921710,
+   "mac_rva": 49253464,
+   "name": "QuestsSystem_OnGameRestored",
+   "note": "QuestsSystem_OnGameRestored. Windows 0x495fd0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 4808656,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:3/5~60%, calls w1 m1, size w49 m64"
+  },
+  {
+   "hash": 2450934495,
+   "mac_rva": 65903508,
+   "name": "ResourceDepot_RequestResource",
+   "note": "ResourceDepot_RequestResource. Windows 0x1cfa8c. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 1899148,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:6/9~67%, calls w4 m24, size w445 m776"
+  },
+  {
+   "hash": 1821516328,
+   "mac_rva": 13997992,
+   "name": "RuntimeSystemWeather_SetWeatherByIndex",
+   "note": "RuntimeSystemWeather_SetWeatherByIndex. (system, uint32 index, CName source, uint32 a5, uint32 priority, float blend in s0). Windows 0xA0592C.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 10508588,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:13/26~50%, calls w38 m71, size w1362 m1948"
+  },
+  {
+   "hash": 3961524856,
+   "mac_rva": 14454028,
+   "name": "SoundBankManager_ReadSoundBanksJson",
+   "note": "SoundBankManager_ReadSoundBanksJson. bool(manager). The body, not the wrapper 0xDC8CF8. Windows 0x7D4844.",
+   "origins": [
+    "codeware"
+   ],
+   "win_rva": 8210500,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:3, offsets:2/15~13%, calls w23 m37, size w540 m1784"
+  },
+  {
+   "hash": 4129169021,
+   "mac_rva": 56231428,
+   "name": "TPPRepresentationComponent_OnAttach",
+   "note": "TPPRepresentationComponent_OnAttach. Windows 0xac58c0. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 11294912,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:8/31~26%, calls w44 m92, size w675 m1828"
+  },
+  {
+   "hash": 1933319146,
+   "mac_rva": 56252124,
+   "name": "TPPRepresentationComponent_OnItemUnequipped",
+   "note": "TPPRepresentationComponent_OnItemUnequipped. Windows 0x9fe1dc. fork DB, verified there.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 10478044,
+   "win_sym": "",
+   "verdict": "STRONG",
+   "detail": "offsets:6/11~55%, calls w1 m1, size w197 m376"
+  },
+  {
+   "hash": 3235778567,
+   "mac_rva": 56256084,
+   "name": "TPPRepresentationComponent_UnregisterAffectedItem",
+   "note": "TPPRepresentationComponent_UnregisterAffectedItem (Mac-only id). R22: void(TPPRepresentationComponent*, TweakDBID aItemID), the cold call of OnItemUnequipped for an affected slot; Windows twin 0x25050CC.",
+   "origins": [
+    "archivexl"
+   ],
+   "win_rva": 38817996,
+   "win_sym": "mac-only twin",
+   "verdict": "STRONG",
+   "detail": "offsets:3/6~50%, calls w2 m7, size w125 m544"
+  },
+  {
+   "hash": 3602585178,
+   "mac_rva": 45569392,
+   "name": "TweakDB_Load",
+   "note": "TweakDB_Load. Windows 0x50eb1c. fork DB, verified there.",
+   "origins": [
+    "archivexl",
+    "sdk",
+    "tweakxl"
+   ],
+   "win_rva": 5303068,
+   "win_sym": "game::data::TweakDB::LoadOptimized",
+   "verdict": "STRONG",
+   "detail": "strings:1, offsets:2/9~22%, calls w17 m21, size w311 m468"
+  }
+ ]
+}

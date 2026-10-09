@@ -161,10 +161,27 @@ int main(int argc, char** argv)
             status = 1;
             continue;
         }
+        // LOCAL TRIAL PATCH (cp2077-mac R30): the same self-trapped sidecar rule as the loader's gate.
+        const auto trapped = PluginRequirements::LoadSelfTrapped(argv[i]);
         std::size_t missing = 0;
+        std::size_t selfTrapped = 0;
         for (const auto value : *constants)
         {
-            missing += all.count(value) && !resolvable.count(value);
+            if (all.count(value) && !resolvable.count(value))
+            {
+                if (trapped.valid && trapped.hashes.count(value))
+                    ++selfTrapped;
+                else
+                    ++missing;
+            }
+        }
+        if (trapped.present && !trapped.valid)
+        {
+            std::printf("NOTE %s trapped-hashes sidecar ignored: %s\n", argv[i], trapped.reason.c_str());
+        }
+        if (selfTrapped)
+        {
+            std::printf("NOTE %s %zu unverified addresses accepted as self-trapped\n", argv[i], selfTrapped);
         }
         if (missing)
         {

@@ -263,7 +263,9 @@
     },
     {
       "hash": "787099588",
-      "offset": "1:0x2F2D360"
+      "offset": "1:0x2456C9C",
+      "verified": true,
+      "local_evidence": "cp2077-mac check-rows OK (local edit for the R30 trial; was 1:0x2F2D360, unverified)"
     },
     {
       "hash": "790570700",
@@ -326,7 +328,9 @@
     },
     {
       "hash": "956641309",
-      "offset": "1:0x36FE44C"
+      "offset": "1:0x36F89A4",
+      "verified": true,
+      "local_evidence": "cp2077-mac check-rows STRONG (local edit for the R30 trial; was 1:0x36FE44C, unverified)"
     },
     {
       "hash": "961751128",
@@ -431,7 +435,9 @@
     },
     {
       "hash": "1303056161",
-      "offset": "1:0x2D9766C"
+      "offset": "1:0x21B5548",
+      "verified": true,
+      "local_evidence": "cp2077-mac check-rows OK (local edit for the R30 trial; was 1:0x2D9766C, unverified)"
     },
     {
       "hash": "1350901460",
@@ -560,7 +566,9 @@
     },
     {
       "hash": "1693194103",
-      "offset": "1:0x3DA0574"
+      "offset": "1:0x491DDB0",
+      "verified": true,
+      "local_evidence": "cp2077-mac check-rows OK (local edit for the R30 trial; was 1:0x3DA0574, unverified)"
     },
     {
       "hash": "1697201926",
@@ -738,7 +746,9 @@
     },
     {
       "hash": "2347184335",
-      "offset": "1:0x2DEAC58"
+      "offset": "1:0x2440814",
+      "verified": true,
+      "local_evidence": "cp2077-mac check-rows OK (local edit for the R30 trial; was 1:0x2DEAC58, unverified)"
     },
     {
       "hash": "2349406410",
@@ -1173,7 +1183,9 @@
     },
     {
       "hash": "3740082313",
-      "offset": "1:0x36FE44C"
+      "offset": "1:0x36F887C",
+      "verified": true,
+      "local_evidence": "cp2077-mac check-rows STRONG (local edit for the R30 trial; was 1:0x36FE44C, unverified)"
     },
     {
       "hash": "3766105236",

@@ -1,9 +1,9 @@
-# hash	trap_name	trap_kind	his_offset (unverified)	plugins
+# hash	name	kind (trap stub or plugin stand-in)	his_offset (unverified)	plugins whose sidecar lists it and whose gate accepts it
 15404457	ResourceReference_Load	TRAP_FUNC	1:0x12F04E4	ArchiveXL,Codeware
 302583262	IRenderProxy_sub_00	TRAP_FUNC	1:0x1000100	ArchiveXL,Codeware
 364779332	CBaseRTTIType_sub_88	TRAP_FUNC	1:0x22EEC0	ArchiveXL,Codeware
 434901863	Memory_Vault_Unk1	TRAP_FUNC	1:0x246E0	ArchiveXL,Codeware,TweakXL
-458427884	Memory_Vault	TRAP_DATA	1:0x24400	ArchiveXL,Codeware,TweakXL
+458427884	Memory_Vault	STANDIN reinterpret_cast<uintptr_t>(tweakxl_memory_vault())	1:0x24400	ArchiveXL,Codeware,TweakXL
 510274732	IRenderProxy_sub_80	TRAP_FUNC	1:0x1000480	ArchiveXL,Codeware
 586028847	CRTTIScriptReferenceType_Set	TRAP_FUNC	1:0x2200100	ArchiveXL,Codeware
 587736171	ResourceReference_Reset	TRAP_FUNC	1:0x12F0604	ArchiveXL,Codeware
@@ -11,29 +11,24 @@
 677908004	LaunchParameters	TRAP_DATA	1:0x7600000	ArchiveXL,Codeware
 678894266	TPPRepresentationComponent_IsAffectedSlot	TRAP_FUNC	1:0x23D9DF4	ArchiveXL
 716262863	CharacterCustomizationState_FinalizePart	TRAP_FUNC	1:0x3D783B8	ArchiveXL
-787099588	CharacterCustomizationSystem_EnsureState	TRAP_FUNC	1:0x2F2D360	ArchiveXL
 837947027	CClass_ClearScriptedData	TRAP_FUNC	1:0x21EA8A4	ArchiveXL,Codeware
-859968306	Memory_Vault_Free	TRAP_FUNC	1:0x2478C	ArchiveXL,Codeware,TweakXL
-956641309	GarmentAssemblerState_ChangeCustomItem	TRAP_FUNC	1:0x36FE44C	ArchiveXL
+859968306	Memory_Vault_Free	STANDIN reinterpret_cast<uintptr_t>(&tweakxl_vault_free)	1:0x2478C	ArchiveXL,Codeware,TweakXL
 1003499294	AppearanceChanger_GetSuffixValue	TRAP_FUNC	1:0x370E9AC	ArchiveXL
 1147149338	ResourceSerializer_OnResourceReady	TRAP_FUNC	1:0x20AB510	ArchiveXL,Codeware
 1163138096	CommandListContext_Close	TRAP_FUNC	1:0xF040F8	ArchiveXL,Codeware
 1168449474	CharacterCustomizationSystem_InitializeOptionsFromState	TRAP_FUNC	1:0x453C2D4	ArchiveXL
 1239944840	g_DeviceData	TRAP_DATA	1:0x0	ArchiveXL,Codeware
-1303056161	ResourceLoader_OnUpdate	TRAP_FUNC	1:0x2D9766C	ArchiveXL
-1350901460	ResourceSerializer_PostLoad	TRAP_FUNC	1:0x21AC670	ArchiveXL,Codeware
-1365841885	Memory_Vault_AllocAligned	TRAP_FUNC	1:0x24668	ArchiveXL,Codeware,TweakXL
-1452677801	Memory_Vault_ReallocAligned	TRAP_FUNC	1:0x246E0	ArchiveXL,Codeware,TweakXL
+1350901460	ResourceSerializer_ExecutePostLoad	TRAP_FUNC	1:0x21AC670	ArchiveXL,Codeware
+1365841885	Memory_Vault_AllocAligned	STANDIN reinterpret_cast<uintptr_t>(&tweakxl_vault_alloc_aligned)	1:0x24668	ArchiveXL,Codeware,TweakXL
+1452677801	Memory_Vault_ReallocAligned	STANDIN reinterpret_cast<uintptr_t>(&tweakxl_vault_realloc_aligned)	1:0x246E0	ArchiveXL,Codeware,TweakXL
 1459046115	DeferredDataBuffer_LoadRefAsync	TRAP_FUNC	1:0x2189040	ArchiveXL,Codeware
 1468405902	IRenderProxy_sub_B0	TRAP_FUNC	1:0x1000680	ArchiveXL,Codeware
 1518151849	CBaseFunction_Handlers	TRAP_DATA	1:0x6E50000	ArchiveXL,Codeware
-1693194103	InkWorldLayer_UpdateComponents	TRAP_DATA	1:0x3DA0574	ArchiveXL
 1894391003	IRenderProxy_sub_90	TRAP_FUNC	1:0x1000580	ArchiveXL,Codeware
 1926836641	GetFreeCommandList	TRAP_FUNC	1:0x163F010	ArchiveXL,Codeware
-1997150124	Memory_Vault_Realloc	TRAP_FUNC	1:0x2478C	ArchiveXL,Codeware,TweakXL
-2347184335	CharacterCustomizationGenitalsController_CheckState	TRAP_FUNC	1:0x2DEAC58	ArchiveXL
+1997150124	Memory_Vault_Realloc	STANDIN reinterpret_cast<uintptr_t>(&tweakxl_vault_realloc)	1:0x2478C	ArchiveXL,Codeware,TweakXL
 2396396482	CBaseRTTIType_sub_A0	TRAP_FUNC	1:0x3228	ArchiveXL,Codeware
-2418676960	Memory_Vault_Alloc	TRAP_FUNC	1:0x24584	ArchiveXL,Codeware,TweakXL
+2418676960	Memory_Vault_Alloc	STANDIN reinterpret_cast<uintptr_t>(&tweakxl_vault_alloc)	1:0x24584	ArchiveXL,Codeware,TweakXL
 2462126272	IRenderProxy_sub_58	TRAP_FUNC	1:0x1000300	ArchiveXL,Codeware
 2508272872	Allocator_CreateResource	TRAP_FUNC	1:0x0	ArchiveXL,Codeware
 2508398574	ResourceToken_DestructUnk38	TRAP_FUNC	1:0x12F080C	ArchiveXL,Codeware
@@ -55,7 +50,6 @@
 3578730042	Memory_PoolStorage_OOM	TRAP_FUNC	1:0x24298	ArchiveXL,Codeware,TweakXL
 3628731410	ObjectPackageReader_ctor	TRAP_FUNC	1:0x2100250	ArchiveXL,Codeware
 3724941976	IRenderProxy_sub_88	TRAP_FUNC	1:0x1000500	ArchiveXL,Codeware
-3740082313	GarmentAssemblerState_ChangeItem	TRAP_FUNC	1:0x36FE44C	ArchiveXL
 3832485534	CBaseRTTIType_sub_80	TRAP_FUNC	1:0x22EEAC	ArchiveXL,Codeware
 3842971216	AISpotPersistentDataArray_Reserve	TRAP_FUNC	1:0x3040DEC	ArchiveXL
 4002093843	ImpostorComponent_OnAttach	TRAP_FUNC	1:0x37DCB7C	ArchiveXL
