@@ -1,7 +1,7 @@
 module CpAutotest
 
 // Still-image noise flicker of MetalFX's denoised scaler (MetalFX Denoiser plugin): at the save's position with time
-// frozen and frame generation off, rounds over the variants below, interleaved (v0 v1 v2 v3 v0 v1 v2 v3) against drift.
+// frozen and frame generation off, rounds over the variants below, interleaved (v0 v1 v0 v1 ...) against drift.
 // For each round, 3 s to settle, then three captures of the upscaler's output (the plugin's "shot" request, saved under
 // metal/) 2 s apart. The flicker is their difference (higher PSNR = steadier): compare
 // s0-<mode>-r<round>-<variant>-still-a with -still-b and -still-b with -still-c (scripts/imgdiff.swift).
@@ -15,8 +15,10 @@ func CpFlMtl(kind: String, name: String) -> Void {
     CpReport("{\"event\":\"MTL\",\"kind\":\"" + kind + "\",\"name\":\"" + name + "\",\"frames\":0}");
 }
 
+// hit0/hit1 (specular hit distance) are left out: one of two runs crashed in MetalFX's encode right after the scaler
+// with a hit distance texture was created.
 func CpFlVariants() -> Int32 {
-    return 4;
+    return 2;
 }
 
 func CpFlVariant(i: Int32) -> String {
@@ -37,7 +39,7 @@ func CpFlApply(i: Int32) -> Void {
 public func CpRunWorldStep(player: ref<PlayerPuppet>, step: Int32) -> Float {
     let mode = StrLen(CpAutotestTag()) > 0 ? CpAutotestTag() : "current";
     let time = GameInstance.GetTimeSystem(player.GetGame());
-    let rounds = 2 * CpFlVariants();
+    let rounds = 4 * CpFlVariants();
     if step == 0 {
         CpReport("{\"event\":\"BENCH_MODE\",\"mode\":\"" + mode + "\",\"settings\":\"flicker\"}");
         return 10.0;
@@ -72,7 +74,7 @@ public func CpRunWorldStep(player: ref<PlayerPuppet>, step: Int32) -> Float {
     if round == rounds && phase == 0 {
         CpFlApply(0);
         time.UnsetTimeDilation(n"cpbench");
-        return 30.0; // the captures are written in the background
+        return 120.0; // the captures are written in the background
     }
     CpCheck("flicker_done", true, mode);
     return -1.0;
