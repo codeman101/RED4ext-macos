@@ -1,11 +1,10 @@
 module CpAutotest
 
 // Still-image noise flicker of MetalFX's denoised scaler (MetalFX Denoiser plugin): at the save's position with time
-// frozen and frame generation off, four rounds (render scale 3, 2.5, 3, 2.5 with sharpening 0; sharpening and auto exposure were measured the same way); for each, 3 s to
-// settle (short: background runs whose window stays hidden stop rendering after a minute or two), then three captures of the
-// upscaler's output (the plugin's "shot" request, saved under metal/) 2 s apart. The flicker is their difference
-// (higher PSNR = steadier): compare s0-<mode>-<variant>-still-a.png with
-// -still-b.png (scripts/imgdiff.swift).
+// frozen and frame generation off, four rounds (render scale 3, 2.5, 3, 2.5 with sharpening 0; sharpening and auto
+// exposure were measured the same way). For each, 3 s to settle, then three captures of the upscaler's output (the
+// plugin's "shot" request, saved under metal/) 2 s apart. The flicker is their difference (higher PSNR = steadier):
+// compare s0-<mode>-r<round>-<variant>-still-a with -still-b and -still-b with -still-c (scripts/imgdiff.swift).
 // Run through tools/rtbench: CP_RESOLUTION=3456x2160 RTBENCH_PRESET=Performance@3 RTBENCH_DENOISE=fx \
 //   RTBENCH_CVARS=MFX/OverrideEnable=1,MFX/Quality=4 RTBENCH_SCENARIO=flicker tools/rtbench pt
 public func CpRunMenuChecks(scenario: String) -> Void {}
