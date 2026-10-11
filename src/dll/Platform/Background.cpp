@@ -62,6 +62,12 @@ void* Replace(const char* aClass, const char* aSelector, void* aImp)
     return method ? method_setImplementation(method, aImp) : nullptr;
 }
 
+// NSWindowOcclusionStateVisible: the game also polls its window's occlusion state.
+unsigned long AlwaysVisible(void*, void*)
+{
+    return 1ul << 1;
+}
+
 void IgnoreNotification(void*, void*, void*)
 {
 }
@@ -168,6 +174,12 @@ void EnableBackgroundModeIfRequested()
     // Same for the app losing focus (e.g. a click into the window and back out): the game's handler tells the engine
     // focus was lost, after which the in-game test steps stopped running.
     Replace("GameApplicationDelegate", "appDidLoseFocus:", reinterpret_cast<void*>(&IgnoreNotification));
+    // And the window being covered: the game pauses rendering when its window is fully occluded (its occlusion
+    // handler; then Sleep(33) per frame and no frame, 0x103d9936c), so a test run froze once the user's windows covered
+    // the game's (MetalFX Denoiser runs, 2026-10-10).
+    Replace("GameWindowController", "windowDidChangeOcclusionState:", reinterpret_cast<void*>(&IgnoreNotification));
+    Replace("GameWindowDelegate", "windowDidChangeOcclusionState:", reinterpret_cast<void*>(&IgnoreNotification));
+    Replace("NSWindow", "occlusionState", reinterpret_cast<void*>(&AlwaysVisible));
 
     // The local center is NSNotificationCenter's default center.
     CFNotificationCenterAddObserver(CFNotificationCenterGetLocalCenter(), nullptr, &OnAppBecameActive,
