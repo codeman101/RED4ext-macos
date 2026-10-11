@@ -17,7 +17,7 @@
 #
 # Launches the game binary directly with RED4ext injected, in a 1280x720 window.
 # The user's UserSettings.json and red4ext/config.ini are backed up and restored on any exit. CP_SETTINGS changes
-# options in UserSettings.json for the run (see below); CP_TAG is passed to the scenario as CpAutotestTag().
+# options in UserSettings.json for the run (see below; every run is muted); CP_TAG is passed to the scenario as CpAutotestTag().
 # Artifacts go to RED4ext/runs/<timestamp>-<scenario>/. Exit: 0 pass, 1 fail, 2 precondition error.
 set -euo pipefail
 
@@ -103,6 +103,11 @@ for g in d["data"]:
                 v, i = v.rsplit("@", 1)
                 o["index"] = int(i)
             o["value"] = v
+        # Test runs are always muted (the user's volume comes back with UserSettings.json).
+        if g["group_name"] == "/audio/volume" and o["name"] == "MasterVolume":
+            o["value"] = 0
+        if g["group_name"] == "/audio/misc" and o["name"] == "MuteInBackground":
+            o["value"] = True
         if g["group_name"] == "/video/display" and o["name"] == "WindowMode":
             o["value"], o["index"] = "Windowed", 0
         if g["group_name"] == "/video/display" and o["name"] == "Resolution":
