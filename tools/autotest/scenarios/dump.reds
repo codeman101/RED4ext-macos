@@ -15,7 +15,7 @@ public func CpRunWorldStep(player: ref<PlayerPuppet>, step: Int32) -> Float {
             return 3.0;
         case 2:
             CpReport("{\"event\":\"MTL\",\"kind\":\"dump\",\"name\":\"s0-" + mode + "\",\"frames\":0}");
-            return 8.0;
+            return 60.0; // PNGs are written in the background
         case 3:
             CpShot("s0-" + mode);
             return 3.0;
