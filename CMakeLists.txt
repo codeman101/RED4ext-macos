@@ -92,6 +92,16 @@ elseif(APPLE)
   if(NOT CMAKE_OSX_ARCHITECTURES)
     set(CMAKE_OSX_ARCHITECTURES "arm64")
   endif()
+
+  # No checkout path ends up in the binaries (__FILE__ in the fatal-error messages would carry the builder's home folder), so the same
+  # sources build to the same bytes from any directory. The SDK map comes after the source map: when the last matching map wins, a
+  # checkout inside the source tree still reads as RED4ext.SDK.
+  add_compile_options("-ffile-prefix-map=${CMAKE_SOURCE_DIR}=.")
+  if(RED4EXT_SDK_DIR)
+    get_filename_component(_red4ext_sdk_root "${RED4EXT_SDK_DIR}" ABSOLUTE)
+    add_compile_options("-ffile-prefix-map=${_red4ext_sdk_root}=RED4ext.SDK")
+  endif()
+  add_compile_options("-ffile-prefix-map=${CMAKE_BINARY_DIR}=build")
 endif()
 
 if(MSVC)
