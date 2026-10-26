@@ -3,7 +3,8 @@
 	url = https://github.com/gabime/spdlog.git
 [submodule "deps/red4ext.sdk"]
 	path = deps/red4ext.sdk
-	url = https://github.com/jackmaxwil/RED4ext.SDK-macos.git
+	url = https://github.com/codeman101/RED4ext.SDK-macos.git
+	branch = loader-2.5
 [submodule "deps/detours"]
 	path = deps/detours
 	url = https://github.com/microsoft/Detours.git
@@ -24,8 +25,7 @@
 	url = https://github.com/jac3km4/redscript
 [submodule "deps/simdjson"]
 	path = deps/simdjson
-	url = https://github.com/jackmaxwil/simdjson.git
-	branch = red4ext-macos
+	url = https://github.com/simdjson/simdjson.git
 [submodule "deps/fishhook"]
 	path = deps/fishhook
 	url = https://github.com/facebook/fishhook.git
