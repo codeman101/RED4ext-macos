@@ -272,21 +272,24 @@ void PluginSystem::Load(const std::filesystem::path& aPath, bool aUseAlteredSear
         const bool usesLoaderAddresses = PluginRequirements::UsesLoaderAddresses(aPath);
         if (!usesLoaderAddresses)
         {
-            Log::info(L"Plugin '{}' carries its own game address table (it does not use RED4ext's address database), so the "
-                      L"database check does not apply to it",
-                      stem);
+            Log::info(
+                L"Plugin '{}' carries its own game address table (it does not use RED4ext's address database), so the "
+                L"database check does not apply to it",
+                stem);
         }
         if (const auto addresses = usesLoaderAddresses ? Addresses::Instance() : nullptr)
         {
             auto missing = addresses->UnresolvedAmong(*constants);
             if (!missing.empty())
             {
-                // LOCAL TRIAL PATCH (cp2077-mac R30): hashes the plugin declares as self-trapped in a sidecar that matches its sha256
-                // are accepted, and only those (see PluginRequirements::SelfTrapped). Nothing is resolved through the database for them.
+                // LOCAL TRIAL PATCH (cp2077-mac R30): hashes the plugin declares as self-trapped in a sidecar that
+                // matches its sha256 are accepted, and only those (see PluginRequirements::SelfTrapped). Nothing is
+                // resolved through the database for them.
                 const auto trapped = PluginRequirements::LoadSelfTrapped(aPath);
                 if (trapped.present && !trapped.valid)
                 {
-                    Log::warn(L"Plugin '{}': its trapped-hashes sidecar is ignored ({})", stem, Utils::Widen(trapped.reason));
+                    Log::warn(L"Plugin '{}': its trapped-hashes sidecar is ignored ({})", stem,
+                              Utils::Widen(trapped.reason));
                 }
                 std::vector<std::uint32_t> accepted;
                 std::vector<std::uint32_t> refused;
@@ -310,7 +313,8 @@ void PluginSystem::Load(const std::filesystem::path& aPath, bool aUseAlteredSear
                 {
                     list += fmt::format("{}{}", list.empty() ? "" : ", ", hash);
                 }
-                Log::info(L"Plugin '{}': {} unverified addresses accepted as self-trapped by its sidecar (the plugin resolves them "
+                Log::info(L"Plugin '{}': {} unverified addresses accepted as self-trapped by its sidecar (the plugin "
+                          L"resolves them "
                           L"itself, never through the address database): {}",
                           stem, accepted.size(), Utils::Widen(list));
             }

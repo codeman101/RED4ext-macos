@@ -51,8 +51,9 @@ std::filesystem::path Paths::GetExe() const
 std::filesystem::path Paths::GetRED4extDir() const
 {
 #ifdef RED4EXT_PLATFORM_MACOS
-    // Local trial patch (cp2077-mac R30, not upstream): RED4EXT_MAC_DIR names the loader folder (relative to the game root, or absolute), so a
-    // second setup (red4ext-jm) can live next to an existing red4ext/ folder. Plugins, logs, config and the address database all follow it.
+    // Local trial patch (cp2077-mac R30, not upstream): RED4EXT_MAC_DIR names the loader folder (relative to the game
+    // root, or absolute), so a second setup (red4ext-jm) can live next to an existing red4ext/ folder. Plugins, logs,
+    // config and the address database all follow it.
     if (const char* dir = std::getenv("RED4EXT_MAC_DIR"); dir && *dir)
     {
         std::filesystem::path p(dir);

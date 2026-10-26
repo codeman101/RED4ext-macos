@@ -2,8 +2,8 @@
 #include "stdafx.hpp"
 
 #ifdef RED4EXT_PLATFORM_MACOS
-#include <mach-o/loader.h>
 #include <CommonCrypto/CommonDigest.h>
+#include <mach-o/loader.h>
 
 #include <cstdio>
 #include <string>
@@ -154,7 +154,8 @@ bool PluginRequirements::UsesLoaderAddresses(const std::filesystem::path& aPath)
         return true;
     }
     const std::string data((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    for (const std::string_view marker : {"RED4ext_ResolveAddress", "cyberpunk2077_addresses.json", "RED4EXT_SDK_ADDRESS_DB"})
+    for (const std::string_view marker :
+         {"RED4ext_ResolveAddress", "cyberpunk2077_addresses.json", "RED4EXT_SDK_ADDRESS_DB"})
     {
         if (data.find(marker) != std::string::npos)
         {

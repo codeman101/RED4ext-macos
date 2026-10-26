@@ -13,12 +13,13 @@ void EnableBackgroundModeIfRequested(); // Platform/Background.cpp
 #include <execinfo.h>
 #include <unistd.h>
 
-// LOCAL DIAGNOSTIC (cp2077-mac R30, env-gated, not for upstream): RED4EXT_MAC_CRASHTRACE=1 prints the faulting address and a backtrace of a
-// SIGSEGV/SIGBUS to stderr. Used to find why the loader dies before its first log line.
+// LOCAL DIAGNOSTIC (cp2077-mac R30, env-gated, not for upstream): RED4EXT_MAC_CRASHTRACE=1 prints the faulting address
+// and a backtrace of a SIGSEGV/SIGBUS to stderr. Used to find why the loader dies before its first log line.
 static void R30CrashTrace(int aSig, siginfo_t* aInfo, void*)
 {
     char line[96];
-    const int n = std::snprintf(line, sizeof(line), "[red4ext-diag] signal %d at %p\n", aSig, aInfo ? aInfo->si_addr : nullptr);
+    const int n =
+        std::snprintf(line, sizeof(line), "[red4ext-diag] signal %d at %p\n", aSig, aInfo ? aInfo->si_addr : nullptr);
     write(2, line, n > 0 ? n : 0);
     void* frames[64];
     const int count = backtrace(frames, 64);

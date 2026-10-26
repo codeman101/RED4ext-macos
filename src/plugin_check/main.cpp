@@ -161,8 +161,8 @@ int main(int argc, char** argv)
             status = 1;
             continue;
         }
-        // The same rules as the loader's gate: a plugin with its own address table is not checked against the database, and the
-        // LOCAL TRIAL PATCH (cp2077-mac R30) self-trapped sidecar rule.
+        // The same rules as the loader's gate: a plugin with its own address table is not checked against the database,
+        // and the LOCAL TRIAL PATCH (cp2077-mac R30) self-trapped sidecar rule.
         const bool usesLoaderAddresses = PluginRequirements::UsesLoaderAddresses(argv[i]);
         if (!usesLoaderAddresses)
         {
