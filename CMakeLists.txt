@@ -23,6 +23,16 @@ include("${RED4EXT_CMAKE_DIR}/TargetAppendOutputDirectory.cmake")
 red4ext_configure_version_from_git()
 
 # ------------------------------------------------------------------------------
+# macOS deployment target
+# ------------------------------------------------------------------------------
+# The game itself needs macOS 15.5, so the loader and its tools are built for 15.5 and load on every macOS the game runs on, not
+# only on the build machine's. A cache default: pass -DCMAKE_OSX_DEPLOYMENT_TARGET=<version> to override it. It has to be set
+# before project(), and it has no effect in a build directory that has already been configured without it.
+if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin")
+  set(CMAKE_OSX_DEPLOYMENT_TARGET "15.5" CACHE STRING "Minimum macOS version the loader is built for")
+endif()
+
+# ------------------------------------------------------------------------------
 # Project definition
 # ------------------------------------------------------------------------------
 project(
