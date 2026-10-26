@@ -269,7 +269,14 @@ void PluginSystem::Load(const std::filesystem::path& aPath, bool aUseAlteredSear
             Log::warn(L"Not loading plugin '{}': could not read it as a 64-bit Mach-O", stem);
             return;
         }
-        if (const auto addresses = Addresses::Instance())
+        const bool usesLoaderAddresses = PluginRequirements::UsesLoaderAddresses(aPath);
+        if (!usesLoaderAddresses)
+        {
+            Log::info(L"Plugin '{}' carries its own game address table (it does not use RED4ext's address database), so the "
+                      L"database check does not apply to it",
+                      stem);
+        }
+        if (const auto addresses = usesLoaderAddresses ? Addresses::Instance() : nullptr)
         {
             auto missing = addresses->UnresolvedAmong(*constants);
             if (!missing.empty())

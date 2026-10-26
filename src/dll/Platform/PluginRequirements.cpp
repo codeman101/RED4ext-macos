@@ -146,6 +146,24 @@ std::optional<std::unordered_set<std::uint32_t>> PluginRequirements::CollectCons
     return constants;
 }
 
+bool PluginRequirements::UsesLoaderAddresses(const std::filesystem::path& aPath)
+{
+    std::ifstream file(aPath, std::ios::binary);
+    if (!file)
+    {
+        return true;
+    }
+    const std::string data((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    for (const std::string_view marker : {"RED4ext_ResolveAddress", "cyberpunk2077_addresses.json", "RED4EXT_SDK_ADDRESS_DB"})
+    {
+        if (data.find(marker) != std::string::npos)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 // LOCAL TRIAL PATCH (cp2077-mac R30): see PluginRequirements.hpp, SelfTrapped.
 PluginRequirements::SelfTrapped PluginRequirements::LoadSelfTrapped(const std::filesystem::path& aPluginPath)
 {

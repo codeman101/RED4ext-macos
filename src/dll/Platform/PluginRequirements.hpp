@@ -14,6 +14,11 @@ namespace PluginRequirements
 // Mach-O that can be parsed safely.
 std::optional<std::unordered_set<std::uint32_t>> CollectConstants(const std::filesystem::path& aPath);
 
+// Whether the plugin takes game addresses from RED4ext: it looks up RED4ext_ResolveAddress, or reads the address database file
+// itself (RED4ext.SDK 1.0 for macOS). A plugin with neither carries its own address table, so the database says nothing about the
+// addresses it uses and the database check does not apply to it.
+bool UsesLoaderAddresses(const std::filesystem::path& aPath);
+
 // LOCAL TRIAL PATCH (cp2077-mac R30, a proposal for upstream, not upstream behaviour): "plugins may declare self-trapped hashes".
 // A plugin that carries its own address resolver can list, in a sidecar next to it (<stem>.trapped-hashes.txt), the address-DB hashes it
 // compiles in but resolves itself to a trap stub or a plugin-internal stand-in, never to a game address and never through the database.

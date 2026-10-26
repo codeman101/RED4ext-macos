@@ -161,13 +161,19 @@ int main(int argc, char** argv)
             status = 1;
             continue;
         }
-        // LOCAL TRIAL PATCH (cp2077-mac R30): the same self-trapped sidecar rule as the loader's gate.
+        // The same rules as the loader's gate: a plugin with its own address table is not checked against the database, and the
+        // LOCAL TRIAL PATCH (cp2077-mac R30) self-trapped sidecar rule.
+        const bool usesLoaderAddresses = PluginRequirements::UsesLoaderAddresses(argv[i]);
+        if (!usesLoaderAddresses)
+        {
+            std::printf("NOTE %s carries its own address table; the database check does not apply\n", argv[i]);
+        }
         const auto trapped = PluginRequirements::LoadSelfTrapped(argv[i]);
         std::size_t missing = 0;
         std::size_t selfTrapped = 0;
         for (const auto value : *constants)
         {
-            if (all.count(value) && !resolvable.count(value))
+            if (usesLoaderAddresses && all.count(value) && !resolvable.count(value))
             {
                 if (trapped.valid && trapped.hashes.count(value))
                     ++selfTrapped;
