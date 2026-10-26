@@ -1,8 +1,8 @@
 #!/bin/bash
 # RED4ext for macOS: install, update, uninstall, check and play, in one command.
 #
-#   curl -fsSL https://raw.githubusercontent.com/jackmaxwil/RED4ext-macos/main/install.sh | bash
-#   curl -fsSL https://raw.githubusercontent.com/jackmaxwil/RED4ext-macos/main/install.sh | bash -s -- VERB [OPTIONS]
+#   curl -fsSL https://raw.githubusercontent.com/codeman101/RED4ext-macos/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/codeman101/RED4ext-macos/main/install.sh | bash -s -- VERB [OPTIONS]
 #
 # Verbs:   install (default), update, uninstall, doctor, play
 # Options: --version X      a release version, e.g. 0.1.0-rc4 (default: the newest release)
@@ -14,7 +14,7 @@
 main() {
     set -euo pipefail
 
-    local REPO=jackmaxwil/RED4ext-macos
+    local REPO=codeman101/RED4ext-macos
     local ONE_LINER="curl -fsSL https://raw.githubusercontent.com/$REPO/main/install.sh | bash"
     local GAME="${CP2077_GAME_DIR:-$HOME/Library/Application Support/Steam/steamapps/common/Cyberpunk 2077}"
     local VERB=install VERSION=""
@@ -73,6 +73,7 @@ macho_uuid() {
         if($cmd==0x1b){read F,$u,16; print uc unpack("H*",$u); exit 0} $o+=$sz} exit 1' "$1"
 }
 db_uuid() { grep -o '"uuid" *: *"[^"]*"' "$1" | head -1 | sed 's/.*"\([^"]*\)"$/\1/' | tr -d '-' | tr '[:lower:]' '[:upper:]'; }
+db_game_version() { grep -o '"game_version" *: *"[^"]*"' "$1" | head -1 | sed 's/.*"\([^"]*\)"$/\1/'; }
 is_resigned() { codesign -d --entitlements - --xml "$1" 2>/dev/null | grep -q allow-unsigned-executable-memory; }
 installed_version() { cat "$GAME/red4ext/VERSION" 2>/dev/null || true; }
 
@@ -135,7 +136,7 @@ do_install() {
     game_uuid=$(macho_uuid "$BIN") || die "Could not read the game binary at \"$BIN\". In Steam, use Verify integrity of game files, then run this again."
     want_uuid=$(db_uuid "$tmp/$name/red4ext/bin/x64/cyberpunk2077_addresses.json")
     [[ "$game_uuid" == "$want_uuid" ]] ||
-        die "RED4ext $VERSION supports game build $want_uuid (Cyberpunk 2077 2.3.1, Steam), but yours is $game_uuid. Nothing was changed. Wait for a RED4ext release for your game version."
+        die "RED4ext $VERSION supports game build $want_uuid (Cyberpunk 2077 $(db_game_version "$tmp/$name/red4ext/bin/x64/cyberpunk2077_addresses.json"), Steam), but yours is $game_uuid. Nothing was changed. Wait for a RED4ext release for your game version."
 
     echo "Copying into \"$GAME\"..."
     ditto "$tmp/$name" "$GAME" || die "Could not copy into \"$GAME\". Check that the folder is writable, then run this again."
@@ -151,6 +152,12 @@ do_install() {
     echo "  2. Start the game with mods by running:"
     echo "     \"$GAME/launch_red4ext.sh\""
     echo "Steam's Play button starts the game without mods."
+    if [[ ! -x "$GAME/engine/tools/scc" ]]; then
+        echo
+        echo "Mods with scripts (Codeware, ArchiveXL and TweakXL too) need redscript 0.5.32 or newer, which is not installed:"
+        echo "download redscript-vX.Y.Z-macos.zip from https://github.com/jac3km4/redscript/releases and unzip it into"
+        echo "\"$GAME\"."
+    fi
 }
 
 do_update() {
@@ -176,7 +183,7 @@ do_uninstall() {
     fi
     rm -rf "$GAME/red4ext" "$GAME/launch_red4ext.sh" "$GAME/INSTALL_MACOS.md" "$GAME/r6/input/modmenu.xml" \
         "$GAME/r6/input/tweakxl.xml" "$GAME/r6/scripts/zz_red4ext_plugins"
-    echo "Removed RED4ext, its plugins and their key bindings. Your mods in archive/pc/mod, r6/scripts and r6/tweaks are untouched."
+    echo "Removed RED4ext, its plugins and their key bindings. Your mods in archive/Mac/mod, r6/scripts and r6/tweaks are untouched."
 
     # Restore the stock binary only if the backup is the same game build. After a Steam update the backup is older
     # than the game, and Steam has already replaced the re-signed binary.

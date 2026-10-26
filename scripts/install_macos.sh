@@ -4,7 +4,8 @@
 # 1. Checks that the game binary is the build the address database was verified against. A different game patch
 #    means RED4ext would refuse to hook anything; wait for an updated release instead.
 # 2. Backs up the game binary once (Cyberpunk2077.orig), then re-signs it with the entitlements RED4ext needs
-#    (dyld environment variables, unsigned executable memory, disabled library validation).
+#    (dyld environment variables, unsigned executable memory, disabled executable page protection, JIT, disabled library
+#    validation: the set the game 2.5.0 boots were tested with).
 # Undo: Steam > Cyberpunk 2077 > Properties > Installed Files > Verify integrity restores the original binary.
 set -euo pipefail
 

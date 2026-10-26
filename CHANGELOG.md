@@ -4,6 +4,24 @@ All notable changes to the RED4ext macOS port.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-27
+
+Cyberpunk 2077 2.5.0 (Steam, Apple silicon, macOS 15.5 or later). Maintained by codeman101 from this release on.
+
+- Game 2.5.0: the 2.5.0 address database (701 rows, 635 verified, each with evidence) and the 2.5 layouts in the SDK
+  (codeman101/RED4ext.SDK-macos, branch loader-2.5). Game 2.3.1 is no longer supported; use 0.1.0-rc6 for it.
+- The release contains Codeware, ArchiveXL and TweakXL built for this loader (codeman101 forks, branch mac-v1-2.5).
+  ModMenu is not included.
+- The address check applies only to plugins that take their game addresses from RED4ext's database. A plugin that
+  carries its own address table (the macOS RED4ext.SDK with built-in addresses, used by the xmake packages) is loaded as
+  it is, with a log note.
+- Plugins may declare self-trapped hashes in a sha256-bound sidecar (`<Plugin>.trapped-hashes.txt`).
+- The fatal error message is printed before exit. `RED4EXT_MAC_DIR` names the loader folder (for a side-by-side test
+  install); `RED4EXT_MAC_CRASHTRACE=1` prints the fault address and a backtrace of a crash in the loader.
+- The game binary is re-signed with the entitlements the 2.5.0 tests ran with (adds disabled executable page protection
+  and JIT to the 0.1.0 set).
+- Mods with scripts need redscript 0.5.32 or newer.
+
 ## [0.1.0-rc6] - 2026-10-07
 
 - **Less stutter:** TweakXL and ArchiveXL opened their log file and wrote to the terminal for every log line, on the game thread. ArchiveXL logs thousands of lines while character meshes stream in. They now keep the file open, buffer it, and stay off the terminal.

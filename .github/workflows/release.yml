@@ -1,11 +1,10 @@
 name: Release
 
-# Pushing a tag vX.Y.Z or vX.Y.Z-rcN builds the release on a runner and publishes it (a version with a "-" is a
-# prerelease). The notes are the CHANGELOG.md section "## [X.Y.Z]", which must exist.
+# By hand only (workflow_dispatch): this workflow still builds the 0.1.0 component set (jackmaxwil's component forks,
+# game 2.3.1). Releases from 0.2.0 on (game 2.5.0) are built with scripts/create_release_pub25.sh from the prebuilt
+# components and published as the GitHub release vX.Y.Z, so a pushed tag must not start this workflow.
 # workflow_dispatch builds any version; with dry_run it only uploads the assets to the run and publishes nothing.
 on:
-  push:
-    tags: [ 'v*' ]
   workflow_dispatch:
     inputs:
       version:
