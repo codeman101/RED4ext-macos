@@ -4,6 +4,14 @@ All notable changes to the RED4ext macOS port.
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-30
+
+- Fixes a crash (bus error) when a world sector from a mod made for an older game version streams in, for example
+  at the Sunset Motel with Lizzie's Braindances. Codeware now skips the old-format instanced mesh objects the 2.5
+  game cannot read instead of crashing.
+- Codeware's crash report no longer prints a leftover script property name from startup.
+- Only Codeware changed. ArchiveXL and TweakXL are the same as in 0.2.0.
+
 ## [0.2.0] - 2026-10-27
 
 Cyberpunk 2077 2.5.0 (Steam, Apple silicon, macOS 15.5 or later). Maintained by codeman101 from this release on.
