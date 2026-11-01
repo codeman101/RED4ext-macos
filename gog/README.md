@@ -12,7 +12,7 @@ Discussion and candidate tables: https://github.com/codeman101/RED4ext-macos/iss
 
 ## Layout
 - `notes/gog_candidates.tsv`: hash, name, Steam 2.5 offset, GOG candidate, confidence.
-- `tools/`: static analysis scripts (`python3 -I`). `shape3.py` = shape-based function matcher.
+- `tools/`: static analysis scripts (`python3 -I`). `tools/patch_tweakxl.py` patches an original TweakXL 0.2.0 dylib for GOG (sha256-checked, re-signs ad hoc). `shape3.py` = shape-based function matcher.
 - `dbg/`: `setup.sh` makes a debuggable copy outside the .app; `crash.py` / `trace.py` are lldb commands.
 - `probe/`: read-only `DYLD_INSERT_LIBRARIES` probes (edit the log path first).
 
