@@ -19,6 +19,8 @@ EXTRA = {
     3998356057: (0x106C8C4, 0x416DDE0),  # ResourcePath_Create*: 107 insns (= Steam), FNV-1a 64 leaf, strips quotes and leading slashes
     3729789488: (0x4D7FBA8, 0x3C4FA84),  # CBaseEngine_LoadGatheredResources*: bool(CBaseEngine&), vcall +0x100, assert string
     2923109755: (0x442D290, 0x252F8D4),  # *candidate*: void(u64,u64) from ExtensionService::OnBootstrap; the only one of 52 shape candidates whose detour fires once, after the depot exists, with the game alive for 120 s
+    1250309504: (0x10E7060, 0x41E3ABC),  # ResourceLoader_IssueLoadingRequestByPath: 43 insns, request {1 at +0x19, -1 at +0x20, 0 at +0x28}, x8 out, x0 loader, x1 path (matches the SDK note)
+    2365013187: (0x10E710C, 0x41E3B68),  # ResourceLoader_IssueLoadingRequest: next function, same 0xAC distance as in Steam, x8 out, x0 loader, x1 request
 }
 TABLE = {**CORE, **EXTRA}
 # memory-vault expected allocator RVAs: same 20 values as TweakXL, stored as u64 in __data
