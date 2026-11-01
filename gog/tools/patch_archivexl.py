@@ -16,6 +16,7 @@ SHA256 = "1d0b2c254a138fb789c96c59521f4b82ec5c841792736aad372045f454eeeb29"
 
 # hash: (steam offset, gog offset)
 EXTRA = {
+    3998356057: (0x106C8C4, 0x416DDE0),  # ResourcePath_Create*: 107 insns (= Steam), FNV-1a 64 leaf, strips quotes and leading slashes
     3729789488: (0x4D7FBA8, 0x3C4FA84),  # CBaseEngine_LoadGatheredResources*: bool(CBaseEngine&), vcall +0x100, assert string
 }
 TABLE = {**CORE, **EXTRA}

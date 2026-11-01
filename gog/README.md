@@ -8,7 +8,8 @@ Discussion and candidate tables: https://github.com/codeman101/RED4ext-macos/iss
 - RED4ext core: 21 GOG candidates, all startup self-checks pass in a debug copy under lldb.
 - TweakXL: runs (TweakDB loads, 196423 records) once its own tables are patched: 21 embedded copies of the 79-entry address table, `InitializeAddressTable` immediates, and the memory-vault expected-offset table (4 pools x 5 allocator slots).
 - ArchiveXL (`tools/patch_archivexl.py`): loads without crashing next to TweakXL in the debug copy. Patched: table entries matched by Steam offset (ArchiveXL lists some functions under extra hashes), the `TweakDB_Load` hook, `CBaseEngine_LoadGatheredResources` (candidate `1:0x3C4FA84`) and its own memory-vault table (35 slots, incl. PoolEngine/PoolRefCount/PoolDefault at Steam-0x20).
-- Not done: TweakXL StatService hook cluster; 4 ArchiveXL hooks (`ResourcePath_Create*`, hashes 2885423437 and 2923109755, `gameIGameSystem_Spawn*`) still fail with `Detour error -2`, so those features stay off; Codeware.
+- Not done: TweakXL StatService hook cluster; 3 ArchiveXL hooks (hashes 2885423437 and 2923109755, `gameIGameSystem_Spawn*`) still fail with `Detour error -2`, so those features stay off; Codeware.
+- `ResourcePath_Create*` candidate `1:0x416DDE0`: exactly 107 insns (same as Steam), leaf FNV-1a 64 that strips leading quotes and slashes, 220 caller functions. Found with `tools/fnvleaf.py`. The hook attaches and the game keeps running; not checked that ArchiveXL's path mapping actually works.
 - `LoadGatheredResources` candidate `1:0x3C4FA84`: virtual call `[vtbl+0x100]`, then a `bool` check whose failure path calls a helper (`0x3C530B4`) holding the "Not all Gathered Resources were loaded!" assert; the only caller function is `0x3C4EE94`. Found with `tools/callers.py`. Static only, not confirmed at runtime.
 - Tested only on a debug copy launched from lldb, not through the normal launcher.
 
