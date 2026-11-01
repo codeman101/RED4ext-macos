@@ -18,6 +18,7 @@ SHA256 = "1d0b2c254a138fb789c96c59521f4b82ec5c841792736aad372045f454eeeb29"
 EXTRA = {
     3998356057: (0x106C8C4, 0x416DDE0),  # ResourcePath_Create*: 107 insns (= Steam), FNV-1a 64 leaf, strips quotes and leading slashes
     3729789488: (0x4D7FBA8, 0x3C4FA84),  # CBaseEngine_LoadGatheredResources*: bool(CBaseEngine&), vcall +0x100, assert string
+    2923109755: (0x442D290, 0x252F8D4),  # *candidate*: void(u64,u64) from ExtensionService::OnBootstrap; the only one of 52 shape candidates whose detour fires once, after the depot exists, with the game alive for 120 s
 }
 TABLE = {**CORE, **EXTRA}
 # memory-vault expected allocator RVAs: same 20 values as TweakXL, stored as u64 in __data
