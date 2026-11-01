@@ -1,0 +1,28 @@
+hash	name	steam_2.5.0_offset	gog_2.5.0_candidate	confidence	evidence
+240386859	Main*	1:0x4E3274C	1:0xF7B728	high (not DB-verified)	called from main() (GOG LC_MAIN 0x32380, Steam 0x323A0); 118 insns to first ret (Steam 119-120); 14 bl (Steam 13 twinned callees); argc/argv loop over argv[1..] with strlen; stack guard; swaps result into global at 0x10801B000+0xB20
+3570081113	(unnamed, script blob names)	1:0x4D7ABBC	1:~0x3C4A5xx..0x3C4ADxx (function start not fixed)	medium	final/final_noopts/master/profiling.redscripts referenced together at 0x103C4A530 and 0x103C4ADEC; master only at 0x103C4C044; same shape as Steam
+1409615660	CString_dtor	1:0x2914C	1:0x2912C	medium-high (not DB-verified)	delta -0x20 like main(); 14 insns (Steam 14); 48369 callers (very widely used, as expected for a string dtor)
+1759447004	CNamePool_Get	1:0x3452D84/1:0x4E38940	1:0xF81AF4	high (not DB-verified)	body ldr x0,[x0]; b 0xF81970; 2.5 wrapper (also returns length) at +8 (0xF81AFC) like Steam 0x4E38948
+3649309656	CNamePool_AddPair	1:0x4E38978	1:0xF81B2C	high (not DB-verified)	null/empty guard, strlen+1, tail call to twin 0xF81810; Get+0x38 as in Steam
+10488987	CNamePool_AddCstr	1:0x4E389D0	1:0xF81B84	high (not DB-verified)	null/empty guard, strlen libc, 'None' guard, FNV-1a64 basis 0xCBF29CE484222325 prime 0x100000001B3, calls twin 0xF81810; AddPair+0x58 as in Steam; lldb saw x0='Uint8'
+4292220681	CNamePool_AddCString	1:0x4E38A98	1:0xF81C4C	medium-high (not DB-verified)	position AddCstr+0xC8 as in Steam; body not read yet
+DynArray_Realloc	2057311186	0x28674	0x28654	high	size 130 insns as Steam
+CString_copy	3904113489	0x2AA74	0x2AA54	med-high	self-assign guard
+CString_ctor_str	3357477547	0x2CCAC	0x2CC8C	high	52 insns
+Handle_DecWeakRef	859509764	0x1025DC8	0x4128D70	med-high	twin 0xF376E8 rejected: 15720 sites < 19913 distinct callers
+CRTTISystem_Get	1247874916	0x10B3CAC	0x41B2858	medium	static-local singleton getter, 26 insns, 3 callers, 2 callees; 1 of 5 shape matches has this form; NOT DB-verified
+ProcessScriptTypes*	898639042	0x11A7E28	0x3CF9C80	medium	only 1 of 5 shape matches (133 insns,1 caller,15 callees) hit at boot under lldb, once, x0=object, caller 0x3cfccc0; NOT DB-verified
+unnamed_4223801011	4223801011	0x4D6A27C	0x3C39BB8	med-high	21 insns, 1 bl callee + virtual call; distance to script-blob anchor ref: Steam -0x10940, GOG -0x10978 (0x38 diff); only 1 of 5 shape matches in 0x3B0-0x3D0 zone near anchor; NOT DB-verified
+CBaseFunction_ExecuteScripted	3791200470	0x1098FC0	0x4198494	high	pair with InternalExecute at the same +0xFFC distance as Steam; 394 insns; NOT DB-verified
+CBaseFunction_InternalExecute	404169501	0x1099FBC	0x4199490	high	356 insns exact, +0xFFC from ExecuteScripted as Steam; NOT DB-verified
+CBaseFunction_ExecuteNative	3778157291	0x109B16C	0x419A640	high	45 insns exact, InternalExecute+0x11B0 as Steam, 4 direct callees; NOT DB-verified
+CClassFunction_ctor	1613572595	0x109B8A4	0x419AD78	high	base ctor call, flags w6|1, vtable, str +0xf0/+0xf8; 173 callers; same offset from InternalExecute as Steam; NOT DB-verified
+CClassStaticFunction_ctor	2920426135	0x109B974	0x419AE48	high	identical twin 0x419ADE4 has 0 callers, this one 55; flags |3, +0xf0/+0xf8; NOT DB-verified
+CGlobalFunction_ctor	4201325776	0x109BAA8	0x419AF7C	high	18 insns, 121 callers; twin 0x419AF34 has 0; same offset from InternalExecute as Steam; NOT DB-verified
+OpcodeHandlers	961751128	3:0x1D2C940	3:0x1D7AF30	high	data; 7631 referencing functions (Steam 3612 with twin, ratio ~2.1); at runtime a table of consecutive small __TEXT function pointers (0x42f6e78, 0x42f6e7c, ...); NOT DB-verified
+CGameEngine	2549221846	3:0x1FDE288	3:0x1FEF9A8	med-high	data; 819 referencing functions (Steam 402, ratio ~2.0); at runtime pointer to heap object with __DATA_CONST vtable 0x7c19c50; NOT DB-verified
+Handle_ctor	3121353053	0x1025C8C	0x4128C34	high	TweakXL table; DecWeakRef-0x13C as Steam; 78 insns exact; 7484 boot hits under lldb; NOT DB-verified
+CClass_CreateInstance	1518341917	0x10C36A0	0x41C1984	high	TweakXL table; 72 insns exact, 5 callees, 156 callers; 6567 boot hits; NOT DB-verified
+CString_ctor_span	2065762423	0x2933C	0x2931C	high	TweakXL table; -0x20 region shift, 46 insns exact; 11 boot hits; NOT DB-verified
+main_for_TweakXL	240386859	0x323A0	0x32380	high	TweakXL table uses main() not Main*; 1 boot hit at 0.0s
+TweakDB_CreateRecord	838931066	0x3309CC4	0x2F5439C	low	173 insns exact, 38 callees, 3 callers; 0 boot hits at menu; NOT verified
