@@ -20,14 +20,14 @@ def cb_open(f,bp,ex,i):
     return False
 def run(d,c,r,i):
     d.SetAsync(True)
-    t=d.CreateTarget(BIN);li=lldb.SBLaunchInfo([])
+    t=d.CreateTarget(BIN);li=lldb.SBLaunchInfo([a for a in os.environ.get('CPG_ARGS','').split() if a])
     li.SetEnvironmentEntries(["DYLD_INSERT_LIBRARIES="+G+"/red4ext/RED4ext.dylib"],True)
     li.SetWorkingDirectory(G);li.SetLaunchFlags(lldb.eLaunchFlagDisableASLR|lldb.eLaunchFlagStopAtEntry)
     e=lldb.SBError();p=t.Launch(li,e)
     if not e.Success(): print(e);return
     bo=t.BreakpointCreateByName("dlopen");bo.SetScriptCallbackFunction("hit.cb_open")
     p.Continue()
-    for _ in range(int(os.environ.get("HW","45"))):
+    for k in range(int(os.environ.get("HW","45"))):
         time.sleep(1)
         if p.GetState() in (lldb.eStateExited,lldb.eStateCrashed): break
     print("FINAL state",p.GetState(),"hits",ST["n"],"bp",ST["bp"],flush=True)
