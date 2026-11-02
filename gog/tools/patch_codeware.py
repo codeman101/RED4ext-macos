@@ -36,6 +36,25 @@ for _o in [int(x, 16) for x in os.environ.get('CW_DISABLE', '').split(',') if x 
 if os.environ.get('CW_DISABLE') == 'all':
     BY_OFF = {k: 0 for k in BY_OFF}
 
+# Hard-coded rva of the R30 script-loader wrapper (movz/movk pair in Mac::V1::InstallScriptLoadedHook).
+# Codeware memcmp()s 32 bytes of prologue there; GOG 0x3C4A334 has the identical prologue and is called from InitEngine.
+WRAPPER_STEAM, WRAPPER_GOG = 0x4D7A9F8, 0x3C4A334
+
+def patch_wrapper_rva(data):
+    n = 0
+    for off in range(0, len(data) - 15, 4):
+        a, = struct.unpack_from("<I", data, off)
+        if a & 0xFFE00000 != 0xD2800000 or (a >> 5) & 0xFFFF != WRAPPER_STEAM & 0xFFFF:
+            continue
+        rd = a & 31
+        for k in (4, 8, 12):  # movk may be a few instructions later
+            b, = struct.unpack_from("<I", data, off + k)
+            if b == 0xF2A00000 | ((WRAPPER_STEAM >> 16) << 5) | rd:
+                struct.pack_into("<I", data, off, 0xD2800000 | ((WRAPPER_GOG & 0xFFFF) << 5) | rd)
+                struct.pack_into("<I", data, off + k, 0xF2A00000 | ((WRAPPER_GOG >> 16) << 5) | rd)
+                n += 1; break
+    return n
+
 SHA256 = "3907fccf8cceec63c1e9daa04a001d58fd0be9bbfe6db162d090765b400a891d"
 
 def main():
@@ -52,9 +71,10 @@ def main():
         q = struct.unpack_from("<Q", data, off)[0]
         if q in VAULT:
             struct.pack_into("<Q", data, off, VAULT[q]); v += 1
+    w = patch_wrapper_rva(data)
     open(dst, "wb").write(data)
     subprocess.run(["codesign", "-f", "-s", "-", dst], check=True)
-    print(f"patched {n} table entries, {v} vault slots -> {dst}")
+    print(f"patched {n} table entries, {v} vault slots, {w} wrapper rva -> {dst}")
 
 if __name__ == "__main__":
     main()
