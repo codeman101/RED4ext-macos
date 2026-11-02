@@ -48,6 +48,18 @@ TABLE = {
     3791200470: (0x1098FC0, 0x4198494),
     3904113489: (0x2AA74, 0x2AA54),
     4201325776: (0x109BAA8, 0x419AF7C),
+    # job system cluster (7/7 relative layout match, shift -0xD45798)
+    1862212562: (0x4DE2D7C, 0x409D5E4),
+    242552139: (0x4DDF1C4, 0x4099A2C),
+    2193429752: (0x4DDEF64, 0x40997CC),
+    69014212: (0x4DDF3C4, 0x4099C2C),
+    1525942140: (0x4DDF488, 0x4099CF0),
+    3651996672: (0x4DDF354, 0x4099BBC),
+    2621709954: (0x4DE3088, 0x409D8F0),
+    2655521326: (0x4DDF828, 0x409A090),
+    2627471740: (0x4DDF868, 0x409A0D0),
+    3235774480: (0x4DF0D14, 0x40AB57C),  # same shift, start verified only
+    1508445968: (0x9D0E550, 0x9A2E340),  # JobQueue global (&ptr): game loads it with adrp/ldr in the callers of 0x409d8f0
 }
 
 # (file offset, old word, new word)
