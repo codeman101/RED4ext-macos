@@ -24,6 +24,8 @@ CW = {
     0x10B0B6C: 0x41AF890,  # ISerializable::sub_A0 default (vtable+0xA8, most common GOG target)
     0x10B0C08: 0x41AF92C,
     0x10B0860: 0x41AF584,  # ISerializable default vfunc @vtable+0x48 (hash 2293436409): most common slot-9 target in GOG vtables, shift fits neighbours
+    0x11A8F30: 0x42A2A78,  # ScriptValidator::ValidateProperty: ScriptProperty.type@+0xB8, ScriptType.metaType@+0x54 match the GOG body
+    0x11A9108: 0x42A2C50,  # ScriptValidator::CompareType: same shift as Validate (gap to ValidateProperty 0x1D8 on both)
     0x11A7E28: 0x42A1970,  # ScriptValidator::Validate (validator,bundle,report): found via 'Validation failed for N types'
     0x529EC50: 0x529CA64,  # Entity::Attach (status 3->4 stores; not shape-verified)
 }
