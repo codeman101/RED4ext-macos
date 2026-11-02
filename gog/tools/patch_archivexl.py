@@ -36,6 +36,18 @@ VAULT_RANGE = (0x1A0600, 0x1A0980)
 # so entries are matched by Steam offset, not by hash.
 BY_OFF = {old: new for old, new in TABLE.values()}
 
+# Cluster matches by relative layout (all landed on exact function starts with one shift per cluster).
+# CharacterCustomization*: 14 functions, shift 0x50E8E8 (CCSystem 5/5 unique match; the rest verified to land on starts).
+# The 4 controller virtuals (Genitals OnAttach 0x4BAE148, Hairstyle OnDetach 0x4BAF2C0/CheckState 0x4BB0AC0, Feet CheckState 0x4BB13FC)
+# also land on function starts with this shift but are left out: ArchiveXL's handlers crash (component owner at +0x50 null,
+# called from the generic component tick), so the GOG targets are probably shared code, not the Steam functions.
+for _o in (0x4BBF004, 0x4BBF438, 0x4BBF6F8, 0x4BBF9B8, 0x4BBFC78,
+           0x4BBFF38, 0x4BC5098, 0x4BC83A8, 0x4BD3F5C, 0x4BD448C, 0x4BD53AC):
+    BY_OFF[_o] = _o + 0x50E8E8
+# CMesh: shift -0xE843D8, 6/6 unique; ShouldPreloadAppearances reads forceLoadAllAppearances at +0x6D like the SDK.
+for _o in (0x519A58C, 0x519A844, 0x519ADA4, 0x519AEBC, 0x519C4B0, 0x519C6DC, 0x519E118):
+    BY_OFF[_o] = _o - 0xE843D8
+
 
 def main():
     src = sys.argv[1]
@@ -43,6 +55,8 @@ def main():
     data = bytearray(open(src, "rb").read())
     if hashlib.sha256(data).hexdigest() != SHA256:
         sys.exit("input is not the original ArchiveXL 1.27.4 dylib (sha256 mismatch)")
+    import patch_codeware  # shares entries (Entity::Reassemble, InitEngine, ...) that ArchiveXL also hooks
+    BY_OFF.update(patch_codeware.CW)
     n = 0
     for off in range(0, len(data) - 15, 4):
         h, z, o, z2 = struct.unpack_from("<IIII", data, off)
