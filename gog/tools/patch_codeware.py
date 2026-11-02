@@ -7,6 +7,16 @@ import hashlib, os, struct, subprocess, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from patch_archivexl import BY_OFF, VAULT
 
+# Codeware-only entries: steam offset -> gog offset
+CW = {
+    0x4D7EFB8: 0x3C4EE94,  # CBaseEngine_InitEngine: contains 'FAILED - InkSystem'; same shift 0x1130124 as LoadGatheredResources
+}
+BY_OFF.update(CW)
+for _o in [int(x, 16) for x in os.environ.get('CW_DISABLE', '').split(',') if x and x != 'all']:
+    BY_OFF[_o] = 0  # debugging: disable a hook (bisecting)
+if os.environ.get('CW_DISABLE') == 'all':
+    BY_OFF = {k: 0 for k in BY_OFF}
+
 SHA256 = "3907fccf8cceec63c1e9daa04a001d58fd0be9bbfe6db162d090765b400a891d"
 
 def main():
