@@ -18,6 +18,7 @@ CW = {
     0x19AB4DC: 0x2CDFD7C,  # Entity::Detach
     0x19AB7F8: 0x2CE0098,  # Entity::Dispose
     0x19A7A30: 0x2CDC2D0,  # Entity::Reassemble (layout only)
+    0x11A7E28: 0x42A1970,  # ScriptValidator::Validate (validator,bundle,report): found via 'Validation failed for N types'
     0x529EC50: 0x529CA64,  # Entity::Attach (status 3->4 stores; not shape-verified)
 }
 BY_OFF.update(CW)
