@@ -48,6 +48,9 @@ for _o in (0x4BBF004, 0x4BBF438, 0x4BBF6F8, 0x4BBF9B8, 0x4BBFC78,
 # neighbouring TweakXL entries' shift (-0xBE88C); bodies not checked.
 for _o in (0x2007BC4, 0x2007DCC, 0x2007EBC, 0x2008310, 0x200857C, 0x200882C):
     BY_OFF[_o] = _o - 0xC083C
+# NOT ported: ItemFactory*Request LoadTemplate/LoadAppearance (0x200C940/0x200CD00/0x20133F4) and AppearanceChanger_GetSuffixes (0x201DCC8).
+# Shift -0xC0730 gives 4 exact function starts, but with it the game aborts with __stack_chk_fail (call chain 0x1F4BBA8 -> 0x1F4BC10 -> 0x19D5340),
+# i.e. the targets are wrong (0x1F4C210...). Still open.
 # CMesh: shift -0xE843D8, 6/6 unique; ShouldPreloadAppearances reads forceLoadAllAppearances at +0x6D like the SDK.
 for _o in (0x519A58C, 0x519A844, 0x519ADA4, 0x519AEBC, 0x519C4B0, 0x519C6DC, 0x519E118):
     BY_OFF[_o] = _o - 0xE843D8
