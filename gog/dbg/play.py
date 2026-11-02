@@ -3,6 +3,8 @@
 import lldb,os,time
 G=os.path.expanduser("~/cyberpunk-gog-port/dbg/game")
 HITS={}
+def cb2(f,bp,ex,i):
+    pr=f.GetThread().GetProcess();tg=pr.GetTarget();x8=f.FindRegister('x8').GetValueAsUnsigned();m=tg.ResolveLoadAddress(x8).GetModule();print('RESOLVED',hex(x8),m.GetFileSpec().GetFilename() if m.IsValid() else None,hex(x8-0x100000000),flush=True);return False
 def cb(f,bp,ex,i):
     pr=f.GetThread().GetProcess();a=bp.GetLoadAddress()-0x100000000
     if a==0x42dd9cc:
@@ -10,7 +12,11 @@ def cb(f,bp,ex,i):
     if a==0x42a2388:
         e=lldb.SBError();x28=f.FindRegister('x28').GetValueAsUnsigned();b=pr.ReadMemory(x28+0xd0,4,e);print('CLS',hex(f.FindRegister('x8').GetValueAsUnsigned()&0xffff),b.hex() if e.Success() else 'err',flush=True)
     if a==0x42dbf78:
-        e=lldb.SBError();x8=f.FindRegister('x8').GetValueAsUnsigned();print('TGT',hex(x8),pr.ReadMemory(x8,0x30,e).hex() if e.Success() else 'err',flush=True)
+        e=lldb.SBError();x0=f.FindRegister('x0').GetValueAsUnsigned();vt=pr.ReadUnsignedFromMemory(x0,8,e);tg=pr.GetTarget();m=tg.ResolveLoadAddress(vt).GetModule();print('MODBASE',hex(m.GetObjectFileHeaderAddress().GetLoadAddress(tg)),'vtoff',hex(vt-m.GetObjectFileHeaderAddress().GetLoadAddress(tg)),flush=True);print('OBJ',hex(x0),'vt',hex(vt),'vtmod',pr.GetTarget().ResolveLoadAddress(vt).GetModule().GetFileSpec().GetFilename(),flush=True)
+        e=lldb.SBError();x8=f.FindRegister('x8').GetValueAsUnsigned();tg=pr.GetTarget();m=tg.ResolveLoadAddress(x8).GetModule();
+        if m.GetFileSpec().GetFilename()=='Codeware.dylib':
+            b2=tg.BreakpointCreateByAddress(x8+0x84);b2.SetScriptCallbackFunction('play.cb2')
+        print('TGTOFF',m.GetFileSpec().GetFilename(),hex(x8-m.GetObjectFileHeaderAddress().GetLoadAddress(tg)),flush=True);print('TGT',hex(x8),pr.ReadMemory(x8,0x30,e).hex() if e.Success() else 'err',flush=True)
     if a==0x3c4639c:
         e=lldb.SBError();x28=f.FindRegister('x28').GetValueAsUnsigned();print('X28',hex(x28),pr.ReadMemory(x28+0xc0,0x28,e).hex() if e.Success() else e,flush=True)
         e=lldb.SBError();print('LR',hex(f.FindRegister('lr').GetValueAsUnsigned()-0x100000000),'MSG',pr.ReadCStringFromMemory(f.FindRegister('x1').GetValueAsUnsigned(),300,e),flush=True)
