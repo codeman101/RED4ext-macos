@@ -44,6 +44,10 @@ BY_OFF = {old: new for old, new in TABLE.values()}
 for _o in (0x4BBF004, 0x4BBF438, 0x4BBF6F8, 0x4BBF9B8, 0x4BBFC78,
            0x4BBFF38, 0x4BC5098, 0x4BC83A8, 0x4BD3F5C, 0x4BD448C, 0x4BD53AC):
     BY_OFF[_o] = _o + 0x50E8E8
+# GarmentAssembler FindState/AddItem/AddCustomItem/RemoveItem + 2 more: 6 exact starts at shift -0xC083C, the only hit near the
+# neighbouring TweakXL entries' shift (-0xBE88C); bodies not checked.
+for _o in (0x2007BC4, 0x2007DCC, 0x2007EBC, 0x2008310, 0x200857C, 0x200882C):
+    BY_OFF[_o] = _o - 0xC083C
 # CMesh: shift -0xE843D8, 6/6 unique; ShouldPreloadAppearances reads forceLoadAllAppearances at +0x6D like the SDK.
 for _o in (0x519A58C, 0x519A844, 0x519ADA4, 0x519AEBC, 0x519C4B0, 0x519C6DC, 0x519E118):
     BY_OFF[_o] = _o - 0xE843D8
