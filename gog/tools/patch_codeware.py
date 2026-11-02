@@ -10,6 +10,15 @@ from patch_archivexl import BY_OFF, VAULT
 # Codeware-only entries: steam offset -> gog offset
 CW = {
     0x4D7EFB8: 0x3C4EE94,  # CBaseEngine_InitEngine: contains 'FAILED - InkSystem'; same shift 0x1130124 as LoadGatheredResources
+    # game::Entity methods, found via stores to Entity.status (+0x156): Initialize=1, Detach 5->2, Uninitialize 6->7, Dispose 6->7, Attach 3->4.
+    # Steam->GOG shift 0x13348A0 (Uninit/Detach/Dispose spacing identical to Steam, Assemble/Initialize/Reassemble land on function starts).
+    0x19AA048: 0x2CDE8E8,  # Entity::Assemble
+    0x19AA7D8: 0x2CDF078,  # Entity::Initialize
+    0x19AB2D4: 0x2CDFB74,  # Entity::Uninitialize
+    0x19AB4DC: 0x2CDFD7C,  # Entity::Detach
+    0x19AB7F8: 0x2CE0098,  # Entity::Dispose
+    0x19A7A30: 0x2CDC2D0,  # Entity::Reassemble (layout only)
+    0x529EC50: 0x529CA64,  # Entity::Attach (status 3->4 stores; not shape-verified)
 }
 BY_OFF.update(CW)
 for _o in [int(x, 16) for x in os.environ.get('CW_DISABLE', '').split(',') if x and x != 'all']:
