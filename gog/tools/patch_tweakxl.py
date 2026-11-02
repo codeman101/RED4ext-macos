@@ -21,6 +21,12 @@ SHA256 = "3be4622af250b6d66200ab9a7c775134e44892640d858433886cdecd8eee4504"
 
 # hash: (steam offset, gog offset)
 TABLE = {
+    3778157291: (0x109B16C, 0x419A640),  # ExecuteNative (already found via the CBaseFunction anchor, same shift 0x30FF4D4)
+    1652956141: (0x10C352C, 0x41C1810),  # same shift as CClass_CreateInstance (0x30FE2E4), lands on a function start; not body-checked
+    1482886888: (0x10C3BC8, 0x41C1EAC),  # idem
+    2399343890: (0x10C4C14, 0x41C2EF8),  # idem
+    2502822355: (0x11AB310, 0x42A4E58),  # shift 0x30F9B48 of the ScriptValidator cluster; not body-checked
+    1585257392: (0x19ACEF8, 0x2CE1798),  # Entity-group shift 0x13348A0; not body-checked
     10488987: (0x4E389D0, 0xF81B84),
     240386859: (0x323A0, 0x32380),
     404169501: (0x1099FBC, 0x4199490),
