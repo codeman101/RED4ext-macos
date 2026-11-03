@@ -29,6 +29,7 @@ CW = {
     0x111CC00: 0x4216860,  # ScriptBundle::~ScriptBundle: calls Clear (0x4216c70: HashMaps +0x8/+0x38/+0x68) then frees +0x1A0; shift 0x30F9C60 sits between neighbours
     0x11A7E28: 0x42A1970,  # ScriptValidator::Validate (validator,bundle,report): found via 'Validation failed for N types'
     0x529EC50: 0x529CA64,  # Entity::Attach (status 3->4 stores; not shape-verified)
+    0x19A8040: 0x2CDC8E0,  # Entity_RequestComponents: Reassemble (0x19A7A30 -> 0x2CDC2D0) + 0x610 in both; body = vtable+0x198 call on the entity, then loops DynArray<Handle<IComponent>> (count +0xC, stride 0x10) with a2
 }
 BY_OFF.update(CW)
 for _o in [int(x, 16) for x in os.environ.get('CW_DISABLE', '').split(',') if x and x != 'all']:
