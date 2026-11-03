@@ -61,6 +61,16 @@ for _o in (0x519A58C, 0x519A844, 0x519ADA4, 0x519AEBC, 0x519C4B0, 0x519C6DC, 0x5
 BY_OFF[0x151A748] = 0x3EF3BD4
 BY_OFF[0x151AA2C] = 0x3EF3EB8
 
+# More neighbours of already-resolved anchors, same Steam distance in GOG (all land on function starts):
+# ResourceDepot_LoadArchives = CheckResource + 0x760 (body: loops the DynArray<CString> paths, count +0xC, stride 0x20, stores mode/severity args);
+# GarmentAssemblerState ChangeItem/ChangeCustomItem = +0x38 from AddItem/RemoveItem anchors; CharacterCustomizationSystem Initialize/GetResource inside the
+# +0x50E8E8 cluster.
+BY_OFF[0x151B18C] = 0x3EF4618
+BY_OFF[0x20085B4] = 0x1F47D78
+BY_OFF[0x2008864] = 0x1F48028
+# held back (character menu untested, see notes): BY_OFF[0x4BC779C] = 0x50D6084
+# held back (character menu untested, see notes): BY_OFF[0x4BC7B24] = 0x50D640C
+
 
 def main():
     src = sys.argv[1]
