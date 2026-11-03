@@ -41,7 +41,7 @@ if os.environ.get('CW_DISABLE') == 'all':
 # Codeware memcmp()s 32 bytes of prologue there; GOG 0x3C4A334 has the identical prologue and is called from InitEngine.
 WRAPPER_STEAM, WRAPPER_GOG = 0x4D7A9F8, 0x3C4A334
 
-def patch_wrapper_rva(data):
+def patch_wrapper_rva(data, WRAPPER_STEAM=WRAPPER_STEAM, WRAPPER_GOG=WRAPPER_GOG):
     n = 0
     for off in range(0, len(data) - 15, 4):
         a, = struct.unpack_from("<I", data, off)
@@ -55,6 +55,10 @@ def patch_wrapper_rva(data):
                 struct.pack_into("<I", data, off + k, 0xF2A00000 | ((WRAPPER_GOG >> 16) << 5) | rd)
                 n += 1; break
     return n
+
+# Mac::PatchScriptOpCodes hard-codes the script opcode handler table rva (Steam 0x9A5C940) in two places and
+# writes New/Cast handlers through it; on GOG that stomped unrelated memory (Character menu crash in ScriptOpCodeNew).
+HANDLERS_STEAM, HANDLERS_GOG = 0x9A5C940, 0x9AAEF30
 
 SHA256 = "3907fccf8cceec63c1e9daa04a001d58fd0be9bbfe6db162d090765b400a891d"
 
@@ -72,7 +76,7 @@ def main():
         q = struct.unpack_from("<Q", data, off)[0]
         if q in VAULT:
             struct.pack_into("<Q", data, off, VAULT[q]); v += 1
-    w = patch_wrapper_rva(data)
+    w = patch_wrapper_rva(data) + patch_wrapper_rva(data, HANDLERS_STEAM, HANDLERS_GOG)
     open(dst, "wb").write(data)
     subprocess.run(["codesign", "-f", "-s", "-", dst], check=True)
     print(f"patched {n} table entries, {v} vault slots, {w} wrapper rva -> {dst}")
