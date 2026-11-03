@@ -4,6 +4,19 @@ All notable changes to the RED4ext macOS port.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-03
+
+- Codeware 1.21.2 from psiberx. Until now the release carried Codeware 1.20 with the community changes for game 2.5;
+  it now has psiberx's own game 2.5 support, his fixes for custom ink controller events, inkWidgetLibraryResource and
+  world node setups, and the improved support for cooked world nodes.
+- Custom ink controllers: Codeware 1.21 reads a game flag to decide whether it attaches the controllers of a spawned
+  widget itself. The macOS build now has the address of that flag in game 2.5.0. The Mac game never sets it, so
+  Codeware keeps attaching the controllers as before.
+- Widgets that mods spawn from an ink library item now pass through Codeware's spawn hook again. On macOS the hook sat
+  on a copy of the spawn function that the game only calls when that flag is set, so it never ran. It now sits on the
+  entry the game calls.
+- Only Codeware changed. The loader, ArchiveXL and TweakXL are the same files as in 0.2.1.
+
 ## [0.2.1] - 2026-10-30
 
 - Fixes a crash (bus error) when a world sector from a mod made for an older game version streams in, for example
