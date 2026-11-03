@@ -68,8 +68,8 @@ BY_OFF[0x151AA2C] = 0x3EF3EB8
 BY_OFF[0x151B18C] = 0x3EF4618
 BY_OFF[0x20085B4] = 0x1F47D78
 BY_OFF[0x2008864] = 0x1F48028
-# held back (character menu untested, see notes): BY_OFF[0x4BC779C] = 0x50D6084
-# held back (character menu untested, see notes): BY_OFF[0x4BC7B24] = 0x50D640C
+BY_OFF[0x4BC779C] = 0x50D6084
+BY_OFF[0x4BC7B24] = 0x50D640C
 
 
 def main():
