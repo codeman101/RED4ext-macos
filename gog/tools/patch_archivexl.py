@@ -55,6 +55,12 @@ for _o in (0x2007BC4, 0x2007DCC, 0x2007EBC, 0x2008310, 0x200857C, 0x200882C):
 for _o in (0x519A58C, 0x519A844, 0x519ADA4, 0x519AEBC, 0x519C4B0, 0x519C6DC, 0x519E118):
     BY_OFF[_o] = _o - 0xE843D8
 
+# ResourceDepot RequestResource / CheckResource: next to InitializeArchives (0x151A118 -> 0x3EF35A8) the Steam layout is kept (-4 each):
+# Steam +0x630/+0x914 -> GOG 0x3EF3BD4 (size 0x2E4 = Steam distance 0x151AA2C-0x151A748) and 0x3EF3EB8. Request locks depot+0xE8,
+# walks 0x38-byte entries and compares an int32 archive handle with -1; Check is a small wrapper building a temporary and looking up.
+BY_OFF[0x151A748] = 0x3EF3BD4
+BY_OFF[0x151AA2C] = 0x3EF3EB8
+
 
 def main():
     src = sys.argv[1]

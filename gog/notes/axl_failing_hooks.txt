@@ -1,7 +1,5 @@
 # ArchiveXL hooks that still fail on GOG 2.5.0 (Steam offsets, Detour error -2), from the RED4ext log of a 120 s run
 # 0x151a118 and 0x46e03b8 now resolved (candidates); the rest are registered by ExtensionLoader::Load() once 0x252F8D4 fires
-0x151a748
-0x151aa2c
 0x1207588
 0x120aff4
 0x12090b0
