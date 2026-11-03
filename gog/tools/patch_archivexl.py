@@ -70,6 +70,9 @@ BY_OFF[0x20085B4] = 0x1F47D78
 BY_OFF[0x2008864] = 0x1F48028
 BY_OFF[0x4BC779C] = 0x50D6084
 BY_OFF[0x4BC7B24] = 0x50D640C
+BY_OFF[0x200C940] = 0x1F4C210   # ItemFactoryAppearanceChangeRequest_LoadTemplate
+BY_OFF[0x200CD00] = 0x1F4C5D0   # ItemFactoryAppearanceChangeRequest_LoadAppearance
+BY_OFF[0x20133F4] = 0x1F52CC4   # ItemFactoryRequest_LoadAppearance
 
 
 def main():
