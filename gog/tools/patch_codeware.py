@@ -60,21 +60,24 @@ def patch_wrapper_rva(data, WRAPPER_STEAM=WRAPPER_STEAM, WRAPPER_GOG=WRAPPER_GOG
 # writes New/Cast handlers through it; on GOG that stomped unrelated memory (Character menu crash in ScriptOpCodeNew).
 HANDLERS_STEAM, HANDLERS_GOG = 0x9A5C940, 0x9AAEF30
 
-SHA256 = "3907fccf8cceec63c1e9daa04a001d58fd0be9bbfe6db162d090765b400a891d"
+SHA256 = {"3907fccf8cceec63c1e9daa04a001d58fd0be9bbfe6db162d090765b400a891d",  # Codeware 1.20.4 (RED4ext-macos 0.2.x)
+          "e9b99654e95c19d38809afc460f2d54a4df6a1e88ec56e7e90dbcf35d709ed84"}  # Codeware 1.21.2 (RED4ext-macos 0.3.0)
 
 def main():
     src = sys.argv[1]; dst = sys.argv[2] if len(sys.argv) > 2 else src
     data = bytearray(open(src, "rb").read())
-    if hashlib.sha256(data).hexdigest() != SHA256:
+    if hashlib.sha256(data).hexdigest() not in SHA256:
         sys.exit("input is not the original Codeware dylib (sha256 mismatch)")
     n = v = 0
     for off in range(0, len(data) - 15, 4):
         h, z, o, z2 = struct.unpack_from("<IIII", data, off)
         if h > 0xFFFF and z == 0 and z2 == 0 and o in BY_OFF:
             struct.pack_into("<I", data, off + 8, BY_OFF[o]); n += 1
-    for off in range(0x41EA00, 0x41EC00, 8):  # vault: 4 groups x 5 allocator RVAs
-        q = struct.unpack_from("<Q", data, off)[0]
-        if q in VAULT:
+    # vault: 4 groups x 5 allocator RVAs; its place moves between Codeware builds, so take the VAULT hits that sit in a cluster
+    hits = [off for off in range(0, len(data) - 7, 8) if struct.unpack_from("<Q", data, off)[0] in VAULT]
+    for off in hits:
+        if any(o != off and abs(o - off) <= 0x40 for o in hits):
+            q = struct.unpack_from("<Q", data, off)[0]
             struct.pack_into("<Q", data, off, VAULT[q]); v += 1
     w = patch_wrapper_rva(data) + patch_wrapper_rva(data, HANDLERS_STEAM, HANDLERS_GOG)
     open(dst, "wb").write(data)
