@@ -66,6 +66,9 @@ BY_OFF[0x151AA2C] = 0x3EF3EB8
 # GarmentAssemblerState ChangeItem/ChangeCustomItem = +0x38 from AddItem/RemoveItem anchors; CharacterCustomizationSystem Initialize/GetResource inside the
 # +0x50E8E8 cluster.
 BY_OFF[0x151B18C] = 0x3EF4618
+# Localization: found by the en-us onscreens/subtitles path hashes in x0 (lldb, dbg/loc.py); 0x214 apart like Steam
+BY_OFF[0x1C2B6DC] = 0x4020160  # Localization_LoadOnScreens
+BY_OFF[0x1C2B4C8] = 0x401FF4C  # Localization_LoadSubtitles
 BY_OFF[0x20085B4] = 0x1F47D78
 BY_OFF[0x2008864] = 0x1F48028
 BY_OFF[0x4BC779C] = 0x50D6084
