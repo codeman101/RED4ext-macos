@@ -73,6 +73,8 @@ BY_OFF[0x4BC7B24] = 0x50D640C
 BY_OFF[0x200C940] = 0x1F4C210   # ItemFactoryAppearanceChangeRequest_LoadTemplate
 BY_OFF[0x200CD00] = 0x1F4C5D0   # ItemFactoryAppearanceChangeRequest_LoadAppearance
 BY_OFF[0x20133F4] = 0x1F52CC4   # ItemFactoryRequest_LoadAppearance
+for _o in [int(x, 16) for x in os.environ.get('AXL_DISABLE', '').split(',') if x]:
+    BY_OFF[_o] = 0  # debugging: disable a hook (bisecting), Steam offsets
 
 
 def main():
