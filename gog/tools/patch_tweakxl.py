@@ -15,7 +15,7 @@ Then re-signs ad hoc (codesign -f -s -). All GOG values are UNVERIFIED
 candidates (see issue codeman101/RED4ext-macos#1). Not covered: the StatService
 hook cluster (still Steam offsets, hook fails cleanly with Detour error -2).
 """
-import hashlib, struct, subprocess, sys
+import hashlib, os, struct, subprocess, sys
 
 SHA256 = "3be4622af250b6d66200ab9a7c775134e44892640d858433886cdecd8eee4504"
 
@@ -146,6 +146,12 @@ def main():
     for off, old, new in VAULT:
         assert struct.unpack_from("<Q", data, off)[0] == old, hex(off)
         struct.pack_into("<Q", data, off, new)
+    if os.environ.get("TWEAKXL_NO_SCRIPT_TWEAKS"):
+        # TweakExecutor::ExecuteTweaks -> ret. Script tweaks call CBaseFunction::ExecuteScripted
+        # (GOG 0x4198494), which crashes on GOG (CStack vtable reads as 0). YAML/xl tweaks unaffected.
+        assert struct.unpack_from("<I", data, 0x61940)[0] == 0xD10303FF
+        struct.pack_into("<I", data, 0x61940, 0xD65F03C0)
+        print("script tweaks disabled")
     open(dst, "wb").write(data)
     subprocess.run(["codesign", "-f", "-s", "-", dst], check=True)
     print(f"patched {n} table entries, {len(IMM)} immediates, {len(VAULT)} vault slots -> {dst}")
