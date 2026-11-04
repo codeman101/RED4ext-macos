@@ -93,7 +93,8 @@ ctest --test-dir build-dev --output-on-failure
 
 `deps/red4ext.sdk` is [codeman101/RED4ext.SDK-macos](https://github.com/codeman101/RED4ext.SDK-macos) (branch
 `loader-2.5`), which holds the 2.5.0 address database. The Codeware, ArchiveXL and TweakXL builds in the release come from
-codeman101/cp2077-codeware, codeman101/cp2077-archive-xl-macos and codeman101/cp2077-tweak-xl (branch `mac-v1-2.5`).
+codeman101/cp2077-codeware (branch `mac-v1-1.21`), codeman101/cp2077-archive-xl-macos and codeman101/cp2077-tweak-xl
+(branch `mac-v1-2.5`), built against codeman101/RED4ext.SDK-macos (branch `mac-next-sdk1212`).
 
 Test loop (needs the game installed and re-signed once with `scripts/codesign_macos.sh exe <game binary>`). These tools
 still expect the 0.1.0 workspace: the component repos with a root CMake build, cloned next to this one.
