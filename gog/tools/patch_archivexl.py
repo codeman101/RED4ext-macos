@@ -59,6 +59,7 @@ for _o in (0x519A58C, 0x519A844, 0x519ADA4, 0x519AEBC, 0x519C4B0, 0x519C6DC, 0x5
 # Steam +0x630/+0x914 -> GOG 0x3EF3BD4 (size 0x2E4 = Steam distance 0x151AA2C-0x151A748) and 0x3EF3EB8. Request locks depot+0xE8,
 # walks 0x38-byte entries and compares an int32 archive handle with -1; Check is a small wrapper building a temporary and looking up.
 BY_OFF[0x151A748] = 0x3EF3BD4
+BY_OFF[0x99dc690] = 0x9A2EC80  # global ResourceLoader* (UniversalRelocPtr hash 0x783c1034): loaded right before the call to ResourceLoader_IssueLoadingRequestByPath in both binaries (Steam 0xf60438, GOG 0xf6041c)
 BY_OFF[0x151AA2C] = 0x3EF3EB8
 
 # More neighbours of already-resolved anchors, same Steam distance in GOG (all land on function starts):
