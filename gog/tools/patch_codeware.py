@@ -30,6 +30,28 @@ CW = {
     0x11A7E28: 0x42A1970,  # ScriptValidator::Validate (validator,bundle,report): found via 'Validation failed for N types'
     0x529EC50: 0x529CA64,  # Entity::Attach (status 3->4 stores; not shape-verified)
     0x19A8040: 0x2CDC8E0,  # Entity_RequestComponents: Reassemble (0x19A7A30 -> 0x2CDC2D0) + 0x610 in both; body = vtable+0x198 call on the entity, then loops DynArray<Handle<IComponent>> (count +0xC, stride 0x10) with a2
+    # Matched with aobmatch.py against the Steam 2.5.0 binary (same normalised instruction sequence, unique in both)
+    0x16a5ba8: 0x1a2986c,  # 
+    # DISABLED, crashes at start (Codeware+0x2b5040 -> GOG 0x4885324): 0x1578050: 0x15d3a18,  # 
+    0x1086858: 0x4186438,  # 
+    0x16f3714: 0x1a77028,  # 
+    0x3140998: 0x1c63150,  # 
+    0x43a7644: 0x154a34c,  # 
+    0x43931a0: 0x1535d98,  # 
+    0x435402c: 0x14f3710,  # 
+    0x435424c: 0x14f3930,  # 
+    # DISABLED, crashes when loading the world (ResourceLoader called with a bad loader): 0x4353d74: 0x14f3458,  # 
+    0x4368f34: 0x150a1e0,  # 
+    0x427028c: 0x1407b34,  # 
+    # DISABLED, crashes at start (GOG 0x419a680): 0x1209038: 0x42fefd8,  # 
+    0x51d4f30: 0x525f8e0,  # 
+    0x12092e0: 0x42ff280,  # 
+    0x19b74b0: 0x2cebc74,  # 
+    0x19b95f4: 0x2ceddb8,  # 
+    0x2b3dac0: 0x17ccc80,  # 
+    0xfffcb8: 0x12b02f0,  # 
+    0x426c760: 0x1404008,  # near (Jaccard 0.97) 
+    0x1b1f1c8: 0x3cfaa4c,  # 
 }
 BY_OFF.update(CW)
 for _o in [int(x, 16) for x in os.environ.get('CW_DISABLE', '').split(',') if x and x != 'all']:
