@@ -4,6 +4,6 @@ set -eu
 H=$(cd "$(dirname "$0")" && pwd)
 OUT="${1:-$H/out}"
 mkdir -p "$OUT"
-clang++ -std=c++20 -O2 -dynamiclib -fvisibility=hidden -o "$OUT/GogFixes.dylib" "$H/GogFixes.cpp" \
+clang++ -std=c++20 -O2 -dynamiclib -fvisibility=hidden -lobjc -o "$OUT/GogFixes.dylib" "$H/GogFixes.cpp" \
     -I "$H/../../deps/red4ext.sdk/include"
 codesign -f -s - "$OUT/GogFixes.dylib"

@@ -15,15 +15,37 @@
 #include <cstdio>
 #include <cstring>
 
+// ObjC runtime declared by hand: <objc/objc.h> clashes with the SDK's BOOL.
+extern "C"
+{
+using id = struct objc_object*;
+using SEL = struct objc_selector*;
+using Class = struct objc_class*;
+using Method = struct objc_method*;
+using IMP = void (*)();
+SEL sel_registerName(const char*);
+Class object_getClass(id);
+Class objc_getClass(const char*);
+const char* class_getName(Class);
+Method class_getInstanceMethod(Class, SEL);
+IMP method_getImplementation(Method);
+IMP method_setImplementation(Method, IMP);
+void objc_msgSend(void);
+}
+
 namespace
 {
 constexpr uint8_t kGogUuid[16] = {0x1D, 0xFA, 0x00, 0x5C, 0xED, 0x12, 0x30, 0x6F, 0xB3, 0x49, 0x67, 0xBE, 0x55, 0x5F, 0x2F, 0x72};
 constexpr uint8_t kSteamUuid[16] = {0x7D, 0x73, 0x82, 0xD0, 0xEA, 0xDD, 0x36, 0xF0, 0xBA, 0x1C, 0xCE, 0xBE, 0xC1, 0xD5, 0xBE, 0xBC};
 constexpr uintptr_t kGogOnUninitialize = 0x1340B20;
 constexpr uintptr_t kSteamOnUninitialize = 0x41A9754;
+// Sibling controller callback (this, arg) with the same weak-handle pattern; GOG only (Steam offset not mapped).
+constexpr uintptr_t kGogSibling = 0x1340F50;
 
 using OnUninitialize_t = void (*)(void*);
 OnUninitialize_t g_original = nullptr;
+using Sibling_t = void (*)(void*, void*);
+Sibling_t g_siblingOriginal = nullptr;
 
 bool IsCodewareObject(void* aThis)
 {
@@ -37,20 +59,73 @@ bool IsCodewareObject(void* aThis)
 
 // The native impl locks the object at controller+0x50 through its weak handle at +0x38/+0x40 (refcount block pointer).
 // A small non-null value there is not a pointer: the controller holds the wrong kind of object and the call would fault.
-bool HasBadLayerHandle(void* aThis)
+bool HasBadLayerHandle(void* aThis, uintptr_t aSlot = 0x50)
 {
-    const auto object = *reinterpret_cast<char**>(static_cast<char*>(aThis) + 0x50);
+    const auto object = *reinterpret_cast<char**>(static_cast<char*>(aThis) + aSlot);
     if (!object)
         return false;
+    const auto addr = reinterpret_cast<uintptr_t>(object);
+    if (addr < 0x100000000ull || (addr & 7))
+        return true;
     const auto block = *reinterpret_cast<uintptr_t*>(object + 0x40);
-    return block != 0 && block < 0x10000;
+    return block != 0 && (block < 0x100000000ull || (block & 3));
 }
 
 void OnUninitialize_Hook(void* aThis)
 {
-    if (IsCodewareObject(aThis) || HasBadLayerHandle(aThis))
+    if (IsCodewareObject(aThis) || HasBadLayerHandle(aThis, 0x50) || HasBadLayerHandle(aThis, 0x60))
         return;
     g_original(aThis);
+}
+
+void Sibling_Hook(void* aThis, void* aArg)
+{
+    if (IsCodewareObject(aThis) || HasBadLayerHandle(aThis, 0x50) || HasBadLayerHandle(aThis, 0x60))
+        return;
+    g_siblingOriginal(aThis, aArg);
+}
+
+// Metal asserts when a texture asks for more mip levels than its size allows (Windows-made mod textures, e.g. a 1000x200
+// icon atlas with 11 levels). Clamp the level count on the descriptor's validateWithDevice: before Metal asserts.
+using NewTexture_t = unsigned long (*)(id, SEL, id);
+NewTexture_t g_newTexture = nullptr;
+
+unsigned long NewTexture_Hook(id aDesc, SEL aSel, id aDevice)
+{
+    auto send = reinterpret_cast<unsigned long (*)(id, SEL)>(&objc_msgSend);
+    const unsigned long w = send(aDesc, sel_registerName("width"));
+    const unsigned long h = send(aDesc, sel_registerName("height"));
+    const unsigned long d = send(aDesc, sel_registerName("depth"));
+    const unsigned long mips = send(aDesc, sel_registerName("mipmapLevelCount"));
+    unsigned long m = w > h ? w : h;
+    m = m > d ? m : d;
+    unsigned long max = 1;
+    while (m > 1)
+    {
+        m >>= 1;
+        ++max;
+    }
+    if (mips > max)
+    {
+        std::fprintf(stderr, "[GogFixes] clamp texture %lux%lu mips %lu -> %lu\n", w, h, mips, max);
+        reinterpret_cast<void (*)(id, SEL, unsigned long)>(&objc_msgSend)(aDesc, sel_registerName("setMipmapLevelCount:"),
+                                                                       max);
+    }
+    return g_newTexture(aDesc, aSel, aDevice);
+}
+
+void HookMetalTextures()
+{
+    // validateWithDevice: runs on every texture descriptor (device, heap and buffer-backed creation paths).
+    Class cls = objc_getClass("MTLTextureDescriptorInternal");
+    if (!cls)
+        return;
+    Method method = class_getInstanceMethod(cls, sel_registerName("validateWithDevice:"));
+    if (!method)
+        return;
+    g_newTexture = reinterpret_cast<NewTexture_t>(method_getImplementation(method));
+    method_setImplementation(method, reinterpret_cast<IMP>(&NewTexture_Hook));
+    std::fprintf(stderr, "[GogFixes] Metal texture descriptor validation hooked\n");
 }
 
 const mach_header_64* MainImage()
@@ -94,6 +169,7 @@ RED4EXT_C_EXPORT bool RED4EXT_CALL Main(RED4ext::v1::PluginHandle aHandle, RED4e
     if (aReason != RED4ext::v1::EMainReason::Load)
         return true;
 
+    HookMetalTextures();
     const auto* header = MainImage();
     uint8_t uuid[16];
     uintptr_t offset = 0;
@@ -115,5 +191,12 @@ RED4EXT_C_EXPORT bool RED4EXT_CALL Main(RED4ext::v1::PluginHandle aHandle, RED4e
                                           reinterpret_cast<void**>(&g_original));
     std::fprintf(stderr, "[GogFixes] inkLogicController::OnUninitialize hook at %p: %s\n", target,
                  ok ? "attached" : "FAILED");
+    if (offset == kGogOnUninitialize)
+    {
+        const auto sibling = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(header) + kGogSibling);
+        const bool ok2 = aSdk->hooking->Attach(aHandle, sibling, reinterpret_cast<void*>(&Sibling_Hook),
+                                               reinterpret_cast<void**>(&g_siblingOriginal));
+        std::fprintf(stderr, "[GogFixes] sibling hook at %p: %s\n", sibling, ok2 ? "attached" : "FAILED");
+    }
     return true;
 }
