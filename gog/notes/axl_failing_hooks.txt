@@ -17,7 +17,7 @@
 0x519a844	CMesh_AddStubAppearance	ported
 0x519ada4	CMesh_ShouldPreloadAppearances	ported
 0x519aebc	?	ported
-0x19d50c8	FactoryIndex_LoadFactoryAsync	open
+0x19d50c8	FactoryIndex_LoadFactoryAsync	ported (GOG 0x2d09908)
 0x1c2b6dc	Localization_LoadOnScreens	open
 0x1c2b4c8	Localization_LoadSubtitles	open
 0x3fe6c94	Localization_LoadVoiceOvers	open

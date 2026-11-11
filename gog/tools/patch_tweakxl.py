@@ -50,7 +50,7 @@ TABLE = {
     3512345737: (0x37D60CC, 0x3420770),
     3602585178: (0x37CE05C, 0x3418744),
     3649309656: (0x4E38978, 0xF81B2C),
-    3689484881: (0x10B0B44, 0x0),
+    3689484881: (0x10B0B44, 0x41AF868),  # 8 insns, aobmatch EXACT; callee at -0x174 like Steam
     3791200470: (0x1098FC0, 0x4198494),
     3904113489: (0x2AA74, 0x2AA54),
     4201325776: (0x109BAA8, 0x419AF7C),
@@ -103,6 +103,8 @@ IMM = [
 ]
 
 # (file offset, old u64, new u64)
+BY_OFF = {0x11E4964: 0x42DB400}  # IScriptable::DestructValueHolder (script tweaks call it; unpatched = crash in ExecuteTweaks)
+
 VAULT = [
     (0x1489B0, 0x10A1FA4, 0x41A0CC8),
     (0x1489B8, 0x10A20C0, 0x41A0DE4),
@@ -140,6 +142,11 @@ def main():
             struct.pack_into("<I", data, off + 8, TABLE[h][1])
             n += 1
     assert n == 21 * len(TABLE), f"table entries patched: {n}, expected {21 * len(TABLE)}"
+    # entries matched by Steam offset only (hash not in TABLE); same function as patch_codeware's 0x11E4964
+    for off in range(0, len(data) - 15, 4):
+        h, z, o, z2 = struct.unpack_from("<IIII", data, off)
+        if h > 0xFFFF and z == 0 and z2 == 0 and o in BY_OFF:
+            struct.pack_into("<I", data, off + 8, BY_OFF[o])
     for off, old, new in IMM:
         assert struct.unpack_from("<I", data, off)[0] == old, hex(off)
         struct.pack_into("<I", data, off, new)
