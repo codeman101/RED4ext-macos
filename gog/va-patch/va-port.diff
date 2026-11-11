@@ -108,3 +108,35 @@
      let vendorNotification: ref<UIMenuNotificationEvent>;
  
      if playerMoney < Cast<Int32>(price) {
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/o/StateIndicators.reds	2026-11-11 11:47:08
++++ virtual-store/StateIndicators.reds	2026-11-11 11:43:30
+@@ -51,15 +51,8 @@
+ 
+ @addMethod(InventoryItemDisplayController)
+ private final func RefreshAtelierEnoughMoneyIndicator() -> Void {
+-  let stockItem: ref<VirtualStockItem> = this.GetAtelierStockItem();
+-  let enoughMoney: Bool = this.cartManager.PlayerHasEnoughMoneyForStock(stockItem);
+-  let isAddedToCart: Bool = this.cartManager.IsStockAddedToCart(stockItem);
+-  if !enoughMoney && !isAddedToCart {
+-    inkWidgetRef.SetState(this.m_requirementsWrapper, n"Money");
+-    this.m_requirementsMet = false;
+-  } else {
+-    this.UpdateRequirements();
+-  };
++  // port: tile-side money lookups return 0 here; Setup() already got the flag from the store controller
++  this.UpdateRequirements();
+ }
+ 
+ @addMethod(InventoryItemDisplayController)
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/o/VirtualAtelierCartManager.reds	2026-11-11 11:47:08
++++ core/systems/VirtualAtelierCartManager.reds	2026-11-11 09:36:08
+@@ -179,6 +179,9 @@
+   }
+ 
+   public final func GetCurrentPlayerMoney() -> Int32 {
++    if IsDefined(this.transactionSystem) && IsDefined(this.player) {
++      this.currentPlayerMoney = this.transactionSystem.GetItemQuantity(this.player, MarketSystem.Money());
++    };
+     return this.currentPlayerMoney;
+   }
+ 
