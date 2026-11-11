@@ -1,115 +1,247 @@
---- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/vabak/VirtualAtelierControl.reds	2026-11-10 23:25:07
-+++ /Applications/Cyberpunk 2077/r6/scripts/virtual-atelier-full/virtual-store-cart/VirtualAtelierControl.reds	2026-11-11 09:14:03
-@@ -39,8 +39,14 @@
-   protected func OnControlHoverOut() -> Void
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/Compat.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/Compat.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/Compat.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/Compat.reds	2026-11-11 12:36:16
+@@ -51,3 +51,40 @@
+     logicController.AsyncSpawnFromExternal(parent, r"base\\gameplay\\gui\\virtual_atelier_slots.inkwidget", slotName, logicController, callbackName, userData);
+   };
+ }
++
++// port: ArchiveXL does not inject the mod localization here, so use English fallbacks
++public func VAL(key: CName) -> String {
++  let text: String = GetLocalizedTextByKey(key);
++  if !Equals(text, "") { return text; };
++  if Equals(key, n"VA-Active-Orders") { return "Active orders"; };
++  if Equals(key, n"VA-Cart-Add") { return "Add to cart"; };
++  if Equals(key, n"VA-Cart-Add-All") { return "Add all"; };
++  if Equals(key, n"VA-Cart-Buy") { return "Buy"; };
++  if Equals(key, n"VA-Cart-Clear") { return "Clear"; };
++  if Equals(key, n"VA-Cart-Confirm-Add") { return "Add all items from this page to the cart?"; };
++  if Equals(key, n"VA-Cart-Confirm-Purchase") { return "Buy the items in the cart for"; };
++  if Equals(key, n"VA-Cart-Confirm-Remove") { return "Remove all items from the cart?"; };
++  if Equals(key, n"VA-Cart-Label-Checkout") { return "Cart"; };
++  if Equals(key, n"VA-Cart-Label-V") { return "Your eddies"; };
++  if Equals(key, n"VA-Cart-Remove") { return "Remove from cart"; };
++  if Equals(key, n"VA-Favorites-Add") { return "Add to favorites"; };
++  if Equals(key, n"VA-Favorites-Remove") { return "Remove from favorites"; };
++  if Equals(key, n"VA-Garment-Remove-All") { return "Remove all garments"; };
++  if Equals(key, n"VA-Garment-Remove-Preview") { return "Remove previewed garment"; };
++  if Equals(key, n"VA-No-Stores") { return "No stores available"; };
++  if Equals(key, n"VA-Preview-Disable") { return "Disable preview"; };
++  if Equals(key, n"VA-Preview-Enable") { return "Enable preview"; };
++  if Equals(key, n"VA-Preview-Item") { return "Preview"; };
++  if Equals(key, n"VA-Preview-Reset") { return "Reset preview"; };
++  if Equals(key, n"VA-Search-Bundle") { return "Search results"; };
++  if Equals(key, n"VA-Search-Filters") { return "Filters"; };
++  if Equals(key, n"VA-Search-Indicator") { return "Search"; };
++  if Equals(key, n"VA-Search-Input-Hint") { return "Search stores and items"; };
++  if Equals(key, n"VA-Search-Items-Count") { return "Items"; };
++  if Equals(key, n"VA-Search-Results") { return "Results"; };
++  if Equals(key, n"VA-Search-Stores-Count") { return "Stores"; };
++  if Equals(key, n"VA-Search-Title") { return "Search"; };
++  if Equals(key, n"VA-Tab-Name") { return "Virtual Atelier"; };
++  if Equals(key, n"VA-Virtual-Stores") { return "Virtual stores"; };
++  return text;
++}
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/core/AtelierTexts.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/core/AtelierTexts.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/core/AtelierTexts.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/core/AtelierTexts.reds	2026-11-11 12:36:16
+@@ -1,29 +1,29 @@
+ module VirtualAtelier.Core
  
-   protected func OnControlClick() -> Void {
--    this.QueueEvent(VirtualAtelierControlClickEvent.Create(this.GetName()));
-+    if IsDefined(this.owner) {
-+      this.owner.HandleControlClick(this.GetName());
-+    } else {
-+      this.QueueEvent(VirtualAtelierControlClickEvent.Create(this.GetName()));
+ public class AtelierTexts {
+-  public static func TabName() -> String = GetLocalizedTextByKey(n"VA-Tab-Name")
+-  public static func EmptyPlaceholder() -> String = GetLocalizedTextByKey(n"VA-No-Stores")
+-  public static func PreviewEnable() -> String = GetLocalizedTextByKey(n"VA-Preview-Enable")
+-  public static func PreviewDisable() -> String = GetLocalizedTextByKey(n"VA-Preview-Disable")
+-  public static func PreviewReset() -> String = GetLocalizedTextByKey(n"VA-Preview-Reset")
+-  public static func PreviewRemoveAllGarment() -> String = GetLocalizedTextByKey(n"VA-Garment-Remove-All")
+-  public static func PreviewRemovePreviewGarment() -> String = GetLocalizedTextByKey(n"VA-Garment-Remove-Preview")
+-  public static func PreviewItem() -> String = GetLocalizedTextByKey(n"VA-Preview-Item")
+-  public static func AddToFavorites() -> String = GetLocalizedTextByKey(n"VA-Favorites-Add")
+-  public static func RemoveFromFavorites() -> String = GetLocalizedTextByKey(n"VA-Favorites-Remove")
++  public static func TabName() -> String = VAL(n"VA-Tab-Name")
++  public static func EmptyPlaceholder() -> String = VAL(n"VA-No-Stores")
++  public static func PreviewEnable() -> String = VAL(n"VA-Preview-Enable")
++  public static func PreviewDisable() -> String = VAL(n"VA-Preview-Disable")
++  public static func PreviewReset() -> String = VAL(n"VA-Preview-Reset")
++  public static func PreviewRemoveAllGarment() -> String = VAL(n"VA-Garment-Remove-All")
++  public static func PreviewRemovePreviewGarment() -> String = VAL(n"VA-Garment-Remove-Preview")
++  public static func PreviewItem() -> String = VAL(n"VA-Preview-Item")
++  public static func AddToFavorites() -> String = VAL(n"VA-Favorites-Add")
++  public static func RemoveFromFavorites() -> String = VAL(n"VA-Favorites-Remove")
+   public static func Zoom() -> String = GetLocalizedTextByKey(n"UI-ResourceExports-OpticalZoom")
+   public static func Move() -> String = GetLocalizedTextByKey(n"UI-ScriptExports-Move0")
+-  public static func ButtonBuy() -> String =  GetLocalizedTextByKey(n"VA-Cart-Buy")
++  public static func ButtonBuy() -> String =  VAL(n"VA-Cart-Buy")
+   public static func Purchase() -> String =  GetLocalizedTextByKey(n"UI-ResourceExports-Buy")
+-  public static func ButtonClear() -> String = GetLocalizedTextByKey(n"VA-Cart-Clear")
+-  public static func ButtonAddAll() -> String = GetLocalizedTextByKey(n"VA-Cart-Add-All")
+-  public static func PlayerMoney() -> String = GetLocalizedTextByKey(n"VA-Cart-Label-V")
+-  public static func Cart() -> String = GetLocalizedTextByKey(n"VA-Cart-Label-Checkout")
+-  public static func CartAdd() -> String = GetLocalizedTextByKey(n"VA-Cart-Add")
+-  public static func CartRemove() -> String = GetLocalizedTextByKey(n"VA-Cart-Remove")
+-  public static func ConfirmationAddAll() -> String = GetLocalizedTextByKey(n"VA-Cart-Confirm-Add")
+-  public static func ConfirmationRemoveAll() -> String = GetLocalizedTextByKey(n"VA-Cart-Confirm-Remove")
+-  public static func ConfirmationPurchase(price: String) -> String = s"\(GetLocalizedTextByKey(n"VA-Cart-Confirm-Purchase")) \(price) \(GetLocalizedText("Common-Characters-EuroDollar"))?"
++  public static func ButtonClear() -> String = VAL(n"VA-Cart-Clear")
++  public static func ButtonAddAll() -> String = VAL(n"VA-Cart-Add-All")
++  public static func PlayerMoney() -> String = VAL(n"VA-Cart-Label-V")
++  public static func Cart() -> String = VAL(n"VA-Cart-Label-Checkout")
++  public static func CartAdd() -> String = VAL(n"VA-Cart-Add")
++  public static func CartRemove() -> String = VAL(n"VA-Cart-Remove")
++  public static func ConfirmationAddAll() -> String = VAL(n"VA-Cart-Confirm-Add")
++  public static func ConfirmationRemoveAll() -> String = VAL(n"VA-Cart-Confirm-Remove")
++  public static func ConfirmationPurchase(price: String) -> String = s"\(VAL(n"VA-Cart-Confirm-Purchase")) \(price) \(GetLocalizedText("Common-Characters-EuroDollar"))?"
+   public static func CategoryAllItems() -> String = GetLocalizedTextByKey(n"UI-Filters-AllItems")
+   public static func CategoryClothes() -> String = GetLocalizedTextByKey(n"UI-Filters-Clothes")
+   public static func CategoryWeapons() -> String = GetLocalizedTextByKey(n"UI-Filters-Weapons")
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/core/systems/VirtualAtelierCartManager.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/core/systems/VirtualAtelierCartManager.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/core/systems/VirtualAtelierCartManager.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/core/systems/VirtualAtelierCartManager.reds	2026-11-11 09:36:08
+@@ -179,6 +179,9 @@
+   }
+ 
+   public final func GetCurrentPlayerMoney() -> Int32 {
++    if IsDefined(this.transactionSystem) && IsDefined(this.player) {
++      this.currentPlayerMoney = this.transactionSystem.GetItemQuantity(this.player, MarketSystem.Money());
 +    };
-   }
-+
-+  public let owner: wref<VirtualStoreController>;
- 
-   public func SetEnabled(enabled: Bool) -> Void {
-     this.enabled = enabled;
---- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/vabak/VirtualStoreController.reds	2026-11-10 23:25:07
-+++ /Applications/Cyberpunk 2077/r6/scripts/virtual-atelier-full/virtual-store/VirtualStoreController.reds	2026-11-11 09:14:03
-@@ -363,7 +363,7 @@
-     let ordersSystem: ref<OrderProcessingSystem> = OrderProcessingSystem.Get(this.player.GetGame());
-     let uiSystem: ref<UISystem> = GameInstance.GetUISystem(this.player.GetGame());
- 
--    let currentBalance: Int32 = this.vendorDataManager.GetLocalPlayerCurrencyAmount();
-+    let currentBalance: Int32 = this.cartManager.GetCurrentPlayerMoney();
-     let currentConfig: ref<VirtualAtelierDeliveryConfig> = new VirtualAtelierDeliveryConfig();
-     let standardCost: Int32 = currentConfig.standardDeliveryPrice + price;
-     let priorityCost: Int32 = Cast<Int32>(Cast<Float>(currentConfig.priorityDeliveryPrice) * weight) + price;
-@@ -415,7 +415,10 @@
+     return this.currentPlayerMoney;
    }
  
-   protected cb func OnVirtualAtelierControlClickEvent(evt: ref<VirtualAtelierControlClickEvent>) -> Bool {
--    let name: CName = evt.name;
-+    this.HandleControlClick(evt.name);
-+  }
-+
-+  public func HandleControlClick(name: CName) -> Void {
-     switch name {
-       case n"buy":
-         this.HandleBuyButtonClick();
-@@ -503,14 +506,17 @@
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/stores-list/AtelierStoresListController.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/stores-list/AtelierStoresListController.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/stores-list/AtelierStoresListController.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/stores-list/AtelierStoresListController.reds	2026-11-11 12:36:16
+@@ -309,7 +309,7 @@
  
-     let buttonCart: ref<VirtualCartImageButton> = VirtualCartImageButton.Create();
-     buttonCart.SetName(n"buy");
-+    buttonCart.owner = this;
-     buttonCart.Reparent(cartControls);
+     let virtualStores: ref<inkText> = new inkText();
+     virtualStores.SetName(n"virtualStores");
+-    virtualStores.SetText(GetLocalizedTextByKey(n"VA-Virtual-Stores"));
++    virtualStores.SetText(VAL(n"VA-Virtual-Stores"));
+     virtualStores.SetFitToContent(true);
+     virtualStores.SetFontFamily("base\\gameplay\\gui\\fonts\\raj\\raj.inkfontfamily");
+     virtualStores.SetScale(Vector2(1.1, 1.1));
+@@ -324,7 +324,7 @@
  
-     let buttonClear: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(AtelierTexts.ButtonClear());
-     buttonClear.SetName(n"clear");
-+    buttonClear.owner = this;
-     buttonClear.Reparent(cartControls);
+     let search: ref<inkText> = new inkText();
+     search.SetName(n"search");
+-    search.SetText(GetLocalizedTextByKey(n"VA-Search-Title"));
++    search.SetText(VAL(n"VA-Search-Title"));
+     search.SetFitToContent(true);
+     search.SetFontFamily("base\\gameplay\\gui\\fonts\\raj\\raj.inkfontfamily");
+     search.SetFontSize(60);
+@@ -338,7 +338,7 @@
  
-     let buttonAddAll: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(AtelierTexts.ButtonAddAll());
-     buttonAddAll.SetName(n"addAll");
-+    buttonAddAll.owner = this;
-     buttonAddAll.Reparent(cartControls);
+     let activeOrders: ref<inkText> = new inkText();
+     activeOrders.SetName(n"activeOrders");
+-    activeOrders.SetText(GetLocalizedTextByKey(n"VA-Active-Orders"));
++    activeOrders.SetText(VAL(n"VA-Active-Orders"));
+     activeOrders.SetFitToContent(true);
+     activeOrders.SetFontFamily("base\\gameplay\\gui\\fonts\\raj\\raj.inkfontfamily");
+     activeOrders.SetFontSize(60);
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/stores-list/PlaceholderComponent.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/stores-list/PlaceholderComponent.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/stores-list/PlaceholderComponent.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/stores-list/PlaceholderComponent.reds	2026-11-11 12:36:16
+@@ -20,7 +20,7 @@
  
-     this.cartIcon = buttonCart;
-@@ -529,6 +535,7 @@
+     let underConstruction: ref<inkText> = new inkText();
+     underConstruction.SetName(n"underConstruction");
+-    underConstruction.SetText(GetLocalizedTextByKey(n"VA-Under-Construction"));
++    underConstruction.SetText(VAL(n"VA-Under-Construction"));
+     underConstruction.SetFitToContent(true);
+     underConstruction.SetFontFamily("base\\gameplay\\gui\\fonts\\raj\\raj.inkfontfamily");
+     underConstruction.SetFontStyle(n"Regular");
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/stores-list/SearchEngineComponent.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/stores-list/SearchEngineComponent.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/stores-list/SearchEngineComponent.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/stores-list/SearchEngineComponent.reds	2026-11-11 13:01:08
+@@ -529,9 +529,9 @@
+     this.indicatorHideAnimproxy.Stop();
  
-     let pagePrev: ref<VirtualCartTextButton> = VirtualCartTextButton.Create("<");
-     pagePrev.SetName(n"prevPage");
-+    pagePrev.owner = this;
-     pagePrev.SetFontSize(60);
-     pagePrev.Reparent(pageControls);
- 
-@@ -550,6 +557,7 @@
- 
-     let pageNext: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(">");
-     pageNext.SetName(n"nextPage");
-+    pageNext.owner = this;
-     pageNext.SetFontSize(60);
-     pageNext.Reparent(pageControls);
- 
-@@ -1370,7 +1378,7 @@
+     if this.resultsCounter > 9999 {
+-      this.resultsLabel.SetText(s"\(GetLocalizedTextByKey(n"VA-Search-Items-Count")) 9999+");
++      this.resultsLabel.SetText(s"\(VAL(n"VA-Search-Items-Count")) 9999+");
+     } else {
+-      this.resultsLabel.SetText(s"\(GetLocalizedTextByKey(n"VA-Search-Items-Count")) \(this.resultsCounter)");
++      this.resultsLabel.SetText(s"\(VAL(n"VA-Search-Items-Count")) \(this.resultsCounter)");
      };
-     InventoryItemData.SetIsEquippable(data.ItemData, EquipmentSystem.GetInstance(this.player).GetPlayerData(this.player).IsEquippable(InventoryItemData.GetGameItemData(data.ItemData)));
-     data.IsVendorItem = true;
--    data.IsEnoughMoney = this.vendorDataManager.GetLocalPlayerCurrencyAmount() >= Cast<Int32>(InventoryItemData.GetBuyPrice(itemData));
-+    data.IsEnoughMoney = this.cartManager.GetCurrentPlayerMoney() >= Cast<Int32>(InventoryItemData.GetBuyPrice(itemData));
-     data.IsDLCAddedActiveItem = stockItem.isDLCAdded && this.uiScriptableSystem.IsDLCAddedActiveItem(stockItem.itemTDBID);
-     data.NotInWardrobe = stockItem.notInWardrobe;
-     this.inventoryManager.GetOrCreateInventoryItemSortData(data.ItemData, this.uiScriptableSystem);
-@@ -1687,10 +1695,12 @@
-   }
  
-   private func ShowPurchaseAllConfirmationPopup() -> Void {
--    let price: Int32 = this.cartManager.GetCurrentGoodsPrice();
--    let priceStr: String = GetFormattedMoneyVA(price);
--    this.popupToken = GenericMessageNotification.Show(this, this.GetVirtualStoreName(), AtelierTexts.ConfirmationPurchase(priceStr), GenericMessageNotificationType.ConfirmCancel);
--    this.popupToken.RegisterListener(this, n"OnPurchaseConfirmationPopupClosed");
-+    this.cartManager.PurchaseGoods(this.cartManager.GetCurrentGoods());
-+    this.allItemsAdded = false;
-+    this.RefreshCartControls();
-+    this.RefreshMoneyLabels();
-+    this.RefreshVirtualItemState();
-+    this.PlaySound(n"Item", n"OnBuy");
-   }
+     if this.searchIndicator.IsVisible() {
+@@ -623,7 +623,7 @@
+     searchInput.SetName(n"searchInput");
+     searchInput.SetLetterCase(textLetterCase.UpperCase);
+     searchInput.SetMaxLength(120);
+-    searchInput.SetDefaultText(GetLocalizedTextByKey(n"VA-Search-Input-Hint"));
++    searchInput.SetDefaultText(VAL(n"VA-Search-Input-Hint"));
+     searchInput.RegisterToCallback(n"OnInput", this, n"OnSearchInput");
+     searchInput.Reparent(searchRow);
+     this.searchInput = searchInput;
+@@ -638,7 +638,7 @@
  
-   protected cb func OnAddAllConfirmationPopupClosed(data: ref<inkGameNotificationData>) {
-@@ -1794,7 +1804,7 @@
-     let itemData: ref<gameItemData>;
-     let transactionSystem: ref<TransactionSystem> = GameInstance.GetTransactionSystem(this.player.GetGame());
-     let inventoryManager: ref<InventoryManager> = GameInstance.GetInventoryManager(this.player.GetGame());
--    let playerMoney: Int32 = this.vendorDataManager.GetLocalPlayerCurrencyAmount();
-+    let playerMoney: Int32 = this.cartManager.GetCurrentPlayerMoney();
-     let vendorNotification: ref<UIMenuNotificationEvent>;
+     let buttonSearch: ref<SimpleButtonSearch> = SimpleButtonSearch.Create();
+     buttonSearch.SetName(n"buttonSearch");
+-    buttonSearch.SetText(GetLocalizedTextByKey(n"VA-Search-Title"));
++    buttonSearch.SetText(VAL(n"VA-Search-Title"));
+     buttonSearch.SetSize(300.0, 80.0);
+     buttonSearch.SetDisabled(true);
+     buttonSearch.Reparent(searchRow);
+@@ -647,7 +647,7 @@
+     // Stores counter
+     let storesCount: ref<inkText> = new inkText();
+     let counterParams: ref<inkTextParams> = new inkTextParams();
+-    let counterLabel: String = GetLocalizedTextByKey(n"VA-Search-Stores-Count");
++    let counterLabel: String = VAL(n"VA-Search-Stores-Count");
+     storesCount.SetName(n"storesCount");
+     storesCount.SetFontSize(46);
+     storesCount.SetFontStyle(n"Regular");
+@@ -665,7 +665,7 @@
+     // Filters label
+     let filtersLabel: ref<inkText> = new inkText();
+     filtersLabel.SetName(n"filtersLabel");
+-    filtersLabel.SetText(GetLocalizedTextByKey(n"VA-Search-Filters"));
++    filtersLabel.SetText(VAL(n"VA-Search-Filters"));
+     filtersLabel.SetFontSize(50);
+     filtersLabel.SetFontStyle(n"Regular");
+     filtersLabel.SetMargin(0.0, 0.0, 0.0, 16.0);
+@@ -817,7 +817,7 @@
+     searchIndicator.SetFontFamily("base\\gameplay\\gui\\fonts\\raj\\raj.inkfontfamily");
+     searchIndicator.SetStyle(r"base\\gameplay\\gui\\common\\main_colors.inkstyle");
+     searchIndicator.BindProperty(n"tintColor", n"MainColors.White");
+-    searchIndicator.SetText(GetLocalizedTextByKey(n"VA-Search-Indicator"));
++    searchIndicator.SetText(VAL(n"VA-Search-Indicator"));
+     searchIndicator.SetVisible(false);
+     searchIndicator.Reparent(searchIndicators);
+     this.searchIndicator = searchIndicator;
+@@ -832,14 +832,14 @@
+     resultsLabel.SetFontFamily("base\\gameplay\\gui\\fonts\\raj\\raj.inkfontfamily");
+     resultsLabel.SetStyle(r"base\\gameplay\\gui\\common\\main_colors.inkstyle");
+     resultsLabel.BindProperty(n"tintColor", n"MainColors.White");
+-    resultsLabel.SetText(s"\(GetLocalizedTextByKey(n"VA-Search-Items-Count")) 9999+");
++    resultsLabel.SetText(s"\(VAL(n"VA-Search-Items-Count")) 9999+");
+     resultsLabel.SetVisible(false);
+     resultsLabel.Reparent(searchIndicators);
+     this.resultsLabel = resultsLabel;
  
-     if playerMoney < Cast<Int32>(price) {
---- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/o/StateIndicators.reds	2026-11-11 11:47:08
-+++ virtual-store/StateIndicators.reds	2026-11-11 11:43:30
+     let buttonResults: ref<SimpleButtonSearch> = SimpleButtonSearch.Create();
+     buttonResults.SetName(n"buttonResults");
+-    buttonResults.SetText(GetLocalizedTextByKey(n"VA-Search-Results"));
++    buttonResults.SetText(VAL(n"VA-Search-Results"));
+     buttonResults.SetDisabled(true);
+     buttonResults.Reparent(outer);
+     this.buttonResults = buttonResults;
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/stores-list/UnderConstructionComponent.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/stores-list/UnderConstructionComponent.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/stores-list/UnderConstructionComponent.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/stores-list/UnderConstructionComponent.reds	2026-11-11 12:36:16
+@@ -20,7 +20,7 @@
+ 
+     let underConstruction: ref<inkText> = new inkText();
+     underConstruction.SetName(n"underConstruction");
+-    underConstruction.SetText(GetLocalizedTextByKey(n"VA-Under-Construction"));
++    underConstruction.SetText(VAL(n"VA-Under-Construction"));
+     underConstruction.SetFitToContent(true);
+     underConstruction.SetFontFamily("base\\gameplay\\gui\\fonts\\raj\\raj.inkfontfamily");
+     underConstruction.SetFontStyle(n"Regular");
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/virtual-store/StateIndicators.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/virtual-store/StateIndicators.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/virtual-store/StateIndicators.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/virtual-store/StateIndicators.reds	2026-11-11 11:43:30
 @@ -51,15 +51,8 @@
  
  @addMethod(InventoryItemDisplayController)
@@ -128,15 +260,185 @@
  }
  
  @addMethod(InventoryItemDisplayController)
---- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/o/VirtualAtelierCartManager.reds	2026-11-11 11:47:08
-+++ core/systems/VirtualAtelierCartManager.reds	2026-11-11 09:36:08
-@@ -179,6 +179,9 @@
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/virtual-store/VirtualStoreController.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/virtual-store/VirtualStoreController.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/virtual-store/VirtualStoreController.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/virtual-store/VirtualStoreController.reds	2026-11-11 12:36:16
+@@ -199,6 +199,18 @@
+     };
    }
  
-   public final func GetCurrentPlayerMoney() -> Int32 {
-+    if IsDefined(this.transactionSystem) && IsDefined(this.player) {
-+      this.currentPlayerMoney = this.transactionSystem.GetItemQuantity(this.player, MarketSystem.Money());
++  // port: Z/X actions only arrive on press here, not on release
++  protected cb func OnGlobalPressPort(evt: ref<inkPointerEvent>) -> Bool {
++    let a: ref<AtelierActions> = AtelierActions.Get(this.player);
++    if evt.IsAction(a.resetGarment) {
++      this.previewManager.ResetGarment();
++      this.RefreshVirtualItemState();
++    } else if evt.IsAction(a.removePreviewGarment) {
++      this.previewManager.RemovePreviewGarment();
++      this.RefreshVirtualItemState();
 +    };
-     return this.currentPlayerMoney;
++  }
++
+   protected cb func OnHandleGlobalRelease(evt: ref<inkPointerEvent>) -> Bool {
+     let atelierActions: ref<AtelierActions> = AtelierActions.Get(this.player);
+ 
+@@ -363,7 +375,7 @@
+     let ordersSystem: ref<OrderProcessingSystem> = OrderProcessingSystem.Get(this.player.GetGame());
+     let uiSystem: ref<UISystem> = GameInstance.GetUISystem(this.player.GetGame());
+ 
+-    let currentBalance: Int32 = this.vendorDataManager.GetLocalPlayerCurrencyAmount();
++    let currentBalance: Int32 = this.cartManager.GetCurrentPlayerMoney();
+     let currentConfig: ref<VirtualAtelierDeliveryConfig> = new VirtualAtelierDeliveryConfig();
+     let standardCost: Int32 = currentConfig.standardDeliveryPrice + price;
+     let priorityCost: Int32 = Cast<Int32>(Cast<Float>(currentConfig.priorityDeliveryPrice) * weight) + price;
+@@ -415,7 +427,10 @@
    }
  
+   protected cb func OnVirtualAtelierControlClickEvent(evt: ref<VirtualAtelierControlClickEvent>) -> Bool {
+-    let name: CName = evt.name;
++    this.HandleControlClick(evt.name);
++  }
++
++  public func HandleControlClick(name: CName) -> Void {
+     switch name {
+       case n"buy":
+         this.HandleBuyButtonClick();
+@@ -503,14 +518,17 @@
+ 
+     let buttonCart: ref<VirtualCartImageButton> = VirtualCartImageButton.Create();
+     buttonCart.SetName(n"buy");
++    buttonCart.owner = this;
+     buttonCart.Reparent(cartControls);
+ 
+     let buttonClear: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(AtelierTexts.ButtonClear());
+     buttonClear.SetName(n"clear");
++    buttonClear.owner = this;
+     buttonClear.Reparent(cartControls);
+ 
+     let buttonAddAll: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(AtelierTexts.ButtonAddAll());
+     buttonAddAll.SetName(n"addAll");
++    buttonAddAll.owner = this;
+     buttonAddAll.Reparent(cartControls);
+ 
+     this.cartIcon = buttonCart;
+@@ -529,6 +547,7 @@
+ 
+     let pagePrev: ref<VirtualCartTextButton> = VirtualCartTextButton.Create("<");
+     pagePrev.SetName(n"prevPage");
++    pagePrev.owner = this;
+     pagePrev.SetFontSize(60);
+     pagePrev.Reparent(pageControls);
+ 
+@@ -550,6 +569,7 @@
+ 
+     let pageNext: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(">");
+     pageNext.SetName(n"nextPage");
++    pageNext.owner = this;
+     pageNext.SetFontSize(60);
+     pageNext.Reparent(pageControls);
+ 
+@@ -722,6 +742,7 @@
+ 
+   private final func InitializeListeners() -> Void {
+     this.RegisterToGlobalInputCallback(n"OnPostOnHold", this, n"OnHandleGlobalHold");
++    this.RegisterToGlobalInputCallback(n"OnPostOnPress", this, n"OnGlobalPressPort");
+     this.RegisterToGlobalInputCallback(n"OnPostOnRelease", this, n"OnHandleGlobalRelease");
+   }
+ 
+@@ -739,6 +760,7 @@
+       };
+     };
+     this.UnregisterFromGlobalInputCallback(n"OnPostOnHold", this, n"OnHandleGlobalHold");
++    this.UnregisterFromGlobalInputCallback(n"OnPostOnPress", this, n"OnGlobalPressPort");
+     this.UnregisterFromGlobalInputCallback(n"OnPostOnRelease", this, n"OnHandleGlobalRelease");
+   }
+ 
+@@ -1370,7 +1392,7 @@
+     };
+     InventoryItemData.SetIsEquippable(data.ItemData, EquipmentSystem.GetInstance(this.player).GetPlayerData(this.player).IsEquippable(InventoryItemData.GetGameItemData(data.ItemData)));
+     data.IsVendorItem = true;
+-    data.IsEnoughMoney = this.vendorDataManager.GetLocalPlayerCurrencyAmount() >= Cast<Int32>(InventoryItemData.GetBuyPrice(itemData));
++    data.IsEnoughMoney = this.cartManager.GetCurrentPlayerMoney() >= Cast<Int32>(InventoryItemData.GetBuyPrice(itemData));
+     data.IsDLCAddedActiveItem = stockItem.isDLCAdded && this.uiScriptableSystem.IsDLCAddedActiveItem(stockItem.itemTDBID);
+     data.NotInWardrobe = stockItem.notInWardrobe;
+     this.inventoryManager.GetOrCreateInventoryItemSortData(data.ItemData, this.uiScriptableSystem);
+@@ -1557,11 +1579,11 @@
+ 
+     if isAddedToCart {
+       if this.cartManager.RemoveFromCart(stockItem) {
+-        hintLabel = GetLocalizedTextByKey(n"VA-Cart-Add");
++        hintLabel = VAL(n"VA-Cart-Add");
+       };
+     } else {
+       if this.cartManager.AddToCart(stockItem, 1) {
+-        hintLabel = GetLocalizedTextByKey(n"VA-Cart-Remove");
++        hintLabel = VAL(n"VA-Cart-Remove");
+       };
+     };
+ 
+@@ -1687,10 +1709,12 @@
+   }
+ 
+   private func ShowPurchaseAllConfirmationPopup() -> Void {
+-    let price: Int32 = this.cartManager.GetCurrentGoodsPrice();
+-    let priceStr: String = GetFormattedMoneyVA(price);
+-    this.popupToken = GenericMessageNotification.Show(this, this.GetVirtualStoreName(), AtelierTexts.ConfirmationPurchase(priceStr), GenericMessageNotificationType.ConfirmCancel);
+-    this.popupToken.RegisterListener(this, n"OnPurchaseConfirmationPopupClosed");
++    this.cartManager.PurchaseGoods(this.cartManager.GetCurrentGoods());
++    this.allItemsAdded = false;
++    this.RefreshCartControls();
++    this.RefreshMoneyLabels();
++    this.RefreshVirtualItemState();
++    this.PlaySound(n"Item", n"OnBuy");
+   }
+ 
+   protected cb func OnAddAllConfirmationPopupClosed(data: ref<inkGameNotificationData>) {
+@@ -1745,7 +1769,7 @@
+       if ArraySize(searchResults) == 1 && IsDefined(searchResults[0]) && IsDefined(searchResults[0].store) {
+         return searchResults[0].store.storeName;
+       };
+-      return GetLocalizedTextByKey(n"VA-Search-Bundle");
++      return VAL(n"VA-Search-Bundle");
+     };
+     return this.virtualStore.storeName;
+   }
+@@ -1794,7 +1818,7 @@
+     let itemData: ref<gameItemData>;
+     let transactionSystem: ref<TransactionSystem> = GameInstance.GetTransactionSystem(this.player.GetGame());
+     let inventoryManager: ref<InventoryManager> = GameInstance.GetInventoryManager(this.player.GetGame());
+-    let playerMoney: Int32 = this.vendorDataManager.GetLocalPlayerCurrencyAmount();
++    let playerMoney: Int32 = this.cartManager.GetCurrentPlayerMoney();
+     let vendorNotification: ref<UIMenuNotificationEvent>;
+ 
+     if playerMoney < Cast<Int32>(price) {
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/virtual-store/VirtualStoreHeaderController.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/virtual-store/VirtualStoreHeaderController.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/virtual-store/VirtualStoreHeaderController.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/virtual-store/VirtualStoreHeaderController.reds	2026-11-11 12:36:16
+@@ -21,7 +21,7 @@
+     };
+ 
+     if IsDefined(counter) {
+-      counter.SetText(s"\(GetLocalizedTextByKey(n"VA-Search-Items-Count")) \(this.data.counter)");
++      counter.SetText(s"\(VAL(n"VA-Search-Items-Count")) \(this.data.counter)");
+     };
+   }
+ }
+diff -ru --strip-trailing-cr /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/virtual-store-cart/VirtualAtelierControl.reds /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/virtual-store-cart/VirtualAtelierControl.reds
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/orig/virtual-store-cart/VirtualAtelierControl.reds	2026-11-11 13:01:17
++++ /Users/guille/cyberpunk-gog-port/va_scripts/virtual-atelier-full/virtual-store-cart/VirtualAtelierControl.reds	2026-11-11 09:14:03
+@@ -39,8 +39,14 @@
+   protected func OnControlHoverOut() -> Void
+ 
+   protected func OnControlClick() -> Void {
+-    this.QueueEvent(VirtualAtelierControlClickEvent.Create(this.GetName()));
++    if IsDefined(this.owner) {
++      this.owner.HandleControlClick(this.GetName());
++    } else {
++      this.QueueEvent(VirtualAtelierControlClickEvent.Create(this.GetName()));
++    };
+   }
++
++  public let owner: wref<VirtualStoreController>;
+ 
+   public func SetEnabled(enabled: Bool) -> Void {
+     this.enabled = enabled;
