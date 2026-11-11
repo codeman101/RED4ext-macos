@@ -406,14 +406,60 @@ bool AllocateWindow(uintptr_t target, uint8_t** out, uintptr_t limit, int maxSte
     return false;
 }
 
+// Island pages come from one block reserved on the first attach, while the address space around the image is still
+// free. Later in the run the game has packed that space and neither the ANYWHERE hint nor the gap walk finds a page
+// inside the branch/ADRP window, so late attaches (plugins that hook after the main menu) failed with kErrUnreachable.
+constexpr uintptr_t kPoolPages = 256;
+uintptr_t g_poolNext = 0;
+uintptr_t g_poolEnd = 0;
+bool g_poolTried = false;
+
+bool PoolTake(uintptr_t target, bool adrp, uint8_t** out)
+{
+    if (!g_poolTried)
+    {
+        g_poolTried = true;
+        mach_vm_address_t base = 0;
+        if (mach_vm_allocate(mach_task_self(), &base, PageSize() * kPoolPages, VM_FLAGS_ANYWHERE) == KERN_SUCCESS)
+        {
+            g_poolNext = static_cast<uintptr_t>(base);
+            g_poolEnd = g_poolNext + PageSize() * kPoolPages;
+        }
+    }
+
+    if (g_poolNext == 0 || g_poolNext >= g_poolEnd)
+    {
+        return false;
+    }
+
+    if (!(adrp ? InAdrpRange(target, g_poolNext) : InBranchRange(target, g_poolNext)))
+    {
+        return false;
+    }
+
+    *out = reinterpret_cast<uint8_t*>(g_poolNext);
+    g_poolNext += PageSize();
+    return true;
+}
+
 bool AllocateNear(uintptr_t target, uint8_t** out)
 {
+    if (PoolTake(target, false, out))
+    {
+        return true;
+    }
+
     const uintptr_t limit = (static_cast<uintptr_t>(1) << 25) * 4 - 4;
     return AllocateWindow(target, out, limit, 8192, false);
 }
 
 bool AllocateFar(uintptr_t target, uint8_t** out)
 {
+    if (PoolTake(target, true, out))
+    {
+        return true;
+    }
+
     const uintptr_t page = PageSize();
     mach_vm_address_t hint = 0;
     if (mach_vm_allocate(mach_task_self(), &hint, page, VM_FLAGS_ANYWHERE) == KERN_SUCCESS)
