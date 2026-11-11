@@ -128,6 +128,53 @@ void HookMetalTextures()
     std::fprintf(stderr, "[GogFixes] Metal texture descriptor validation hooked\n");
 }
 
+// Codeware's GameInstance constructor hook has no GOG address (hard-coded movz/movk, not in its table), so Codeware's
+// codeware_mac_game_instance() returns null and ArchiveXL dereferenced it when buying a Virtual Atelier item. Porting
+// that hook makes Codeware crash elsewhere, so capture the instance here and give ArchiveXL its own getter: ArchiveXL
+// caches the dlsym'd function pointer in Red::MacGameInstance() (guard ArchiveXL+0x1D9048, pointer +0x1D9040).
+using GameInstanceCtor_t = void* (*)(void*);
+GameInstanceCtor_t g_gameInstanceCtor = nullptr;
+void* g_gameInstance = nullptr;
+constexpr uintptr_t kGogGameInstanceCtor = 0x1A157B0;
+constexpr uintptr_t kArchiveXLGuard = 0x1D9048;
+constexpr uintptr_t kArchiveXLGetter = 0x1D9040;
+
+void* GameInstanceGetter()
+{
+    return g_gameInstance;
+}
+
+char* FindImage(const char* aName)
+{
+    for (uint32_t i = 0; i < _dyld_image_count(); ++i)
+    {
+        const char* path = _dyld_get_image_name(i);
+        if (path && std::strstr(path, aName))
+            return reinterpret_cast<char*>(const_cast<mach_header*>(_dyld_get_image_header(i)));
+    }
+    return nullptr;
+}
+
+void* GameInstanceCtor_Hook(void* aThis)
+{
+    auto result = g_gameInstanceCtor(aThis);
+    const auto base = static_cast<char*>(result);
+    const bool looks = base && *reinterpret_cast<uintptr_t*>(base + 0x100) == 0x415643FF7Bull &&
+                       *reinterpret_cast<void**>(base + 0x108) == result;
+    char* axl = looks ? FindImage("/ArchiveXL.dylib") : nullptr;
+    std::fprintf(stderr, "[GogFixes] GameInstance ctor this=%p looks=%d archivexl=%p\n", result, looks, axl);
+    if (looks)
+    {
+        g_gameInstance = result;
+        if (axl)
+        {
+            *reinterpret_cast<void**>(axl + kArchiveXLGetter) = reinterpret_cast<void*>(&GameInstanceGetter);
+            *reinterpret_cast<uint8_t*>(axl + kArchiveXLGuard) = 1;
+        }
+    }
+    return result;
+}
+
 const mach_header_64* MainImage()
 {
     return reinterpret_cast<const mach_header_64*>(_NSGetMachExecuteHeader());
@@ -196,6 +243,10 @@ RED4EXT_C_EXPORT bool RED4EXT_CALL Main(RED4ext::v1::PluginHandle aHandle, RED4e
         const auto sibling = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(header) + kGogSibling);
         const bool ok2 = aSdk->hooking->Attach(aHandle, sibling, reinterpret_cast<void*>(&Sibling_Hook),
                                                reinterpret_cast<void**>(&g_siblingOriginal));
+        const auto ctor = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(header) + kGogGameInstanceCtor);
+        const bool ok3 = aSdk->hooking->Attach(aHandle, ctor, reinterpret_cast<void*>(&GameInstanceCtor_Hook),
+                                               reinterpret_cast<void**>(&g_gameInstanceCtor));
+        std::fprintf(stderr, "[GogFixes] GameInstance ctor hook at %p: %s\n", ctor, ok3 ? "attached" : "FAILED");
         std::fprintf(stderr, "[GogFixes] sibling hook at %p: %s\n", sibling, ok2 ? "attached" : "FAILED");
     }
     return true;

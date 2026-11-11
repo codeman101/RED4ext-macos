@@ -1,0 +1,110 @@
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/vabak/VirtualAtelierControl.reds	2026-11-10 23:25:07
++++ /Applications/Cyberpunk 2077/r6/scripts/virtual-atelier-full/virtual-store-cart/VirtualAtelierControl.reds	2026-11-11 09:14:03
+@@ -39,8 +39,14 @@
+   protected func OnControlHoverOut() -> Void
+ 
+   protected func OnControlClick() -> Void {
+-    this.QueueEvent(VirtualAtelierControlClickEvent.Create(this.GetName()));
++    if IsDefined(this.owner) {
++      this.owner.HandleControlClick(this.GetName());
++    } else {
++      this.QueueEvent(VirtualAtelierControlClickEvent.Create(this.GetName()));
++    };
+   }
++
++  public let owner: wref<VirtualStoreController>;
+ 
+   public func SetEnabled(enabled: Bool) -> Void {
+     this.enabled = enabled;
+--- /private/tmp/claude-501/-Applications-Cyberpunk-2077/1b644566-a78d-4c62-a2b9-9aa0ddf5cd6e/scratchpad/vabak/VirtualStoreController.reds	2026-11-10 23:25:07
++++ /Applications/Cyberpunk 2077/r6/scripts/virtual-atelier-full/virtual-store/VirtualStoreController.reds	2026-11-11 09:14:03
+@@ -363,7 +363,7 @@
+     let ordersSystem: ref<OrderProcessingSystem> = OrderProcessingSystem.Get(this.player.GetGame());
+     let uiSystem: ref<UISystem> = GameInstance.GetUISystem(this.player.GetGame());
+ 
+-    let currentBalance: Int32 = this.vendorDataManager.GetLocalPlayerCurrencyAmount();
++    let currentBalance: Int32 = this.cartManager.GetCurrentPlayerMoney();
+     let currentConfig: ref<VirtualAtelierDeliveryConfig> = new VirtualAtelierDeliveryConfig();
+     let standardCost: Int32 = currentConfig.standardDeliveryPrice + price;
+     let priorityCost: Int32 = Cast<Int32>(Cast<Float>(currentConfig.priorityDeliveryPrice) * weight) + price;
+@@ -415,7 +415,10 @@
+   }
+ 
+   protected cb func OnVirtualAtelierControlClickEvent(evt: ref<VirtualAtelierControlClickEvent>) -> Bool {
+-    let name: CName = evt.name;
++    this.HandleControlClick(evt.name);
++  }
++
++  public func HandleControlClick(name: CName) -> Void {
+     switch name {
+       case n"buy":
+         this.HandleBuyButtonClick();
+@@ -503,14 +506,17 @@
+ 
+     let buttonCart: ref<VirtualCartImageButton> = VirtualCartImageButton.Create();
+     buttonCart.SetName(n"buy");
++    buttonCart.owner = this;
+     buttonCart.Reparent(cartControls);
+ 
+     let buttonClear: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(AtelierTexts.ButtonClear());
+     buttonClear.SetName(n"clear");
++    buttonClear.owner = this;
+     buttonClear.Reparent(cartControls);
+ 
+     let buttonAddAll: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(AtelierTexts.ButtonAddAll());
+     buttonAddAll.SetName(n"addAll");
++    buttonAddAll.owner = this;
+     buttonAddAll.Reparent(cartControls);
+ 
+     this.cartIcon = buttonCart;
+@@ -529,6 +535,7 @@
+ 
+     let pagePrev: ref<VirtualCartTextButton> = VirtualCartTextButton.Create("<");
+     pagePrev.SetName(n"prevPage");
++    pagePrev.owner = this;
+     pagePrev.SetFontSize(60);
+     pagePrev.Reparent(pageControls);
+ 
+@@ -550,6 +557,7 @@
+ 
+     let pageNext: ref<VirtualCartTextButton> = VirtualCartTextButton.Create(">");
+     pageNext.SetName(n"nextPage");
++    pageNext.owner = this;
+     pageNext.SetFontSize(60);
+     pageNext.Reparent(pageControls);
+ 
+@@ -1370,7 +1378,7 @@
+     };
+     InventoryItemData.SetIsEquippable(data.ItemData, EquipmentSystem.GetInstance(this.player).GetPlayerData(this.player).IsEquippable(InventoryItemData.GetGameItemData(data.ItemData)));
+     data.IsVendorItem = true;
+-    data.IsEnoughMoney = this.vendorDataManager.GetLocalPlayerCurrencyAmount() >= Cast<Int32>(InventoryItemData.GetBuyPrice(itemData));
++    data.IsEnoughMoney = this.cartManager.GetCurrentPlayerMoney() >= Cast<Int32>(InventoryItemData.GetBuyPrice(itemData));
+     data.IsDLCAddedActiveItem = stockItem.isDLCAdded && this.uiScriptableSystem.IsDLCAddedActiveItem(stockItem.itemTDBID);
+     data.NotInWardrobe = stockItem.notInWardrobe;
+     this.inventoryManager.GetOrCreateInventoryItemSortData(data.ItemData, this.uiScriptableSystem);
+@@ -1687,10 +1695,12 @@
+   }
+ 
+   private func ShowPurchaseAllConfirmationPopup() -> Void {
+-    let price: Int32 = this.cartManager.GetCurrentGoodsPrice();
+-    let priceStr: String = GetFormattedMoneyVA(price);
+-    this.popupToken = GenericMessageNotification.Show(this, this.GetVirtualStoreName(), AtelierTexts.ConfirmationPurchase(priceStr), GenericMessageNotificationType.ConfirmCancel);
+-    this.popupToken.RegisterListener(this, n"OnPurchaseConfirmationPopupClosed");
++    this.cartManager.PurchaseGoods(this.cartManager.GetCurrentGoods());
++    this.allItemsAdded = false;
++    this.RefreshCartControls();
++    this.RefreshMoneyLabels();
++    this.RefreshVirtualItemState();
++    this.PlaySound(n"Item", n"OnBuy");
+   }
+ 
+   protected cb func OnAddAllConfirmationPopupClosed(data: ref<inkGameNotificationData>) {
+@@ -1794,7 +1804,7 @@
+     let itemData: ref<gameItemData>;
+     let transactionSystem: ref<TransactionSystem> = GameInstance.GetTransactionSystem(this.player.GetGame());
+     let inventoryManager: ref<InventoryManager> = GameInstance.GetInventoryManager(this.player.GetGame());
+-    let playerMoney: Int32 = this.vendorDataManager.GetLocalPlayerCurrencyAmount();
++    let playerMoney: Int32 = this.cartManager.GetCurrentPlayerMoney();
+     let vendorNotification: ref<UIMenuNotificationEvent>;
+ 
+     if playerMoney < Cast<Int32>(price) {
